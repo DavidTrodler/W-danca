@@ -27,7 +27,7 @@ WIDTH, HEIGHT = 1500, 1000
 clock = pygame.time.Clock()
 
 # Load the character image
-velikost_postavy = 50
+velikost_postavy = 100
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 
 # Game loop
