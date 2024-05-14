@@ -46,10 +46,10 @@ while True:
                 player_projectiles_up.append((rect_x + velikost_postavy // 2, rect_y))
             #DOWN
             elif event.key == pygame.K_DOWN:
-                player_projectiles_down.append((rect_x - velikost_postavy // 2, rect_y))
+                player_projectiles_down.append((rect_x + velikost_postavy // 2, rect_y))
             #LEFT
             elif event.key == pygame.K_LEFT:
-                player_projectiles_left.append((rect_x, rect_y - velikost_postavy // 2))
+                player_projectiles_left.append((rect_x, rect_y + velikost_postavy // 2))
             #RIGHT
             elif event.key == pygame.K_RIGHT:
                 player_projectiles_right.append((rect_x, rect_y + velikost_postavy // 2))
@@ -94,7 +94,7 @@ while True:
     if len(player_projectiles_down) > 0:
         for proj_x, proj_y in player_projectiles_down:
             proj_y += projectile_speed
-            if proj_y > HEIGHT:
+            if proj_y < HEIGHT:
                 new_player_projectiles_DOWN.append((proj_x, proj_y))
         player_projectiles_down = new_player_projectiles_DOWN
 
@@ -102,7 +102,7 @@ while True:
     if len(player_projectiles_left) > 0:
         for proj_x, proj_y in player_projectiles_left:
             proj_x -= projectile_speed
-            if proj_x < WIDTH:
+            if proj_x > 0:
                 new_player_projectiles_LEFT.append((proj_x, proj_y))
         player_projectiles_left = new_player_projectiles_LEFT
 
@@ -110,7 +110,7 @@ while True:
     if len(player_projectiles_right) > 0:
         for proj_x, proj_y in player_projectiles_right:
             proj_x += projectile_speed
-            if proj_x > WIDTH:
+            if proj_x < WIDTH:
                 new_player_projectiles_RIGHT.append((proj_x, proj_y))
         player_projectiles_right = new_player_projectiles_RIGHT
 
