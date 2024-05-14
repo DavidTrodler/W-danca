@@ -27,9 +27,9 @@ WIDTH, HEIGHT = 1500, 1000
 clock = pygame.time.Clock()
 
 # Load the character image
-velikost_postavy = 100
+velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
-
+slza = pygame.image.load("pixil-frame-0.png")
 # Game loop
 while True:
     for event in pygame.event.get():
@@ -39,7 +39,8 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 # Add a new player projectile when spacebar is pressed
-                player_projectiles.append((rect_x + velikost_postavy - 6, rect_y))
+                player_projectiles.append((rect_x + velikost_postavy // 2, rect_y))
+
 
     window.fill(hneda)
 
@@ -65,7 +66,7 @@ while True:
 
     # Draw player projectiles on the window
     for proj_x, proj_y in player_projectiles:
-        pygame.draw.rect(window, modra_mouchy, (proj_x, proj_y, projectile_size, projectile_size))
+        window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
 
     # Ensure the character stays within the window boundaries
     rect_x = max(0, min(rect_x, WIDTH - 100))
