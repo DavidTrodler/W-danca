@@ -12,7 +12,10 @@ projectile_size = 10
 projectile_speed = 10
 
 # Initialize lists for player projectiles and all projectiles
-player_projectiles = []
+player_projectiles_up = []
+player_projectiles_down = []
+player_projectiles_left = []
+player_projectiles_right = []
 projectiles = []
 
 # Create the game window
@@ -36,10 +39,25 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                # Add a new player projectile when spacebar is pressed
-                player_projectiles.append((rect_x + velikost_postavy // 2, rect_y))
+            #UP
+            if event.key == pygame.K_UP:
+                player_projectiles_up.append((rect_x + velikost_postavy // 2, rect_y))
+            #DOWN
+            elif event.key == pygame.K_DOWN:
+                player_projectiles_down.append((rect_x - velikost_postavy // 2, rect_y))
+            #LEFT
+            elif event.key == pygame.K_LEFT:
+                player_projectiles_left.append((rect_x, rect_y - velikost_postavy // 2))
+            #RIGHT
+            elif event.key == pygame.K_RIGHT:
+                player_projectiles_right.append((rect_x, rect_y + velikost_postavy // 2))
+
+
+            
+
+        
 
 
     window.fill(hneda)
@@ -57,17 +75,67 @@ while True:
         rect_y += 5
 
     # Update the position of player projectiles
-    new_player_projectiles = []
-    for proj_x, proj_y in player_projectiles:
-        proj_y -= projectile_speed
-        if proj_y > 0:
-            new_player_projectiles.append((proj_x, proj_y))
-    player_projectiles = new_player_projectiles
+    new_player_projectiles_UP = []
+    new_player_projectiles_DOWN = []
+    new_player_projectiles_LEFT = []
+    new_player_projectiles_RIGHT = []
+
+
+
+    #UP
+    if len(player_projectiles_up) > 0:
+        for proj_x, proj_y in player_projectiles_up:
+            proj_y -= projectile_speed
+            if proj_y > 0:
+                new_player_projectiles_UP.append((proj_x, proj_y))
+        player_projectiles_up = new_player_projectiles_UP
+
+    #DOWN
+    if len(player_projectiles_down) > 0:
+        for proj_x, proj_y in player_projectiles_down:
+            proj_y += projectile_speed
+            if proj_y > HEIGHT:
+                new_player_projectiles_DOWN.append((proj_x, proj_y))
+        player_projectiles_down = new_player_projectiles_DOWN
+
+    #LEFT
+    if len(player_projectiles_left) > 0:
+        for proj_x, proj_y in player_projectiles_left:
+            proj_x -= projectile_speed
+            if proj_x < WIDTH:
+                new_player_projectiles_LEFT.append((proj_x, proj_y))
+        player_projectiles_left = new_player_projectiles_LEFT
+
+    #RIGHT
+    if len(player_projectiles_right) > 0:
+        for proj_x, proj_y in player_projectiles_right:
+            proj_x += projectile_speed
+            if proj_x > WIDTH:
+                new_player_projectiles_RIGHT.append((proj_x, proj_y))
+        player_projectiles_right = new_player_projectiles_RIGHT
 
     # Draw player projectiles on the window
-    for proj_x, proj_y in player_projectiles:
-        pygame.draw.rect(window, modra_mouchy, (proj_x, proj_y, projectile_size, projectile_size))
-
+    
+    #UP
+    if len(player_projectiles_up) > 0:
+        for proj_x, proj_y in player_projectiles_up:
+            pygame.draw.rect(window, modra_mouchy, (proj_x, proj_y, projectile_size, projectile_size))
+    
+    #DOWN
+    if len(player_projectiles_down) > 0:
+        for proj_x, proj_y in player_projectiles_down:
+            pygame.draw.rect(window, modra_mouchy, (proj_x, proj_y, projectile_size, projectile_size))
+    
+    #LEFT
+    if len(player_projectiles_left) > 0:
+        for proj_x, proj_y in player_projectiles_left:
+            pygame.draw.rect(window, modra_mouchy, (proj_x, proj_y, projectile_size, projectile_size))
+    
+    #RIGHT
+    if len(player_projectiles_right) > 0:
+        for proj_x, proj_y in player_projectiles_right:
+            pygame.draw.rect(window, modra_mouchy, (proj_x, proj_y, projectile_size, projectile_size))
+    
     # Ensure the character stays within the window boundaries
     rect_x = max(0, min(rect_x, WIDTH - 100))
     rect_y = max(0, min(rect_y, HEIGHT - 100))
