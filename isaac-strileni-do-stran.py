@@ -55,7 +55,6 @@ while True:
                 player_projectiles_right.append((rect_x, rect_y + velikost_postavy // 2))
 
 
-            
 
         
 
