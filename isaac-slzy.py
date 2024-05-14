@@ -1,5 +1,4 @@
 import pygame, sys
-
 pygame.init()
 
 # Define color constants
@@ -40,7 +39,7 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 # Add a new player projectile when spacebar is pressed
-                player_projectiles.append((rect_x + velikost_postavy // 2, rect_y))
+                player_projectiles.append((rect_x + velikost_postavy - 6, rect_y))
 
     window.fill(hneda)
 
