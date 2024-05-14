@@ -14,7 +14,7 @@ projectile_size = 10
 projectile_speed = 10
 # Shooting cooldown
 cooldown = 0
-
+cooldown_time = 5
 
 
 # Initialize lists for player projectiles and all projectiles
@@ -50,22 +50,22 @@ while True:
             #UP
             if event.key == pygame.K_UP and shoots == False:
                 player_projectiles_up.append((rect_x + velikost_postavy // 2, rect_y))
-                cooldown = 5
+                cooldown = cooldown_time
                 break
             #DOWN
             elif event.key == pygame.K_DOWN and shoots == False:
                 player_projectiles_down.append((rect_x + velikost_postavy // 2, rect_y + 46))
-                cooldown = 5
+                cooldown = cooldown_time  
                 break
             #LEFT
             elif event.key == pygame.K_LEFT and shoots == False:
                 player_projectiles_left.append((rect_x - 2, rect_y + velikost_postavy // 2))
-                cooldown = 5
+                cooldown = cooldown_time
                 break
             #RIGHT
             elif event.key == pygame.K_RIGHT and shoots == False:
                 player_projectiles_right.append((rect_x + 52, rect_y + velikost_postavy // 2))
-                cooldown = 5
+                cooldown = cooldown_time
                 break
 
     if cooldown > 0:
