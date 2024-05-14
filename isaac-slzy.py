@@ -1,5 +1,4 @@
 import pygame, sys
-
 pygame.init()
 
 # Define color constants
@@ -28,7 +27,7 @@ WIDTH, HEIGHT = 1500, 1000
 clock = pygame.time.Clock()
 
 # Load the character image
-velikost_postavy = 30
+velikost_postavy = 50
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 
 # Game loop
@@ -40,7 +39,7 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 # Add a new player projectile when spacebar is pressed
-                player_projectiles.append((rect_x + velikost_postavy // 2, rect_y))
+                player_projectiles.append((rect_x + velikost_postavy - 6, rect_y))
 
     window.fill(hneda)
 
