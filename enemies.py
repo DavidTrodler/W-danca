@@ -8,7 +8,6 @@ hneda = (85, 33, 0)
 modra_mouchy =(165, 199, 206)
 cerna = (0, 0, 0)
 
-enemies = []
 
 # Create the game window
 window = pygame.display.set_mode((1500, 1000))
@@ -21,16 +20,11 @@ WIDTH, HEIGHT = 1500, 1000
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
 
-#Stats to variables
-level = level() #----> Od levelu se odvíjí pravděpodobnost spavnutí nepřítele
-player_position = player_position() #----> Od pozice se odvíjí, kam budou nepřátelé střílet
+#ROOMS
+rooms = [56]
 
-#enemies spawn
-def enemies():
-    pass
-
-def enemies_position(): #----> Funkce, která určí pozici nepřátel
-    pass
+#Mapa
+pygame.image.load("map.png")
 
 # Game loop
 while True:
@@ -39,9 +33,6 @@ while True:
             pygame.quit()
             sys.exit()
 
-    for enemy in enemies:
-        pygame.draw.rect(window, telova, enemy)
-        pygame.draw.rect(window, cerna, enemy, 2)
 
     
 
@@ -49,9 +40,3 @@ while True:
     pygame.display.update()
     clock.tick(30)
 
-"""
-To do:
-
-vytvořit NEPŘÁTELÉ a místnosti
-
-"""
