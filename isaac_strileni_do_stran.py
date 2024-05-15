@@ -337,9 +337,12 @@ while True:
 """
 To do:
 
-
+    # Draw player projectiles on the window
+    for proj_x, proj_y in player_projectiles:
+        window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
 
 
 vytvořit NEPŘÁTELÉ a místnosti
 
 """
+
