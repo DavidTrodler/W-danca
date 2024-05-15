@@ -14,6 +14,7 @@ rext_x, rext_y = rect_x, rect_y
 WIDTH, HEIGHT = 1500, 1000
 clock = pygame.time.Clock()
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
+srdce = pygame.image.load("empty_heart.png")
 
 while True:
     for event in pygame.event.get():
@@ -36,7 +37,7 @@ while True:
 
     rect_x = max(0, min(rect_x, WIDTH - 100))
     rect_y = max(0, min(rect_y, HEIGHT - 100))
-
+    window.blit(srdce, (500, 500))
     isaac = window.blit(postava, (rect_x, rect_y))
 
 
