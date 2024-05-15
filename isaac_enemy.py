@@ -1,4 +1,6 @@
 import pygame, sys
+
+
 pygame.init()
 
 # Define color constants
@@ -52,6 +54,14 @@ clock = pygame.time.Clock()
 # Load the character image
 velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
+
+#Functions for enemies.py
+def level():
+    pass
+
+def player_position():
+    pass
+
 
 # Game loop
 while True:
@@ -320,6 +330,7 @@ while True:
     isaac = window.blit(postava, (rect_x, rect_y))
 
     # Update the display and control the frame rate
+    player_position()
     pygame.display.update()
     clock.tick(30)
 
