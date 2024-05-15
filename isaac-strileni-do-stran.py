@@ -14,7 +14,7 @@ projectile_size = 10
 projectile_speed = 10
 # Shooting cooldown
 cooldown = 0
-cooldown_time = 5
+cooldown_time = 20
 
 
 # Initialize lists for player projectiles and all projectiles
