@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, random
 
 
 pygame.init()
@@ -13,17 +13,29 @@ cerna = (0, 0, 0)
 
 #Level
 level = 1
+def create_new_level():
+    global level, enemies_on_screen
+    level += 1
 
 # Define projectile size and speed
 projectile_size = 10
 projectile_speed = 10
-projectile_speed_diagonal = 7
+projectile_speed_diagonal = 4
 # Shooting cooldown
 cooldown = 0
 cooldown_time = 10
 
-#Enemies
+#ENEMIES
 enemies = []
+enemies_on_screen = 0
+# Funkce pro vytvoření nových nepřátel
+def create_new_enemies():
+    global enemies_on_screen
+    for _ in range(enemies_on_screen):
+        enemy_x = random.randint(0, window.get_width() - enemy_size)
+        enemy_y = random.randint(0, window.get_height() // 2)
+        enemies.append((enemy_x, enemy_y, False))
+
 
 # Initialize lists for player projectiles and all projectiles
 #UP
@@ -57,6 +69,7 @@ WIDTH, HEIGHT = 1500, 1000
 clock = pygame.time.Clock()
 
 # Load the character image
+enemy_size = 50
 velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 
