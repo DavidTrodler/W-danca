@@ -34,7 +34,6 @@ while True:
             sys.exit()
 
 
-    
 
     
     pygame.display.update()
