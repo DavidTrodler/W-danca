@@ -3,6 +3,7 @@ import pygame, sys
 
 pygame.init()
 
+
 # Define color constants
 telova = (255, 186, 141)
 hneda = (85, 33, 0)
@@ -10,6 +11,8 @@ modra_mouchy =(165, 199, 206)
 cerna = (0, 0, 0)
 
 
+#Level
+level = 1
 
 # Define projectile size and speed
 projectile_size = 10
@@ -19,6 +22,8 @@ projectile_speed_diagonal = 7
 cooldown = 0
 cooldown_time = 10
 
+#Enemies
+enemies = []
 
 # Initialize lists for player projectiles and all projectiles
 #UP
@@ -134,6 +139,8 @@ while True:
                 cooldown = cooldown_time
                 break
 
+
+    #Shooting cooldown
     if cooldown > 0:
         cooldown -= 1
         shoots = True
@@ -330,15 +337,16 @@ while True:
     isaac = window.blit(postava, (rect_x, rect_y))
 
     # Update the display and control the frame rate
-    player_position()
+
+    #LEVEL
+
+
+
     pygame.display.update()
     clock.tick(30)
 
 """
 To do:
-
-
-
 
 vytvořit NEPŘÁTELÉ a místnosti
 
