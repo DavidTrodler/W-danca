@@ -51,9 +51,9 @@ clock = pygame.time.Clock()
 velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 slza = pygame.image.load("slza.png")
-prvni_srdicko = pygame.image.load("full_heart.png")
-druhy_srdicko = pygame.image.load("full_heart.png")
-treti_srdicko = pygame.image.load("full_heart.png")
+prvni_srdicko = pygame.image.load("better_full_heart.png")
+druhy_srdicko = pygame.image.load("better_full_heart.png")
+treti_srdicko = pygame.image.load("better_full_heart.png")
 
 #Functions for enemies.py
 def level():
