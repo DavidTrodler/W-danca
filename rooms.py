@@ -2,6 +2,7 @@ import random
 import time
 #Vybrané roomky
 rooms=[]
+
 #Pravděpodobnosti
 level = float(5)
 level_odcitani = 0
