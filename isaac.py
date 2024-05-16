@@ -8,7 +8,7 @@ modra_mouchy =(165, 199, 206)
 cerna = (0, 0, 0)
 
 # Define projectile size and speed
-projectile_size = 10
+projectile_size = 15
 projectile_speed = 10
 projectile_speed_diagonal = 4
 
