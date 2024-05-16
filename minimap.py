@@ -21,10 +21,11 @@ while True:
 """
 Dodělat zobrazení roomek na mapě následujícím způsobem.
 -----------------------------------------------------------------
-Vše se bude odvíjet od roomky č. 1, která bude mít souřadnice 360, 200.
+Vše se bude odvíjet od roomky č. 1, která bude mít souřadnice 360, 200. (asi, oblast minimapy je znázorněna v souboru "minimapa rozměry.png")
 Následující roomky budou mít vztah k roomce, například roomka nad ní bude mít souřadnice
 stejné jako roomka č. 1, ale bude mít y-ovou souřadnici o 200 větší. Roomka vpravo od ní bude mít
-souřadnice pro x větší např o 300 atd... 
+souřadnice pro x větší např. o 300 atd...
+!! čísla roomek jsou znázorněna v excelové tabulce ve složce s projektem (W-danca) !! 
 
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
