@@ -2,6 +2,9 @@ import pygame, sys
 
 
 pygame.init()
+#Current room
+current_room = 1
+
 
 # Define color constants
 telova = (255, 186, 141)

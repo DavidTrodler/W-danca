@@ -1,29 +1,34 @@
-import random
-import time
+import random,time
 #Vybrané roomky
 rooms=[]
 
 #Pravděpodobnosti
-level = float(5)
+level = float(3)
 level_odcitani = 0
 level_pravdepodobnost = float(0.25 / (level/2))
 pravdepodobnost_cervena = float(1)
 pravdepodobnost_ruzova = float(0.5)
 pravdepodobnost_zelena = float(0.1)
+#Pokud je level 1
+if level == float(1):
+    pravdepodobnost_ruzova = float(1)
+    pravdepodobnost_cervena = float(2)
 
+fialova = True
+cervena = False
+ruzova = False
+zelena = False
 #Smyčka výběrů roomek
 while True:
-    fialova = True
-    cervena = False
-    ruzova = False
-    zelena = False
 
-    for i in range(2,9):
-        if i in rooms:
-            cervena = True
-    for i in range (10,25):
-        if i in rooms:
-            ruzova = True
+    if not cervena:
+        for i in range(2,9):
+            if i in rooms:
+                cervena = True
+    if not ruzova:
+        for i in range (10,25):
+            if i in rooms:
+                ruzova = True
 
 
     if random.random() < pravdepodobnost_cervena:
@@ -70,7 +75,7 @@ while True:
             #Růžová
             if random.random() < pravdepodobnost_ruzova:
                 pravdepodobnost_ruzova -= level_pravdepodobnost
-                rooms.append([13])
+                rooms.append(13)
                 ruzova = True
         #pokud je v místnostech 5
         print("5")
@@ -83,7 +88,7 @@ while True:
             #Růžová
             if random.random() < pravdepodobnost_ruzova:
                 pravdepodobnost_ruzova -= level_pravdepodobnost
-                rooms.append([10])
+                rooms.append(10)
                 ruzova = True
         #pokud je v místnostech 6
         print("6")
@@ -215,6 +220,8 @@ while True:
                 pravdepodobnost_cervena -= (level_pravdepodobnost * 2)
                 rooms.append(6)
             #Růžová
+                rooms.append(6)
+            #Růžová
             if random.random() < pravdepodobnost_ruzova:
                 pravdepodobnost_ruzova -= level_pravdepodobnost
                 rooms.append(random.choice([10,23]))
@@ -330,7 +337,7 @@ while True:
             #Zelená
             if random.random() < pravdepodobnost_zelena:
                 pravdepodobnost_zelena -= level_pravdepodobnost
-                rooms.append([43,44])
+                rooms.append(random.choice([43,44]))
                 zelena = True
         #pokud je v místnostech 25
         if 25 in rooms:
@@ -344,7 +351,241 @@ while True:
                 rooms.append([31,32])
                 zelena = True
     if fialova and cervena and ruzova and zelena:
+        #pokud je v místnostech 26
+        if 26 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([33,34]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(13)
+        #pokud je v místnostech 27
+        if 27 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([37,38]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(10)
+        #pokud je v místnostech 28
+        if 28 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([41,42]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(11)
+        #pokud je v místnostech 29
+        if 29 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([45,30]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(12)
+        #pokud je v místnostech 30
+        if 30 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([31,29]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(20)
+        #pokud je v místnostech 31
+        if 31 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([30,46]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(25)
+        #pokud je v místnostech 32
+        if 32 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([33,46]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(25)
+        #pokud je v místnostech 33
+        if 33 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([26,32]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(21)
+        #pokud je v místnostech 34
+        if 34 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([26,35]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(14)
+        #pokud je v místnostech 35
+        if 35 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([34,47]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(22)
+        #pokud je v místnostech 36
+        if 36 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([37,47]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(22)
+        #pokud je v místnostech 37
+        if 37 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([27,36]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(15)
+        #pokud je v místnostech 38
+        if 38 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([27,39]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(16)
+        #pokud je v místnostech 39
+        if 39 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([38,48]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(23)
+        #pokud je v místnostech 40
+        if 40 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([41,48]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(23)
+        #pokud je v místnostech 41
+        if 41 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([28,40]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(17)
+        #pokud je v místnostech 42
+        if 42 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([28,43]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(18)
+        #pokud je v místnostech 43
+        if 43 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([42,49]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(24)
+        #pokud je v místnostech 44
+        if 44 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([45,49]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(24)
+        #pokud je v místnostech 45
+        if 45 in rooms:
+            #Zelená
+            if random.random() < pravdepodobnost_zelena:
+                pravdepodobnost_zelena -= level_pravdepodobnost
+                rooms.append(random.choice([29,44]))
+            #Růžová
+            if random.random() < pravdepodobnost_ruzova:
+                pravdepodobnost_ruzova -= level_pravdepodobnost
+                rooms.append(19)
+        #pokud je v místnostech 46
+        if 46 in rooms:
+            if 31 in rooms:
+                rooms.append(32)
+            else:
+                rooms.append(31)
+        #pokud je v místnostech 47
+        if 47 in rooms:
+            if 35 in rooms:
+                rooms.append(36)
+            else:
+                rooms.append(35)
+        #pokud je v místnostech 48
+        if 48 in rooms:
+            if 39 in rooms:
+                rooms.append(40)
+            else:
+                rooms.append(39)
+        #pokud je v místnostech 49
+        if 49 in rooms:
+            if 43 in rooms:
+                rooms.append(44)
+            else:
+                rooms.append(43)
+    if pravdepodobnost_cervena <= 0000.1:
+        cervena = False
+    if pravdepodobnost_ruzova <= 0000.1:
+        ruzova = False
+    if pravdepodobnost_zelena <= 0000.1:
+        zelena = False
+    if pravdepodobnost_cervena <= 0000.1 and pravdepodobnost_ruzova <= 0000.1 and pravdepodobnost_zelena <= 0000.1:
         break
+
+        
+        
     time.sleep(0.1)
 
 
@@ -355,6 +596,4 @@ print(pravdepodobnost_ruzova)
 print(pravdepodobnost_zelena)
 
 
-"""
-Možná přidat do posledního ifu více větvení, pokud je pravděpodobnost u zelené stále větší než 0
-"""
+
