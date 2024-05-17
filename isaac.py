@@ -11,7 +11,8 @@ cerna = (0, 0, 0)
 projectile_size = 10
 projectile_speed = 10
 projectile_speed_diagonal = 4
-
+# Player health
+player_health = float(5)
 # Shooting cooldown
 cooldown = 0
 cooldown_time = 10
@@ -36,13 +37,16 @@ player_projectiles_right_up = []
 #ALL
 projectiles = []
 
-# Create the game window
-window = pygame.display.set_mode((1500, 1000))
+# Create the game window + Load images
+window = pygame.display.set_mode((1366, 755))
 pygame.display.set_caption("ˇIsaacˇ")
-
+pozadi = pygame.image.load("pozadi.png")
+window.blit(pozadi, (0, 0))
+srdce_full = pygame.image.load("full_heart.png")
+srdce_half = pygame.image.load("half_a_heart.png")
 # Set initial position and dimensions for the character
 rect_x, rect_y = 70, 500
-WIDTH, HEIGHT = 1500, 1000
+WIDTH, HEIGHT = 1366, 755
 
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
@@ -135,7 +139,7 @@ while True:
     if cooldown == 0:
         shoots = False
 
-    window.fill(hneda)
+
 
     keys = pygame.key.get_pressed()
 
@@ -261,6 +265,11 @@ while True:
                 new_player_projectiles_RIGHT_UP.append((proj_x, proj_y))
         player_projectiles_right_up = new_player_projectiles_RIGHT_UP
 
+
+    # Vykreslení pozadí
+    window.blit(pozadi, (0, 0))
+
+    
     # Draw player projectiles on the window
     #UP
     if len(player_projectiles_up) > 0:
@@ -318,7 +327,13 @@ while True:
 
     # Draw the character on the window
     isaac = window.blit(postava, (rect_x, rect_y))
-
+    # Draw the player health bar
+    if player_health == 5:
+        window.blit(srdce_full, (1250, 35))
+        window.blit(srdce_full, (1200, 35))
+        window.blit(srdce_full, (1150, 35))
+        window.blit(srdce_full, (1100, 35))
+        window.blit(srdce_half, (1050, 35))
     # Update the display and control the frame rate
     pygame.display.update()
     clock.tick(30)
