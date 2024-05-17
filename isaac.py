@@ -322,8 +322,8 @@ while True:
 
 
     # Ensure the character stays within the window boundaries
-    rect_x = max(0, min(rect_x, WIDTH - 100))
-    rect_y = max(0, min(rect_y, HEIGHT - 100))
+    rect_x = max(45, min(rect_x, WIDTH - 100))
+    rect_y = max(45, min(rect_y, HEIGHT - 100))
 
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))

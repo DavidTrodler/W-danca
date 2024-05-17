@@ -28,22 +28,10 @@ slza = pygame.transform.scale(importovani_slzy, (25, 25))
 heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
 
-# Rozměry minimapy
-minimap_width = 200
-minimap_height = 200
-
-# Funkce pro vykreslení minimapy
-def draw_minimap(WIDTH, HEIGHT):
-    minimap = pygame.Surface((minimap_width, minimap_height))
-    minimap.fill(cerna)
-
-    # Poměr velikostí
-    scale_x = minimap_width / WIDTH
-    scale_y = minimap_height / HEIGHT
+minimap = pygame.image.load("minimap_layout.png")
+minimap = pygame.transform.scale(minimap, (250, 200))
 
 
-    # Umístění minimapy na hlavní obrazovku
-    window.blit(minimap, (600, 400))
 
 # Game loop
 while True:
@@ -71,8 +59,8 @@ while True:
     window.blit(pozadi, (0, 0))
 
     # Ensure the character stays within the window boundaries
-    rect_x = max(0, min(rect_x, WIDTH - 100))
-    rect_y = max(0, min(rect_y, HEIGHT - 100))
+    rect_x = max(45, min(rect_x, WIDTH - 100))
+    rect_y = max(45, min(rect_y, HEIGHT - 100))
 
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
@@ -80,8 +68,11 @@ while True:
     window.blit(heart_full, (25, 25))
     window.blit(heart_full, (95, 25))
     window.blit(heart_half, (165, 25))
-    draw_minimap(WIDTH,HEIGHT)
-    
+
+    window.blit(minimap, (1089, 25))
     # Update the display and control the frame rate
     pygame.display.update()
     clock.tick(30)
+
+
+#75,50 <-- stred mapy
