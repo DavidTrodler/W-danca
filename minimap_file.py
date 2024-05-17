@@ -89,6 +89,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+    #Nyní nefunguje, ale bude, až budeme mít dveře
     if dvere_up:
         move_up_counter += dvere_up_value
         dvere_up = False
@@ -102,43 +103,47 @@ while True:
         move_side_counter += dvere_right_value
         dvere_right = False
 
+
+
     #První
-    for img_x, img_y in prvni:
+    for img_x, img_y in [prvni]:
         if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
-            window.blit(room_image, ((prvni)))
+            window.blit(room_image, (prvni))
     #Druhá
-    for img_x, img_y in druha:
+    for img_x, img_y in [druha]:
         if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
             window.blit(room_image, ((druha)))
     #Třetí
-    for img_x, img_y in treti:
+    for img_x, img_y in [treti]:
         if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
             window.blit(room_image, ((treti)))
     #Čtvrtá
-    for img_x, img_y in ctvrta:
+    for img_x, img_y in [ctvrta]:
         if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
             window.blit(room_image, ((ctvrta)))
     #Pátá
-    for img_x, img_y in pata:
+    for img_x, img_y in [pata]:
         if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
             window.blit(room_image, ((pata)))
     #Šestá
-    for img_x, img_y in sesta:
+    for img_x, img_y in [sesta]:
         if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
             window.blit(room_image, ((sesta))) 
     #Sedmá
-    for img_x, img_y in sedma:
+    for img_x, img_y in [sedma]:
         if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
             window.blit(room_image, ((sedma)))
     #Osmá
-    for img_x, img_y in osma:
+    for img_x, img_y in [osma]:
         if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
             window.blit(room_image, ((osma)))
     #Devátá
-    for img_x, img_y in devata:
+    for img_x, img_y in [devata]:
         if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
             window.blit(room_image, (devata))
 
+
+#PŘIDAT oblast na obrazovce, ve které se roomky nebudou zobrazovat (podobně jako to tam je, jen si vyber oblast jakou budeš chtít)
 
 
     pygame.display.update()
