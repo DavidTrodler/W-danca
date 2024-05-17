@@ -26,6 +26,7 @@ def vyber_insert_level(x):
     if random.random() < pravdepodobnost_cervena:
         pravdepodobnost_cervena -= (level_pravdepodobnost * 2)
         rooms.append(random.choice([2, 3, 4, 5]))
+    
     while True:
 
         if not cervena:
