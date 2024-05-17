@@ -2,6 +2,9 @@ import pygame, sys
 
 
 pygame.init()
+#Current room
+current_room = 1
+
 
 # Define color constants
 telova = (255, 186, 141)
@@ -41,12 +44,12 @@ player_projectiles_right_up = []
 projectiles = []
 
 # Create the game window
-window = pygame.display.set_mode((1500, 1000))
+window = pygame.display.set_mode((1366, 755))
 pygame.display.set_caption("ˇIsaacˇ")
 
 # Set initial position and dimensions for the character
 rect_x, rect_y = 500, 500
-WIDTH, HEIGHT = 1500, 1000
+WIDTH, HEIGHT = 1366, 755
 
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()

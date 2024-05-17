@@ -1,5 +1,4 @@
 import pygame, sys
-from isaac_strileni_do_stran import level, player_position
 pygame.init()
 
 # Define color constants
@@ -21,10 +20,13 @@ WIDTH, HEIGHT = 1500, 1000
 clock = pygame.time.Clock()
 
 #ROOMS
-rooms = [56]
+rooms = [56,66,67,68,58,59,49,50,60,70,80]
 
 #Mapa
-pygame.image.load("map.png")
+pygame.image.load("pozadi.png")
+
+
+
 
 # Game loop
 while True:
