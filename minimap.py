@@ -34,7 +34,7 @@ Pokud se změní souřadnice roomky č. 1, změní se i souřadnice všech ostat
 Při zobrazování roomek bude podmínka: Pokud nejsou souřadnice roomky v oblasti minimapy, obrázek roomky se nevykreslí.
 
 🎇
-ještě jednou uvidim "|" a skokncis jako cicina.jpg
+ještě jednou uvidim "|" a skoncis jako cicina.jpg
                      v
 🎇
 """
