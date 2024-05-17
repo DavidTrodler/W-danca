@@ -13,7 +13,6 @@ rect_x, rect_y = 70, 500
 WIDTH, HEIGHT = 1500, 1000
 clock = pygame.time.Clock()
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
-strela = pygame.draw.rect(window, cerna, (rect_a, rect_b, 100,100))
 
 while True:
     for event in pygame.event.get():
