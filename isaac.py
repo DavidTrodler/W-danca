@@ -55,7 +55,10 @@ clock = pygame.time.Clock()
 velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 importovani_slzy = pygame.image.load("tear.png")
-slza = pygame.transform.scale(importovani_slzy, (50, 50))
+slza = pygame.transform.scale(importovani_slzy, (35, 35))
+prvni_srdicko = pygame.image.load("srdicka/full_heart.png")
+druhy_srdicko = pygame.image.load("srdicka/half_a_heart.png")
+treti_srdicko = pygame.image.load("srdicka/empty_heart.png")
 
 #Functions for enemies.py
 def level():
@@ -326,8 +329,9 @@ while True:
     rect_x = max(0, min(rect_x, WIDTH - 100))
     rect_y = max(0, min(rect_y, HEIGHT - 100))
 
-    # Draw the character on the window
+    # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
+<<<<<<< HEAD
     # Draw the player health bar
     if player_health == 5:
         window.blit(srdce_full, (1250, 35))
@@ -335,6 +339,17 @@ while True:
         window.blit(srdce_full, (1150, 35))
         window.blit(srdce_full, (1100, 35))
         window.blit(srdce_half, (1050, 35))
+=======
+    window.blit(prvni_srdicko, (25, 25))
+    window.blit(druhy_srdicko, (95, 25))
+    window.blit(treti_srdicko, (165, 25))
+    
+>>>>>>> 6bc41eb4b4cf5384792afddc2057b50b03ebf230
     # Update the display and control the frame rate
     pygame.display.update()
     clock.tick(30)
+
+"""
+tears
+Věnovala bych se more important things, bullets zatim +- funguji, potom bych se podivala na tears hybajici se podle tela a vycentrovani
+"""

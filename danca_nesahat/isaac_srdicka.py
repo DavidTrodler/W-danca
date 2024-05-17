@@ -50,7 +50,8 @@ clock = pygame.time.Clock()
 # Load the character and tear image
 velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
-slza = pygame.image.load("slza.png")
+importovani_slzy = pygame.image.load("tear.png")
+slza = pygame.transform.scale(importovani_slzy, (35, 35))
 prvni_srdicko = pygame.image.load("srdicka/full_heart.png")
 druhy_srdicko = pygame.image.load("srdicka/half_a_heart.png")
 treti_srdicko = pygame.image.load("srdicka/empty_heart.png")
@@ -319,12 +320,12 @@ while True:
     rect_x = max(0, min(rect_x, WIDTH - 100))
     rect_y = max(0, min(rect_y, HEIGHT - 100))
 
-    # Draw the character on the window
+    # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
+    window.blit(prvni_srdicko, (25, 25))
+    window.blit(druhy_srdicko, (95, 25))
+    window.blit(treti_srdicko, (165, 25))
 
-    window.blit(prvni_srdicko, (100, 100))
-    window.blit(druhy_srdicko, (200, 100))
-    window.blit(treti_srdicko, (300, 100))
     # Update the display and control the frame rate
     pygame.display.update()
     clock.tick(30)
