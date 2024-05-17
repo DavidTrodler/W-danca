@@ -42,8 +42,7 @@ window = pygame.display.set_mode((1366, 755))
 pygame.display.set_caption("ˇIsaacˇ")
 pozadi = pygame.image.load("pozadi.png")
 window.blit(pozadi, (0, 0))
-srdce_full = pygame.image.load("full_heart.png")
-srdce_half = pygame.image.load("half_a_heart.png")
+
 # Set initial position and dimensions for the character
 rect_x, rect_y = 70, 500
 WIDTH, HEIGHT = 1366, 755
@@ -56,9 +55,8 @@ velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 importovani_slzy = pygame.image.load("tear.png")
 slza = pygame.transform.scale(importovani_slzy, (35, 35))
-prvni_srdicko = pygame.image.load("srdicka/full_heart.png")
-druhy_srdicko = pygame.image.load("srdicka/half_a_heart.png")
-treti_srdicko = pygame.image.load("srdicka/empty_heart.png")
+heart_full = pygame.image.load("srdicka/full_heart.png")
+heart_half = pygame.image.load("srdicka/half_a_heart.png")
 
 #Functions for enemies.py
 def level():
@@ -331,20 +329,11 @@ while True:
 
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
-<<<<<<< HEAD
     # Draw the player health bar
-    if player_health == 5:
-        window.blit(srdce_full, (1250, 35))
-        window.blit(srdce_full, (1200, 35))
-        window.blit(srdce_full, (1150, 35))
-        window.blit(srdce_full, (1100, 35))
-        window.blit(srdce_half, (1050, 35))
-=======
-    window.blit(prvni_srdicko, (25, 25))
-    window.blit(druhy_srdicko, (95, 25))
-    window.blit(treti_srdicko, (165, 25))
+    window.blit(heart_full, (25, 25))
+    window.blit(heart_full, (95, 25))
+    window.blit(heart_half, (165, 25))
     
->>>>>>> 6bc41eb4b4cf5384792afddc2057b50b03ebf230
     # Update the display and control the frame rate
     pygame.display.update()
     clock.tick(30)
