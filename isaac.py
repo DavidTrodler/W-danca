@@ -54,7 +54,8 @@ clock = pygame.time.Clock()
 # Load the character and tear image
 velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
-slza = pygame.image.load("slza.png")
+importovani_slzy = pygame.image.load("tear.png")
+slza = pygame.transform.scale(importovani_slzy, (50, 50))
 
 #Functions for enemies.py
 def level():
