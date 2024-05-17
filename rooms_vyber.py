@@ -41,7 +41,7 @@ def vyber_insert_level(x):
 
         if fialova and cervena:
             #pokud je v místnostech 2
-            print("2")
+            
             if 2 in rooms:
                 #Červená
                 if random.random() < pravdepodobnost_cervena:
@@ -55,7 +55,7 @@ def vyber_insert_level(x):
                     ruzova = True
 
             #pokud je v místnostech 3
-            print("3")
+            
             if 3 in rooms:
                 #Červená
                 if random.random() < pravdepodobnost_cervena:
@@ -69,7 +69,7 @@ def vyber_insert_level(x):
                     rooms.append(12)
                     ruzova = True
             #pokud je v místnostech 4
-            print("4")
+            
             if 4 in rooms:
                 #Červená
                 if random.random() < pravdepodobnost_cervena:
@@ -82,7 +82,7 @@ def vyber_insert_level(x):
                     rooms.append(13)
                     ruzova = True
             #pokud je v místnostech 5
-            print("5")
+            
             if 5 in rooms:
                 #Červená
                 if random.random() < pravdepodobnost_cervena:
@@ -95,7 +95,7 @@ def vyber_insert_level(x):
                     rooms.append(10)
                     ruzova = True
             #pokud je v místnostech 6
-            print("6")
+            
             if 6 in rooms:
                 #Růžová
                 if random.random() < pravdepodobnost_ruzova:
@@ -103,7 +103,7 @@ def vyber_insert_level(x):
                     rooms.append(random.choice([16,17]))
                     ruzova = True
             #pokud je v místnostech 7
-            print("7")
+            
             if 7 in rooms:
                 #Růžová
                 if random.random() < pravdepodobnost_ruzova:
@@ -111,7 +111,7 @@ def vyber_insert_level(x):
                     rooms.append(random.choice([18,19]))
                     ruzova = True
             #pokud je v místnostech 8
-            print("8")
+            
             if 8 in rooms:
                 #Růžová
                 if random.random() < pravdepodobnost_ruzova:
@@ -119,7 +119,7 @@ def vyber_insert_level(x):
                     rooms.append(random.choice([20,21]))
                     ruzova = True
             #pokud je v místnostech 9
-            print("9")
+            
             if 9 in rooms:
                 #Růžová
                 if random.random() < pravdepodobnost_ruzova:
@@ -595,11 +595,7 @@ def vyber_insert_level(x):
 
 
 
-    print(rooms)
-    print(len(rooms))
-    print(rooms_fixed)
-    print(pravdepodobnost_cervena)
-    print(pravdepodobnost_ruzova)
-    print(pravdepodobnost_zelena)
+
     return rooms_fixed
 
+print(vyber_insert_level(6))
