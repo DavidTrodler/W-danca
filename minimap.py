@@ -32,4 +32,9 @@ vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 Pokud se změní souřadnice roomky č. 1, změní se i souřadnice všech ostatních roomek.
 
 Při zobrazování roomek bude podmínka: Pokud nejsou souřadnice roomky v oblasti minimapy, obrázek roomky se nevykreslí.
+
+🎇
+ještě jednou uvidim "|" a skokncis jako cicina.jpg
+                     v
+🎇
 """
