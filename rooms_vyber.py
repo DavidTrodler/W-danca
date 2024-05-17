@@ -1,6 +1,7 @@
 import random
 import time
 
+#fialova = zakladni room
 
 def vyber_insert_level(x):
     #Vybrané roomky
@@ -8,7 +9,6 @@ def vyber_insert_level(x):
 
     #Pravděpodobnosti
     level = float(x)
-    level_odcitani = 0
     level_pravdepodobnost = float(0.25 / (level/2))
     pravdepodobnost_cervena = float(1)
     pravdepodobnost_ruzova = float(0.5)
