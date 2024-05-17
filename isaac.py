@@ -11,8 +11,6 @@ cerna = (0, 0, 0)
 projectile_size = 10
 projectile_speed = 10
 projectile_speed_diagonal = 4
-# Player health
-player_health = float(5)
 # Shooting cooldown
 cooldown = 0
 cooldown_time = 10
@@ -54,7 +52,7 @@ clock = pygame.time.Clock()
 velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 importovani_slzy = pygame.image.load("tear.png")
-slza = pygame.transform.scale(importovani_slzy, (35, 35))
+slza = pygame.transform.scale(importovani_slzy, (25, 25))
 heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
 
