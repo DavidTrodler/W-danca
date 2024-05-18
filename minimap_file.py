@@ -83,9 +83,9 @@ osma[1] = prvni[1] + image_height * (-1) + (move_up[1] * move_up_counter)
 
 #Devátá
 devata = [0,0]
-devata[0] = prvni[0] + image_width * 1 + (move_side[0] * move_side_counter)
-devata[1] = prvni[1] + image_width * (-1) + (move_up[1] * move_up_counter)
-print(devata[0], devata[1])
+devata[0] = prvni[0] + (image_width * 1) + (move_side[0] * move_side_counter)
+devata[1] = prvni[1] + (image_height * (-1)) + (move_up[1] * move_up_counter)
+print(devata)
 #Desátá   x     y
 desata = [0,0]
 desata[0] = prvni[0] + image_width * 2 + (move_side[0] * move_side_counter)
