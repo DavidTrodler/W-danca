@@ -7,26 +7,26 @@ pygame.display.set_mode
 
 # Create the game window
 window = pygame.display.set_mode((1366, 755))
-WIDTH = 755
-HEIGHT = 1366
-image_width = 60 #x
+WIDTH = 1366
+HEIGHT = 755
+image_width = 60 #x  #<---- Šířka obrázku, dá se volně měnit
 image_height = 30 #y
 pygame.display.set_caption("ˇIsaacˇ")
 room_image = pygame.image.load("pozadi.png")
-zkouzka_image = pygame.image.load("nakres_dveri.png")
+zkouzka_image = pygame.image.load("nakres_dveri.png") #<---- Zkušební obrázek pro roomku č. 1
 clock = pygame.time.Clock()
 zkouzka_image = pygame.transform.scale(zkouzka_image,(image_width,image_height))
 room_image = pygame.transform.scale(room_image,(image_width,image_height))
 # Rooms list
 rooms = [1]
-rooms = rooms_fixed(3)
+rooms = rooms_fixed(3) #<---- Číslo = level
 print(rooms)
 
 
 #Pohyby mapy
 move_up = [0, 30] # y + 30
 move_side = [60, 0] # x + 60
-move_up_counter = 0
+move_up_counter = 0 #<---- O kolik roomek se posunul hráč nahoru nebo dolů
 move_side_counter = 0
 
 #Dveře, ukazuje, kam se mají osy posunout
@@ -36,7 +36,7 @@ dvere_left_value = 1
 dvere_right_value = -1
 
 dvere_up = False #<--- Změní se, pokud hráč projde dveřmi (kvůli if statment ve while loop)
-dvere_down = False
+dvere_down = False 
 dvere_left = False
 dvere_right = False
 
@@ -49,6 +49,7 @@ prvni[0] = prvni[0] + (move_side[0] * move_side_counter)
 #Druhá
 druha = [0,0]
 druha[0] = prvni[0] + image_width * 0 + (move_side[0] * move_side_counter)
+#<-----Posune se ošířku obrázku (image_width) do boku, násobí se podle závislosti na roomce č. jedna. (viz excell)
 druha[1] = prvni[1] + image_height * 1 + (move_up[1] * move_up_counter)
 
 #Třetí
@@ -83,9 +84,9 @@ osma[1] = prvni[1] + image_height * (-1) + (move_up[1] * move_up_counter)
 
 #Devátá
 devata = [0,0]
-devata[0] = prvni[0] + image_width * 1 + (move_side[0] * move_side_counter)
-devata[1] = prvni[1] + image_width * (-1) + (move_up[1] * move_up_counter)
-print(devata[0], devata[1])
+devata[0] = prvni[0] + (image_width * 1) + (move_side[0] * move_side_counter)
+devata[1] = prvni[1] + (image_height * (-1)) + (move_up[1] * move_up_counter)
+print(devata)
 #Desátá   x     y
 desata = [0,0]
 desata[0] = prvni[0] + image_width * 2 + (move_side[0] * move_side_counter)
@@ -289,7 +290,7 @@ ctyratadevata[1] = prvni[1] + image_height * 3 + (move_up[1] * move_up_counter)
 
 
 
-prvni_statement = True
+prvni_statement = True #<----- indikuje, jesli je dané číslo v seznamu rooms
 druha_statement = False
 treti_statement = False
 ctvrta_statement = False
@@ -342,7 +343,7 @@ ctyratadevata_statement = False
 
 
 if 2 in rooms:
-    druha_statement = True
+    druha_statement = True #<----- indikuje, jesli je dané číslo v seznamu rooms
 if 3 in rooms:
     treti_statement = True
 if 4 in rooms:
@@ -445,7 +446,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-    #Nyní nefunguje, ale bude, až budeme mít dveře
+    #<----Nyní nefunguje, ale bude, až budeme mít dveře
     if dvere_up:
         move_up_counter += dvere_up_value
         dvere_up = False
@@ -462,9 +463,9 @@ while True:
 
 
     #První
-    if prvni_statement:
+    if prvni_statement: #<---- pokud je 1. roomka v seznamu rooms, bude True
         for img_x, img_y in [prvni]:
-            if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
+            if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0: #<----- pouze, aby se nezobrazovaly mimo obrazovku
                 window.blit(zkouzka_image, (prvni))
     #Druhá
     if druha_statement:
