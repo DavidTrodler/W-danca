@@ -6,7 +6,6 @@ import time
 def vyber_insert_level(x):
     #Vybrané roomky
     rooms=[1]
-    rooms_fixed = []
 
     #Pravděpodobnosti
     level = float(x)
@@ -14,6 +13,8 @@ def vyber_insert_level(x):
     pravdepodobnost_cervena = float(1)
     pravdepodobnost_ruzova = float(0.5)
     pravdepodobnost_zelena = float(0.1)
+
+
     #Pokud je level 1
     if level == float(1):
         pravdepodobnost_ruzova = float(1)
@@ -582,11 +583,6 @@ def vyber_insert_level(x):
                 else:
                     rooms.append(43)
 
-        #Čištění seznamu
-        for i in rooms:
-            if i not in rooms_fixed:
-                rooms_fixed.append(i)
-
 
         if pravdepodobnost_cervena <= 0000.1:
             cervena = False
@@ -594,14 +590,24 @@ def vyber_insert_level(x):
             ruzova = False
         if pravdepodobnost_zelena <= 0000.1:
             zelena = False
-        if pravdepodobnost_cervena <= 0000.1 and pravdepodobnost_ruzova <= 0000.1 and pravdepodobnost_zelena <= 0000.1 and len(rooms_fixed) > 3:
-            break
+        if pravdepodobnost_cervena <= 0000.1 and pravdepodobnost_ruzova <= 0000.1 and pravdepodobnost_zelena <= 0000.1 and len(rooms) > 3:
+            return rooms
 
+            
+    
         
 
 
 
+def rooms_fixed(y):
+    #Čištění seznamu
+    rooms = vyber_insert_level(y)
+    rooms_fixed_list = []
+    for i in rooms:
+        if i not in rooms_fixed_list:
+            rooms_fixed_list.append(i)
 
-    return rooms_fixed
+    return rooms_fixed_list
 
-print(vyber_insert_level(2))
+
+
