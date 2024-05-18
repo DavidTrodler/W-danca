@@ -27,7 +27,8 @@ importovani_slzy = pygame.image.load("tear.png")
 slza = pygame.transform.scale(importovani_slzy, (25, 25))
 heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
-
+first_room = pygame.image.load("room_minimap.png")
+first_room = pygame.transform.scale(first_room, (25, 15))
 minimap = pygame.image.load("minimap_layout.png")
 minimap = pygame.transform.scale(minimap, (170, 120))
 
@@ -70,6 +71,7 @@ while True:
     window.blit(heart_half, (165, 25))
 
     window.blit(minimap, (800, 20))
+    window.blit(first_room, (820, 30))
     # Update the display and control the frame rate
     pygame.display.update()
     clock.tick(30)
