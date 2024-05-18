@@ -23,7 +23,7 @@ print(rooms)
 #Pohyby mapy
 move_up = [0, 30] # y + 30
 move_side = [60, 0] # x + 60
-move_up_counter = -5
+move_up_counter = 0
 move_side_counter = 0
 
 #Dveře, ukazuje, kam se mají osy posunout
@@ -45,8 +45,8 @@ prvni[0] = prvni[0] + (move_side[0] * move_side_counter)
 
 #Druhá
 druha = [0,0]
-druha[0] = prvni[0] + image_width * 0 + move_side[0] * move_side_counter
-druha[1] = prvni[1] + image_height * 1 + move_up[1] * move_up_counter
+druha[0] = prvni[0] + image_width * 0 + (move_side[0] * move_side_counter)
+druha[1] = prvni[1] + image_height * 1 + (move_up[1] * move_up_counter)
 
 #Třetí
 treti = [0,0]
