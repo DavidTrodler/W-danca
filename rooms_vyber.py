@@ -36,7 +36,7 @@ def vyber_insert_level(x):
                 if i in rooms:
                     cervena = True
         if not ruzova:
-            for i in range (10,25):
+            for i in range(10,25):
                 if i in rooms:
                     ruzova = True
 
@@ -143,7 +143,7 @@ def vyber_insert_level(x):
                 #Zelená
                 if random.random() < pravdepodobnost_zelena:
                     pravdepodobnost_zelena -= level_pravdepodobnost
-                    rooms.append(random.choice([24,25]))
+                    rooms.append(27)
                     zelena = True
             #pokud je v místnostech 11
             if 11 in rooms:

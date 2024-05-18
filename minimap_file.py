@@ -23,7 +23,7 @@ print(rooms)
 #Pohyby mapy
 move_up = [0, 30] # y + 30
 move_side = [60, 0] # x + 60
-move_up_counter = 0
+move_up_counter = -5
 move_side_counter = 0
 
 #Dveře, ukazuje, kam se mají osy posunout
@@ -340,13 +340,10 @@ ctyratadevata_statement = False
 
 if 2 in rooms:
     druha_statement = True
-    print(druha_statement)
 if 3 in rooms:
     treti_statement = True
-    print(treti_statement)
 if 4 in rooms:
     ctvrta_statement = True
-    print(ctvrta_statement)
 if 5 in rooms:
     pata_statement = True
 if 6 in rooms:
@@ -357,6 +354,7 @@ if 8 in rooms:
     osma_statement = True
 if 9 in rooms:
     devata_statement = True
+    print(devata_statement)
 if 10 in rooms:
     desata_statement = True
 if 11 in rooms:
@@ -505,7 +503,7 @@ while True:
     if devata_statement:
         for img_x, img_y in [devata]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
-                window.blit(room_image, (devata))
+                window.blit(room_image, ((devata)))
     #Desátá
     if desata_statement:
         for img_x, img_y in [desata]:
