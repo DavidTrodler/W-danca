@@ -19,7 +19,7 @@ zkouzka_image = pygame.transform.scale(zkouzka_image,(image_width,image_height))
 room_image = pygame.transform.scale(room_image,(image_width,image_height))
 # Rooms list
 rooms = [1]
-rooms = rooms_fixed(3)
+rooms = rooms_fixed(3) #<---- Číslo = level
 print(rooms)
 
 
