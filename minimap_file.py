@@ -1,6 +1,7 @@
 import pygame, sys
 from rooms_vyber import rooms_fixed
 
+
 pygame.display.set_mode
 
 
@@ -12,7 +13,9 @@ image_width = 60 #x
 image_height = 30 #y
 pygame.display.set_caption("ˇIsaacˇ")
 room_image = pygame.image.load("pozadi.png")
+zkouzka_image = pygame.image.load("nakres_dveri.png")
 clock = pygame.time.Clock()
+zkouzka_image = pygame.transform.scale(zkouzka_image,(image_width,image_height))
 room_image = pygame.transform.scale(room_image,(image_width,image_height))
 # Rooms list
 rooms = [1]
@@ -82,7 +85,7 @@ osma[1] = prvni[1] + image_height * (-1) + (move_up[1] * move_up_counter)
 devata = [0,0]
 devata[0] = prvni[0] + image_width * 1 + (move_side[0] * move_side_counter)
 devata[1] = prvni[1] + image_width * (-1) + (move_up[1] * move_up_counter)
-
+print(devata[0], devata[1])
 #Desátá   x     y
 desata = [0,0]
 desata[0] = prvni[0] + image_width * 2 + (move_side[0] * move_side_counter)
@@ -354,7 +357,6 @@ if 8 in rooms:
     osma_statement = True
 if 9 in rooms:
     devata_statement = True
-    print(devata_statement)
 if 10 in rooms:
     desata_statement = True
 if 11 in rooms:
@@ -463,7 +465,7 @@ while True:
     if prvni_statement:
         for img_x, img_y in [prvni]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
-                window.blit(room_image, (prvni))
+                window.blit(zkouzka_image, (prvni))
     #Druhá
     if druha_statement:
         for img_x, img_y in [druha]:
@@ -503,7 +505,7 @@ while True:
     if devata_statement:
         for img_x, img_y in [devata]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
-                window.blit(room_image, ((devata)))
+                window.blit(room_image, (devata))
     #Desátá
     if desata_statement:
         for img_x, img_y in [desata]:
