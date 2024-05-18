@@ -13,7 +13,7 @@ image_height = 30 #y
 pygame.display.set_caption("ˇIsaacˇ")
 room_image = pygame.image.load("pozadi.png")
 clock = pygame.time.Clock()
-room_image = pygame.transform.scale(room_image,(60,30))
+room_image = pygame.transform.scale(room_image,(image_width,image_height))
 # Rooms list
 rooms = [1]
 rooms = rooms_fixed(3)
