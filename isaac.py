@@ -339,4 +339,7 @@ while True:
 """
 tears
 Věnovala bych se more important things, bullets zatim +- funguji, potom bych se podivala na tears hybajici se podle tela a vycentrovani
+
+dvere
+ve slozce "danca_nesahat" v souboru "idk.py" presne polohy dveri, pozadi<"nakres_dveri.png"> jen pro mereni polohy dveri
 """

@@ -8,14 +8,14 @@ modra_mouchy =(165, 199, 206)
 cerna = (0, 0, 0)
 
 # Create the game window + Load images
-window = pygame.display.set_mode((1366, 755))
+window = pygame.display.set_mode((1000, 600))
 pygame.display.set_caption("ˇIsaacˇ")
-pozadi = pygame.image.load("pozadi.png")
+pozadi = pygame.image.load("nakres_dveri.png")
 window.blit(pozadi, (0, 0))
 
 # Set initial position and dimensions for the character
 rect_x, rect_y = 70, 500
-WIDTH, HEIGHT = 1366, 755
+WIDTH, HEIGHT = 1000, 600
 
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
@@ -59,8 +59,8 @@ while True:
     window.blit(pozadi, (0, 0))
 
     # Ensure the character stays within the window boundaries
-    rect_x = max(45, min(rect_x, WIDTH - 100))
-    rect_y = max(45, min(rect_y, HEIGHT - 100))
+    rect_x = max(40, min(rect_x, WIDTH - 101))
+    rect_y = max(40, min(rect_y, HEIGHT - 96))
 
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
@@ -75,4 +75,17 @@ while True:
     clock.tick(30)
 
 
-#75,50 <-- stred mapy
+#75,50 <-- stred minimapy
+"""
+mereno na velikosti okna - 1000,600
+
+0,250 - 0,350 - zapadni dvere
+1000,250 - 1000,350 - vychodni dvere
+450,0 - 550,0 - severni dvere
+450,600 - 550,600 - jizni dvere
+
+ohraniceni isaaca:
+rect_x = max(40, min(rect_x, WIDTH - 101))
+rect_y = max(40, min(rect_y, HEIGHT - 96))
+<presne na pixel, opovaz se zpochybnovat>
+"""
