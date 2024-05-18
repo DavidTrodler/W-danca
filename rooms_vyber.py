@@ -122,13 +122,13 @@ def vyber_insert_level(x):
                     rooms.append(random.choice([20,21]))
                     ruzova = True
             #pokud je v místnostech 9
-            
             if 9 in rooms:
                 #Růžová
                 if random.random() < pravdepodobnost_ruzova:
                     pravdepodobnost_ruzova -= level_pravdepodobnost
                     rooms.append(random.choice([14,15]))
                     ruzova = True
+
         if fialova and cervena and ruzova:
             #pokud je v místnostech 10
             if 10 in rooms:
