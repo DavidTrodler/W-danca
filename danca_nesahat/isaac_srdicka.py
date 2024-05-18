@@ -54,7 +54,6 @@ importovani_slzy = pygame.image.load("tear.png")
 slza = pygame.transform.scale(importovani_slzy, (35, 35))
 prvni_srdicko = pygame.image.load("srdicka/full_heart.png")
 druhy_srdicko = pygame.image.load("srdicka/half_a_heart.png")
-treti_srdicko = pygame.image.load("srdicka/empty_heart.png")
 
 #Functions for enemies.py
 def level():
@@ -324,7 +323,6 @@ while True:
     isaac = window.blit(postava, (rect_x, rect_y))
     window.blit(prvni_srdicko, (25, 25))
     window.blit(druhy_srdicko, (95, 25))
-    window.blit(treti_srdicko, (165, 25))
 
     # Update the display and control the frame rate
     pygame.display.update()

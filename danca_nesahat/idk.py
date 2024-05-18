@@ -29,7 +29,7 @@ heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
 
 minimap = pygame.image.load("minimap_layout.png")
-minimap = pygame.transform.scale(minimap, (250, 200))
+minimap = pygame.transform.scale(minimap, (170, 120))
 
 
 
@@ -69,7 +69,7 @@ while True:
     window.blit(heart_full, (95, 25))
     window.blit(heart_half, (165, 25))
 
-    window.blit(minimap, (1089, 25))
+    window.blit(minimap, (800, 20))
     # Update the display and control the frame rate
     pygame.display.update()
     clock.tick(30)
