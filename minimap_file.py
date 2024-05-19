@@ -2,7 +2,7 @@ import pygame, sys
 from rooms_vyber import rooms_fixed
 
 
-pygame.display.set_mode
+
 
 
 # Create the game window
@@ -43,8 +43,8 @@ def pohyby_mapy():
     # Room numbers
     #První
     prvni = [500 , 500] #POKUD CHCEŠ ZMĚNIT UMÍSTĚNÍ MAPY, ZMĚŇ UMÍSTĚNÍ PRVNÍ ROOMKY   
-    prvni[1] = prvni[1] + (move_up[1] * move_up_counter)
     prvni[0] = prvni[0] + (move_side[0] * move_side_counter)
+    prvni[1] = prvni[1] + (move_up[1] * move_up_counter)
 
     #Druhá
     druha = [0,0]
