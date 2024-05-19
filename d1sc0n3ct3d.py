@@ -72,7 +72,7 @@ room_image = pygame.transform.scale(room_image,(image_width,image_height))
 
 image_filter = room_image
 image_filter.set_alpha(128) #průhledné 0 - 255 neprůhledné
-image_filter_position = [500,500]
+image_filter_position = [1000,100]
 # Rooms list
 rooms = [1]
 rooms = rooms_fixed(3) #<---- Číslo = level
@@ -1048,11 +1048,3 @@ while True:
     pygame.display.flip()
     pygame.display.update()
     clock.tick(30)
-
-"""
-tears
-Věnovala bych se more important things, bullets zatim +- funguji, potom bych se podivala na tears hybajici se podle tela a vycentrovani
-
-dvere
-ve slozce "danca_nesahat" v souboru "idk.py" presne polohy dveri, pozadi<"nakres_dveri.png"> jen pro mereni polohy dveri
-"""
