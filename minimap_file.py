@@ -14,9 +14,13 @@ image_height = 30 #y
 pygame.display.set_caption("ˇIsaacˇ")
 room_image = pygame.image.load("pozadi.png")
 zkouzka_image = pygame.image.load("nakres_dveri.png") #<---- Zkušební obrázek pro roomku č. 1
+
 clock = pygame.time.Clock()
 zkouzka_image = pygame.transform.scale(zkouzka_image,(image_width,image_height))
 room_image = pygame.transform.scale(room_image,(image_width,image_height))
+image_filter = room_image
+image_filter.set_alpha(128) #průhledné 0 - 255 neprůhledné
+image_filter_position = [500,500]
 # Rooms list
 rooms = [1]
 rooms = rooms_fixed(3) #<---- Číslo = level
@@ -30,8 +34,8 @@ move_up_counter = 0 #<---- O kolik roomek se posunul hráč nahoru nebo dolů
 move_side_counter = 0
 
 #Dveře, ukazuje, kam se mají osy posunout
-dvere_up_value = -1
-dvere_down_value = 1
+dvere_up_value = 1
+dvere_down_value = -1
 dvere_left_value = 1
 dvere_right_value = -1
 
@@ -487,13 +491,14 @@ while True:
         move_side_counter += dvere_right_value
         dvere_right = False
 
-
-
+    #Čištění obrazovky
+    window.fill((0, 0, 0))
+    window.blit(image_filter, (image_filter_position))
     #První
     if prvni_statement: #<---- pokud je 1. roomka v seznamu rooms, bude True
         for img_x, img_y in [prvni]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0: #<----- pouze, aby se nezobrazovaly mimo obrazovku
-                window.blit(zkouzka_image, (prvni))
+                window.blit(room_image, (prvni))
     #Druhá
     if druha_statement:
         for img_x, img_y in [druha]:
@@ -739,7 +744,7 @@ while True:
 
 #PŘIDAT oblast na obrazovce, ve které se roomky nebudou zobrazovat (podobně jako to tam je, jen si vyber oblast jakou budeš chtít)
 
-
+    pygame.display.flip()
     pygame.display.update()
     clock.tick(30)
 
