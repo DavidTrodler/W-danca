@@ -12,6 +12,7 @@ window = pygame.display.set_mode((1000, 600))
 pygame.display.set_caption("ˇIsaacˇ")
 pozadi = pygame.image.load("nakres_dveri.png")
 window.blit(pozadi, (0, 0))
+aktualni_room = 1
 
 # Set initial position and dimensions for the character
 rect_x, rect_y = 70, 500
@@ -54,21 +55,34 @@ while True:
     rect_x = max(40, min(rect_x, WIDTH - 101))
     rect_y = max(40, min(rect_y, HEIGHT - 96))
 
-    # Draw the character and hearts on the window
-    isaac = window.blit(postava, (rect_x, rect_y))
     # Draw the player health bar
     window.blit(heart_full, (25, 25))
     window.blit(heart_full, (95, 25))
     window.blit(heart_half, (165, 25))
 
+    # Draw the character and hearts on the window
+    isaac = window.blit(postava, (rect_x, rect_y))
+
     if isaac.colliderect(pygame.Rect(40, 250, 1, 100)):
+        rect_x += 855
         print("zapadni")
     elif isaac.colliderect(pygame.Rect(960,250, 1, 100)):
+        rect_x -= 855
         print("vychodni")
     elif isaac.colliderect(pygame.Rect(450,40, 100, 1)):
+        rect_y += 460
         print("severni")
-    elif isaac.colliderect(pygame.Rect(450,550, 100, 1)):
+    elif isaac.colliderect(pygame.Rect(450,560, 100, 1)):
+        rect_y -= 460
         print("jizni")
+
+    # Draw the character and hearts on the window
+    isaac = window.blit(postava, (rect_x, rect_y))
+
+
+
+
+
     # Update the display and control the frame rate
     pygame.display.update()
     clock.tick(30)
