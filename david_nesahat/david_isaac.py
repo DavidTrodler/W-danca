@@ -1,23 +1,75 @@
 import pygame, sys
 from rooms_vyber import rooms_fixed
+pygame.init()
 
+# Define color constants
+telova = (255, 186, 141)
+hneda = (85, 33, 0)
+modra_mouchy =(165, 199, 206)
+cerna = (0, 0, 0)
 
+# Define projectile size and speed
+projectile_size = 10
+projectile_speed = 10
+projectile_speed_diagonal = 4
+# Shooting cooldown
+cooldown = 0
+cooldown_time = 10
 
+# Initialize lists for player projectiles and all projectiles
+#UP
+player_projectiles_up = []
+player_projectiles_up_left = []
+player_projectiles_up_right = []
+#DOWN
+player_projectiles_down = []
+player_projectiles_down_left = []
+player_projectiles_down_right = []
+#LEFT
+player_projectiles_left = []
+player_projectiles_left_down = []
+player_projectiles_left_up = []
+#RIGHT
+player_projectiles_right = []
+player_projectiles_right_down = []
+player_projectiles_right_up = []
+#ALL
+projectiles = []
 
-
-# Create the game window
+# Create the game window + Load images
 window = pygame.display.set_mode((1366, 755))
-WIDTH = 1366
-HEIGHT = 755
+pygame.display.set_caption("ˇIsaacˇ")
+pozadi = pygame.image.load("pozadi.png")
+window.blit(pozadi, (0, 0))
+
+# Set initial position and dimensions for the character
+rect_x, rect_y = 70, 500
+WIDTH, HEIGHT = 1366, 755
+
+# Create a clock object to control the frame rate
+clock = pygame.time.Clock()
+
+# Load the character and tear image
+velikost_postavy = 57
+postava = pygame.image.load("pixelovy_isaac_vetsi.png")
+importovani_slzy = pygame.image.load("tear.png")
+slza = pygame.transform.scale(importovani_slzy, (25, 25))
+heart_full = pygame.image.load("srdicka/full_heart.png")
+heart_half = pygame.image.load("srdicka/half_a_heart.png")
+
+#Functions for enemies.py
+"""
+Start -------------- minimap_file.py
+"""
 image_width = 60 #x  #<---- Šířka obrázku, dá se volně měnit
 image_height = 30 #y
 pygame.display.set_caption("ˇIsaacˇ")
 room_image = pygame.image.load("pozadi.png")
 zkouzka_image = pygame.image.load("nakres_dveri.png") #<---- Zkušební obrázek pro roomku č. 1
 
-clock = pygame.time.Clock()
 zkouzka_image = pygame.transform.scale(zkouzka_image,(image_width,image_height))
 room_image = pygame.transform.scale(room_image,(image_width,image_height))
+
 image_filter = room_image
 image_filter.set_alpha(128) #průhledné 0 - 255 neprůhledné
 image_filter_position = [500,500]
@@ -43,6 +95,7 @@ dvere_up = False #<--- Změní se, pokud hráč projde dveřmi (kvůli if statme
 dvere_down = False 
 dvere_left = False
 dvere_right = False
+
 def pohyby_mapy():
     # Room numbers
     #První
@@ -347,109 +400,114 @@ ctyratasesta_statement = False
 ctyratasedma_statement = False
 ctyrataosma_statement = False
 ctyratadevata_statement = False
-
 prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
 
+def is_in_rooms():
+    if 2 in rooms:
+        druha_statement = True 
+    if 3 in rooms:
+        treti_statement = True
+    if 4 in rooms:
+        ctvrta_statement = True
+    if 5 in rooms:
+        pata_statement = True
+    if 6 in rooms:
+        sesta_statement = True
+    if 7 in rooms:
+        sedma_statement = True
+    if 8 in rooms:
+        osma_statement = True
+    if 9 in rooms:
+        devata_statement = True
+    if 10 in rooms:
+        desata_statement = True
+    if 11 in rooms:
+        jedenacta_statement = True
+    if 12 in rooms:
+        dvanacta_statement = True
+    if 13 in rooms:
+        trinacta_statement = True
+    if 14 in rooms:
+        ctrnacta_statement = True
+    if 15 in rooms:
+        patnacta_statement = True
+    if 16 in rooms:
+        sestnacta_statement = True
+    if 17 in rooms:
+        sedmnacta_statement = True
+    if 18 in rooms:
+        osmnacta_statement = True
+    if 19 in rooms:
+        devatenacta_statement = True
+    if 20 in rooms:
+        dvacata_statement = True
+    if 21 in rooms:
+        dvacataprvni_statement = True
+    if 22 in rooms:
+        dvacatadruha_statement = True
+    if 23 in rooms:
+        dvacatatreti_statement = True
+    if 24 in rooms:
+        dvacatactvrta_statement = True
+    if 25 in rooms:
+        dvacatapata_statement = True
+    if 26 in rooms:
+        dvacatasesta_statement = True
+    if 27 in rooms:
+        dvacatasedma_statement = True
+    if 28 in rooms:
+        dvacataosma_statement = True
+    if 29 in rooms:
+        dvacatadevata_statement = True
+    if 30 in rooms:
+        tricata_statement = True
+    if 31 in rooms:
+        tricataprvni_statement = True
+    if 32 in rooms:
+        tricatadruha_statement = True
+    if 33 in rooms:
+        tricatatreti_statement = True
+    if 34 in rooms:
+        tricatactvrta_statement = True
+    if 35 in rooms:
+        tricatapata_statement = True
+    if 36 in rooms:
+        tricatasesta_statement = True
+    if 37 in rooms:
+        tricatasedma_statement = True
+    if 38 in rooms:
+        tricataosma_statement = True
+    if 39 in rooms:
+        tricatadevata_statement = True
+    if 40 in rooms:
+        ctyracta_statement = True
+    if 41 in rooms:
+        ctyractaprvni_statement = True
+    if 42 in rooms:
+        ctyractadruha_statement = True
+    if 43 in rooms:
+        ctyratatreti_statement = True
+    if 44 in rooms:
+        ctyratactvrta_statement = True
+    if 45 in rooms:
+        ctyratapata_statement = True
+    if 46 in rooms:
+        ctyratasesta_statement = True
+    if 47 in rooms:
+        ctyratasedma_statement = True
+    if 48 in rooms:
+        ctyrataosma_statement = True
+    if 49 in rooms:
+        ctyratadevata_statement = True
 
-if 2 in rooms:
-    druha_statement = True 
-if 3 in rooms:
-    treti_statement = True
-if 4 in rooms:
-    ctvrta_statement = True
-if 5 in rooms:
-    pata_statement = True
-if 6 in rooms:
-    sesta_statement = True
-if 7 in rooms:
-    sedma_statement = True
-if 8 in rooms:
-    osma_statement = True
-if 9 in rooms:
-    devata_statement = True
-if 10 in rooms:
-    desata_statement = True
-if 11 in rooms:
-    jedenacta_statement = True
-if 12 in rooms:
-    dvanacta_statement = True
-if 13 in rooms:
-    trinacta_statement = True
-if 14 in rooms:
-    ctrnacta_statement = True
-if 15 in rooms:
-    patnacta_statement = True
-if 16 in rooms:
-    sestnacta_statement = True
-if 17 in rooms:
-    sedmnacta_statement = True
-if 18 in rooms:
-    osmnacta_statement = True
-if 19 in rooms:
-    devatenacta_statement = True
-if 20 in rooms:
-    dvacata_statement = True
-if 21 in rooms:
-    dvacataprvni_statement = True
-if 22 in rooms:
-    dvacatadruha_statement = True
-if 23 in rooms:
-    dvacatatreti_statement = True
-if 24 in rooms:
-    dvacatactvrta_statement = True
-if 25 in rooms:
-    dvacatapata_statement = True
-if 26 in rooms:
-    dvacatasesta_statement = True
-if 27 in rooms:
-    dvacatasedma_statement = True
-if 28 in rooms:
-    dvacataosma_statement = True
-if 29 in rooms:
-    dvacatadevata_statement = True
-if 30 in rooms:
-    tricata_statement = True
-if 31 in rooms:
-    tricataprvni_statement = True
-if 32 in rooms:
-    tricatadruha_statement = True
-if 33 in rooms:
-    tricatatreti_statement = True
-if 34 in rooms:
-    tricatactvrta_statement = True
-if 35 in rooms:
-    tricatapata_statement = True
-if 36 in rooms:
-    tricatasesta_statement = True
-if 37 in rooms:
-    tricatasedma_statement = True
-if 38 in rooms:
-    tricataosma_statement = True
-if 39 in rooms:
-    tricatadevata_statement = True
-if 40 in rooms:
-    ctyracta_statement = True
-if 41 in rooms:
-    ctyractaprvni_statement = True
-if 42 in rooms:
-    ctyractadruha_statement = True
-if 43 in rooms:
-    ctyratatreti_statement = True
-if 44 in rooms:
-    ctyratactvrta_statement = True
-if 45 in rooms:
-    ctyratapata_statement = True
-if 46 in rooms:
-    ctyratasesta_statement = True
-if 47 in rooms:
-    ctyratasedma_statement = True
-if 48 in rooms:
-    ctyrataosma_statement = True
-if 49 in rooms:
-    ctyratadevata_statement = True
 
+pohyby_mapy()
+is_in_rooms()
+"""
+End -------------- minimap_file.py
+"""
 
-print(prvni)
+# Game loop
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -457,27 +515,78 @@ while True:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             #UP
-            if event.key == pygame.K_UP:
-                move_up_counter += dvere_up_value
-                prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            if event.key == pygame.K_UP and not keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
+                player_projectiles_up.append((rect_x + velikost_postavy // 2, rect_y))
+                cooldown = cooldown_time
                 break
-            #DOWN
-            elif event.key == pygame.K_DOWN:
-                move_up_counter += dvere_down_value
-                prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            #UP_LEFT
+            elif event.key == pygame.K_UP and keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
+                player_projectiles_up_left.append((rect_x + velikost_postavy // 2, rect_y))
+                cooldown = cooldown_time
                 break
-            #LEFT
-            elif event.key == pygame.K_LEFT:
-                move_side_counter += dvere_left_value
-                prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
-                break
-            #RIGHT
-            elif event.key == pygame.K_RIGHT:
-                move_side_counter += dvere_right_value
-                prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            #UP_RIGHT
+            elif event.key == pygame.K_UP and keys[pygame.K_d] and not keys[pygame.K_a] and shoots == False:
+                player_projectiles_up_right.append((rect_x + velikost_postavy // 2, rect_y))
+                cooldown = cooldown_time
                 break
 
-    #<----Nyní nefunguje, ale bude, až budeme mít dveře
+            #DOWN
+            elif event.key == pygame.K_DOWN and not keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
+                player_projectiles_down.append((rect_x + velikost_postavy // 2, rect_y + 46))
+                cooldown = cooldown_time  
+                break
+            #DOWN_LEFT
+            elif event.key == pygame.K_DOWN and keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
+                player_projectiles_down_left.append((rect_x + velikost_postavy // 2, rect_y + 46))
+                cooldown = cooldown_time
+                break
+            #DOWN_RIGHT
+            elif event.key == pygame.K_DOWN and keys[pygame.K_d] and not keys[pygame.K_a] and shoots == False:
+                player_projectiles_down_right.append((rect_x + velikost_postavy // 2, rect_y + 46))
+                cooldown = cooldown_time
+                break
+
+            #LEFT
+            elif event.key == pygame.K_LEFT and not keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
+                player_projectiles_left.append((rect_x - 2, rect_y + velikost_postavy // 2))
+                cooldown = cooldown_time
+                break
+            #LEFT_DOWN
+            elif event.key == pygame.K_LEFT and keys[pygame.K_s] and not keys[pygame.K_w] and shoots == False:
+                player_projectiles_left_down.append((rect_x - 2, rect_y + velikost_postavy // 2))
+                cooldown = cooldown_time
+                break
+            #LEFT_UP
+            elif event.key == pygame.K_LEFT and keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
+                player_projectiles_left_up.append((rect_x - 2, rect_y + velikost_postavy // 2))
+                cooldown = cooldown_time
+                break
+            #RIGHT
+            elif event.key == pygame.K_RIGHT and not keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
+                player_projectiles_right.append((rect_x + 52, rect_y + velikost_postavy // 2))
+                cooldown = cooldown_time
+                break
+            #RIGHT_DOWN
+            elif event.key == pygame.K_RIGHT and keys[pygame.K_s] and not keys[pygame.K_w] and shoots == False:
+                player_projectiles_right_down.append((rect_x + 52, rect_y + velikost_postavy // 2))
+                cooldown = cooldown_time
+                break
+            #RIGHT_UP
+            elif event.key == pygame.K_RIGHT and keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
+                player_projectiles_right_up.append((rect_x + 52, rect_y + velikost_postavy // 2))
+                cooldown = cooldown_time
+                break
+
+    if cooldown > 0:
+        cooldown -= 1
+        shoots = True
+    if cooldown == 0:
+        shoots = False
+
+    """
+    Start -------------- minimap_file.py
+    """
+    # Jestliže jsou aktivovány dveře
     if dvere_up:
         move_up_counter += dvere_up_value
         dvere_up = False
@@ -490,10 +599,192 @@ while True:
     elif dvere_right:
         move_side_counter += dvere_right_value
         dvere_right = False
+    """
+    End -------------- minimap_file.py
+    """
+    keys = pygame.key.get_pressed()
 
-    #Čištění obrazovky
-    window.fill((0, 0, 0))
+    # Move the character based on the pressed keys
+    if keys[pygame.K_a]:
+        rect_x -= 5
+    if keys[pygame.K_d]:
+        rect_x += 5
+    if keys[pygame.K_w]:
+        rect_y -= 5
+    if keys[pygame.K_s]:
+        rect_y += 5
+
+    # Update the position of player projectiles
+    #UP
+    new_player_projectiles_UP = []
+    new_player_projectiles_UP_LEFT = []
+    new_player_projectiles_UP_RIGHT = []
+    #DOWN
+    new_player_projectiles_DOWN = []
+    new_player_projectiles_DOWN_LEFT = []
+    new_player_projectiles_DOWN_RIGHT = []
+    #LEFT
+    new_player_projectiles_LEFT = []
+    new_player_projectiles_LEFT_DOWN = []
+    new_player_projectiles_LEFT_UP = []
+    #RIGHT
+    new_player_projectiles_RIGHT = []
+    new_player_projectiles_RIGHT_DOWN = []
+    new_player_projectiles_RIGHT_UP = []
+
+    #UP
+    if len(player_projectiles_up) > 0:
+        for proj_x, proj_y in player_projectiles_up:
+            proj_y -= projectile_speed
+            if proj_y > 0:
+                new_player_projectiles_UP.append((proj_x, proj_y))
+        player_projectiles_up = new_player_projectiles_UP
+    #UP_LEFT
+    if len(player_projectiles_up_left) > 0:
+        for proj_x, proj_y in player_projectiles_up_left:
+            proj_y -= projectile_speed
+            proj_x -= projectile_speed_diagonal
+            if proj_y > 0 or proj_x > 0:
+                new_player_projectiles_UP_LEFT.append((proj_x, proj_y))
+        player_projectiles_up_left = new_player_projectiles_UP_LEFT
+    #UP_RIGHT
+    if len(player_projectiles_up_right) > 0:
+        for proj_x, proj_y in player_projectiles_up_right:
+            proj_y -= projectile_speed
+            proj_x += projectile_speed_diagonal
+            if proj_y > 0 or proj_x < WIDTH:
+                new_player_projectiles_UP_RIGHT.append((proj_x, proj_y))
+        player_projectiles_up_right = new_player_projectiles_UP_RIGHT
+
+    #DOWN
+    if len(player_projectiles_down) > 0:
+        for proj_x, proj_y in player_projectiles_down:
+            proj_y += projectile_speed
+            if proj_y < HEIGHT:
+                new_player_projectiles_DOWN.append((proj_x, proj_y))
+        player_projectiles_down = new_player_projectiles_DOWN
+    #DOWN_LEFT
+    if len(player_projectiles_down_left) > 0:
+        for proj_x, proj_y in player_projectiles_down_left:
+            proj_y += projectile_speed
+            proj_x -= projectile_speed_diagonal
+            if proj_y < HEIGHT or proj_x < 0:
+                new_player_projectiles_DOWN_LEFT.append((proj_x, proj_y))
+        player_projectiles_down_left = new_player_projectiles_DOWN_LEFT
+    #DOWN_RIGHT
+    if len(player_projectiles_down_right) > 0:
+        for proj_x, proj_y in player_projectiles_down_right:
+            proj_y += projectile_speed
+            proj_x += projectile_speed_diagonal
+            if proj_y < HEIGHT or proj_x < WIDTH:
+                new_player_projectiles_DOWN_RIGHT.append((proj_x, proj_y))
+        player_projectiles_down_right = new_player_projectiles_DOWN_RIGHT
+    #LEFT
+    if len(player_projectiles_left) > 0:
+        for proj_x, proj_y in player_projectiles_left:
+            proj_x -= projectile_speed
+            if proj_x > 0:
+                new_player_projectiles_LEFT.append((proj_x, proj_y))
+        player_projectiles_left = new_player_projectiles_LEFT
+    #LEFT_DOWN
+    if len(player_projectiles_left_down) > 0:
+        for proj_x, proj_y in player_projectiles_left_down:
+            proj_x -= projectile_speed
+            proj_y += projectile_speed_diagonal
+            if proj_x > 0 or proj_y < HEIGHT:
+                new_player_projectiles_LEFT_DOWN.append((proj_x, proj_y))
+        player_projectiles_left_down = new_player_projectiles_LEFT_DOWN
+    #LEFT_UP
+    if len(player_projectiles_left_up) > 0:
+        for proj_x, proj_y in player_projectiles_left_up:
+            proj_x -= projectile_speed
+            proj_y -= projectile_speed_diagonal
+            if proj_x > 0 or proj_y > 0:
+                new_player_projectiles_LEFT_UP.append((proj_x, proj_y))
+        player_projectiles_left_up = new_player_projectiles_LEFT_UP
+    #RIGHT
+    if len(player_projectiles_right) > 0:
+        for proj_x, proj_y in player_projectiles_right:
+            proj_x += projectile_speed
+            if proj_x < WIDTH:
+                new_player_projectiles_RIGHT.append((proj_x, proj_y))
+        player_projectiles_right = new_player_projectiles_RIGHT
+    #RIGHT_DOWN
+    if len(player_projectiles_right_down) > 0:
+        for proj_x, proj_y in player_projectiles_right_down:
+            proj_x += projectile_speed
+            proj_y += projectile_speed_diagonal
+            if proj_x < WIDTH or proj_y < HEIGHT:
+                new_player_projectiles_RIGHT_DOWN.append((proj_x, proj_y))
+        player_projectiles_right_down = new_player_projectiles_RIGHT_DOWN
+    #RIGHT_UP
+    if len(player_projectiles_right_up) > 0:
+        for proj_x, proj_y in player_projectiles_right_up:
+            proj_x += projectile_speed
+            proj_y -= projectile_speed_diagonal
+            if proj_x < WIDTH or proj_y > 0:
+                new_player_projectiles_RIGHT_UP.append((proj_x, proj_y))
+        player_projectiles_right_up = new_player_projectiles_RIGHT_UP
+
+
+    # Vykreslení pozadí
+    window.blit(pozadi, (0, 0))
     window.blit(image_filter, (image_filter_position))
+    
+    # Draw player projectiles on the window
+    #UP
+    if len(player_projectiles_up) > 0:
+        for proj_x, proj_y in player_projectiles_up:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #UP_LEFT
+    if len(player_projectiles_up_left) > 0:
+        for proj_x, proj_y in player_projectiles_up_left:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #UP_RIGHT
+    if len(player_projectiles_up_right) > 0:
+        for proj_x, proj_y in player_projectiles_up_right:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #DOWN
+    if len(player_projectiles_down) > 0:
+        for proj_x, proj_y in player_projectiles_down:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #DOWN_LEFT
+    if len(player_projectiles_down_left) > 0:
+        for proj_x, proj_y in player_projectiles_down_left:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #DOWN_RIGHT
+    if len(player_projectiles_down_right) > 0:
+        for proj_x, proj_y in player_projectiles_down_right:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #LEFT
+    if len(player_projectiles_left) > 0:
+        for proj_x, proj_y in player_projectiles_left:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #LEFT_DOWN
+    if len(player_projectiles_left_down) > 0:
+        for proj_x, proj_y in player_projectiles_left_down:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #LEFT_UP
+    if len(player_projectiles_left_up) > 0:
+        for proj_x, proj_y in player_projectiles_left_up:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #RIGHT
+    if len(player_projectiles_right) > 0:
+        for proj_x, proj_y in player_projectiles_right:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #RIGHT_DOWN
+    if len(player_projectiles_right_down) > 0:
+        for proj_x, proj_y in player_projectiles_right_down:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #RIGHT_UP
+    if len(player_projectiles_right_up) > 0:
+        for proj_x, proj_y in player_projectiles_right_up:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+
+    """
+    Start -------------- minimap_file.py
+    """
+    # Vykreslení mapy
     #První
     if prvni_statement: #<---- pokud je 1. roomka v seznamu rooms, bude True
         for img_x, img_y in [prvni]:
@@ -740,32 +1031,30 @@ while True:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
                 window.blit(room_image, (ctyratadevata))
 
+    """
+    End -------------- minimap_file.py
+    """
 
+    # Ensure the character stays within the window boundaries
+    rect_x = max(45, min(rect_x, WIDTH - 100))
+    rect_y = max(45, min(rect_y, HEIGHT - 100))
 
-#PŘIDAT oblast na obrazovce, ve které se roomky nebudou zobrazovat (podobně jako to tam je, jen si vyber oblast jakou budeš chtít)
-
+    # Draw the character and hearts on the window
+    isaac = window.blit(postava, (rect_x, rect_y))
+    # Draw the player health bar
+    window.blit(heart_full, (25, 25))
+    window.blit(heart_full, (95, 25))
+    window.blit(heart_half, (165, 25))
+    
+    # Update the display and control the frame rate
     pygame.display.flip()
     pygame.display.update()
     clock.tick(30)
 
 """
-Search for: Half transparent image in pygame
-            How to adjust pygame window blit size
-"""
+tears
+Věnovala bych se more important things, bullets zatim +- funguji, potom bych se podivala na tears hybajici se podle tela a vycentrovani
 
-
-"""
-Dodělat zobrazení roomek na mapě následujícím způsobem.
------------------------------------------------------------------
-Vše se bude odvíjet od roomky č. 1, která bude mít souřadnice 360, 200. (asi, oblast minimapy je znázorněna v souboru "minimapa rozměry.png")
-Následující roomky budou mít vztah k roomce, například roomka nad ní bude mít souřadnice
-stejné jako roomka č. 1, ale bude mít y-ovou souřadnici o 200 větší. Roomka vpravo od ní bude mít
-souřadnice pro x větší např. o 300 atd...
-!! čísla roomek jsou znázorněna v excelové tabulce ve složce s projektem (W-danca) !! 
-
-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-Pokud se změní souřadnice roomky č. 1, změní se i souřadnice všech ostatních roomek.
-
-Při zobrazování roomek bude podmínka: Pokud nejsou souřadnice roomky v oblasti minimapy, obrázek roomky se nevykreslí.
+dvere
+ve slozce "danca_nesahat" v souboru "idk.py" presne polohy dveri, pozadi<"nakres_dveri.png"> jen pro mereni polohy dveri
 """
