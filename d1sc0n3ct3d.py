@@ -72,7 +72,7 @@ room_image = pygame.transform.scale(room_image,(image_width,image_height))
 
 image_filter = room_image
 image_filter.set_alpha(128) #průhledné 0 - 255 neprůhledné
-image_filter_position = [1000,100]
+image_filter_position = [500,500]
 # Rooms list
 rooms = [1]
 rooms = rooms_fixed(3) #<---- Číslo = level
@@ -1044,6 +1044,21 @@ while True:
     window.blit(heart_full, (95, 25))
     window.blit(heart_half, (165, 25))
     
+    isaac = window.blit(postava, (rect_x, rect_y))
+
+    if isaac.colliderect(pygame.Rect(100, 250, 1, 100)):
+        rect_x += 1100
+        print("zapadni")
+    elif isaac.colliderect(pygame.Rect(1266,250, 1, 100)):
+        rect_x -= 1100
+        print("vychodni")
+    elif isaac.colliderect(pygame.Rect(888,20, 100, 1)):
+        rect_y += 460
+        print("severni")
+    elif isaac.colliderect(pygame.Rect(888,655, 100, 1)):
+        rect_y -= 460
+        print("jizni")
+        
     # Update the display and control the frame rate
     pygame.display.flip()
     pygame.display.update()
