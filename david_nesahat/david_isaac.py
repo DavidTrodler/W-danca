@@ -38,7 +38,7 @@ player_projectiles_right_up = []
 projectiles = []
 
 # Create the game window + Load images
-window = pygame.display.set_mode((1000, 600))
+window = pygame.display.set_mode((50, 600))
 pygame.display.set_caption("ˇIsaacˇ")
 pozadi = pygame.image.load("nakres_dveri.png")
 pozadi = pygame.transform.scale(pozadi, (1000, 600))
@@ -48,7 +48,8 @@ window.blit(pozadi, (0, 0))
 # Set initial position and dimensions for the character
 rect_x, rect_y = 70, 500
 WIDTH, HEIGHT = 1000, 600
-
+WORLD_WIDTH, WORLD_HEIGHT = 7000, 3500
+velikost_mistnosti = WIDTH, HEIGHT
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
 
@@ -72,13 +73,14 @@ room_image = pygame.image.load("pozadi.png")
 room_image = pygame.transform.scale(room_image,(image_width, image_height))
 image_filter = pygame.transform.scale(room_image,(image_width, image_height))
 room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
-
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+world = pygame.Surface((WORLD_WIDTH, WORLD_HEIGHT))
 
 image_filter_position = [775, 100] #<---- Pozice filtru
 # Rooms list
 rooms = [1]
 rooms = rooms_fixed(3) #<---- Číslo = level
-current_room = [1]
+current_room = 1
 
 
 doors_dictionary = {0: [False, False, False, False]} #Posloupnost dveří: UP, RIGHT, BOTTOM, LEFT
@@ -908,6 +910,33 @@ pohyby_mapy()
 End -------------- minimap_file.py
 """
 
+def pozice_roomek():
+    if isaac.colliderect(pygame.Rect(0,0, WIDTH, HEIGHT)):
+        current = 1
+    elif isaac.colliderect(pygame.Rect(0,HEIGHT, WIDTH, (HEIGHT*2))):
+        current = 2
+    print(current)
+    return current
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Game loop
 while True:
     for event in pygame.event.get():
@@ -983,7 +1012,8 @@ while True:
         shoots = True
     if cooldown == 0:
         shoots = False
-        
+    
+    #boundries
     rect_x = max(40, min(rect_x, WIDTH - 101))
     rect_y = max(40, min(rect_y, HEIGHT - 96))
 
@@ -1198,21 +1228,23 @@ while True:
 
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
-    
+    current_room = pozice_roomek()
     """
     Start -------------- minimap_file.py
     """
-    # Vykreslení mapy
+    # Vykreslení mapy + herního pole
     #První
     if prvni_statement: #<---- pokud je 1. roomka v seznamu rooms, bude True
         for img_x, img_y in [prvni]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0: #<----- pouze, aby se nezobrazovaly mimo obrazovku
                 window.blit(room_image, (prvni))
+        window.blit(pozadi, (WIDTH, HEIGHT))
     #Druhá
     if druha_statement:
         for img_x, img_y in [druha]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
                 window.blit(room_image, ((druha)))
+        window.blit(pozadi, (WIDTH, (HEIGHT*2)))
     #Třetí
     if treti_statement:
         for img_x, img_y in [treti]:
@@ -1455,26 +1487,34 @@ while True:
     """
     Start -------------- plane.py
     """
-    if isaac.colliderect(pygame.Rect(40, 250, 1, 100)):
-        rect_x += 855
-        move_side_counter += dvere_left_value
-        prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
-        dvere_left = True
-    elif isaac.colliderect(pygame.Rect(960,250, 1, 100)):
-        rect_x -= 855
-        move_side_counter += dvere_right_value
-        prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
-        dvere_right = True
-    elif isaac.colliderect(pygame.Rect(450,40, 100, 1)):
-        rect_y += 460
-        move_up_counter += dvere_up_value
-        prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
-        dvere_up = True
-    elif isaac.colliderect(pygame.Rect(450,560, 100, 1)):
-        rect_y -= 460
-        move_up_counter += dvere_down_value
-        prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
-        dvere_down = True
+    #DOORS
+
+
+
+    if doors_dictionary[current_room][0]:
+        if isaac.colliderect(pygame.Rect(450,40, 100, 1)):
+            rect_y -= 80
+            move_up_counter += dvere_up_value
+            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            dvere_up = True
+    if doors_dictionary[current_room][1]:
+        if isaac.colliderect(pygame.Rect(960,250, 1, 100)):
+            rect_x += 80
+            move_side_counter += dvere_right_value
+            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            dvere_right = True
+    if doors_dictionary[current_room][2]:
+        if isaac.colliderect(pygame.Rect(450,560, 100, 1)):
+            rect_y += 80
+            move_up_counter += dvere_down_value
+            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            dvere_down = True
+    if doors_dictionary[current_room][3]:
+        if isaac.colliderect(pygame.Rect(40, 250, 1, 100)):
+            rect_x -= 80
+            move_side_counter += dvere_left_value
+            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            dvere_left = True
 
 
 
