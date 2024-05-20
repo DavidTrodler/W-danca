@@ -495,6 +495,8 @@ def rooms_dictionary_funciton():
         doors_dictionary[43][3] = True
     return doors_dictionary
 
+print(rooms_dictionary_funciton())
+
 
 def pohyby_mapy():
     # Room numbers
