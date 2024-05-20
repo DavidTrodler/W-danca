@@ -68,11 +68,9 @@ image_width = 60 #x  #<---- Šířka obrázku, dá se volně měnit
 image_height = 30 #y
 pygame.display.set_caption("ˇIsaacˇ")
 room_image = pygame.image.load("pozadi.png")
-zkouzka_image = pygame.image.load("nakres_dveri.png") #<---- Zkušební obrázek pro roomku č. 1
 
-zkouzka_image = pygame.transform.scale(zkouzka_image,(image_width,image_height))
-room_image = pygame.transform.scale(room_image,(image_width,image_height))
-image_filter = pygame.transform.scale(room_image,(image_width,image_height))
+room_image = pygame.transform.scale(room_image,(image_width, image_height))
+image_filter = pygame.transform.scale(room_image,(image_width, image_height))
 room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
 
 
@@ -294,11 +292,208 @@ def rooms_dictionary_funciton():
         #Třicettři
         doors_dictionary[33][2] = True
         #Třináct
-        
-
-
-
-
+        doors_dictionary[13][3] = True
+        #Osm
+        doors_dictionary[8][0] = True
+        #Dvacetpět
+        doors_dictionary[25][1] = True
+    if 22 in rooms:
+        #Třicetpět
+        doors_dictionary[35][2] = True
+        #Třicetšest
+        doors_dictionary[36][3] = True
+        #Patnáct
+        doors_dictionary[15][0] = True
+        #Čtrnáct
+        doors_dictionary[14][1] = True
+    if 23 in rooms:
+        #Šestnáct
+        doors_dictionary[16][2] = True
+        #Třicetdevět
+        doors_dictionary[39][3] = True
+        #Čtyřicet
+        doors_dictionary[40][0] = True
+        #Sedmnáct
+        doors_dictionary[17][1] = True
+    if 24 in rooms:
+        #Devatenáct
+        doors_dictionary[19][2] = True
+        #Osmnáct
+        doors_dictionary[18][3] = True
+        #Čtyřicettři
+        doors_dictionary[34][0] = True
+        #Čtyřicetčtyři
+        doors_dictionary[34][1] = True
+    if 25 in rooms:
+        #Třicetpět
+        doors_dictionary[35][2] = True
+        #Dvacetjedna
+        doors_dictionary[21][3] = True
+        #Dvacet
+        doors_dictionary[20][0] = True
+        #Třicetjedna
+        doors_dictionary[31][1] = True
+    if 26 in rooms:
+        #Třicetčtyři
+        doors_dictionary[34][3] = True
+        #Třináct
+        doors_dictionary[13][0] = True
+        #Třicettři
+        doors_dictionary[33][1] = True
+    if 27 in rooms:
+        #Třicetsedm
+        doors_dictionary[37][2] = True
+        #Třicetosm
+        doors_dictionary[38][0] = True
+        #Deset
+        doors_dictionary[10][1] = True
+    if 28 in rooms:
+        #Jedenáct
+        doors_dictionary[11][2] = True
+        #Čtyřicetjedna
+        doors_dictionary[41][3] = True
+        #Čtyřicetdva
+        doors_dictionary[11][1] = True
+    if 29 in rooms:
+        #Třicet
+        doors_dictionary[30][2] = True
+        #Dvanáct
+        doors_dictionary[12][3] = True
+        #Čtyřicetpět
+        doors_dictionary[45][0] = True
+    if 30 in rooms:
+        #Třicetjedna
+        doors_dictionary[31][2] = True
+        #Dvacet
+        doors_dictionary[20][3] = True
+        #Dvacetdevět
+        doors_dictionary[29][0] = True
+    if 31 in rooms:
+        #Čtyřicetšest
+        doors_dictionary[46][2] = True
+        #Dvacetpět
+        doors_dictionary[25][3] = True
+        #Třicet
+        doors_dictionary[30][0] = True
+    if 32 in rooms:
+        #Třicettři
+        doors_dictionary[33][3] = True
+        #Dvacetpět
+        doors_dictionary[25][0] = True
+        #Čtyřicetšest
+        doors_dictionary[46][1] = True
+    if 33 in rooms:
+        #Dvacetšest
+        doors_dictionary[26][3] = True
+        #Třicetjedna
+        doors_dictionary[31][0] = True
+        #Třicetdva
+        doors_dictionary[32][1] = True
+    if 34 in rooms:
+        #Třicetpět
+        doors_dictionary[35][3] = True
+        #Čtrnáct
+        doors_dictionary[14][0] = True
+        #Dvacetšest
+        doors_dictionary[26][1] = True
+    if 35 in rooms:
+        #Čtyřicetsedm
+        doors_dictionary[47][3] = True
+        #Dvacetdva
+        doors_dictionary[22][0] = True
+        #Třicetčtyři
+        doors_dictionary[34][1] = True
+    if 36 in rooms:
+        #Čtyřicetsedm
+        doors_dictionary[47][2] = True
+        #Třicetsedm
+        doors_dictionary[37][0] = True
+        #Dvacetdva
+        doors_dictionary[22][1] = True
+    if 37 in rooms:
+        #Třicetšest
+        doors_dictionary[36][2] = True
+        #Dvacetsedm
+        doors_dictionary[27][0] = True
+        #Patnáct
+        doors_dictionary[15][1] = True
+    if 38 in rooms:
+        #Dvacetsedm
+        doors_dictionary[27][2] = True
+        #Třicetdevět
+        doors_dictionary[39][0] = True
+        #Šestnáct
+        doors_dictionary[16][1] = True
+    if 39 in rooms:
+        #Třicetosm
+        doors_dictionary[38][2] = True
+        #Čtyřicetosm
+        doors_dictionary[48][0] = True
+        #Dvacettři
+        doors_dictionary[23][1] = True
+    if 40 in rooms:
+        #Dvacettři
+        doors_dictionary[23][2] = True
+        #Čtyřicetosm
+        doors_dictionary[48][3] = True
+        #Čtyřicetjedna
+        doors_dictionary[41][1] = True
+    if 41 in rooms:
+        #Sedmnáct
+        doors_dictionary[17][2] = True
+        #Čtyřicet
+        doors_dictionary[40][3] = True
+        #Dvacetosm
+        doors_dictionary[28][1] = True
+    if 42 in rooms:
+        #Osmnáct
+        doors_dictionary[18][2] = True
+        #Dvacetosm
+        doors_dictionary[28][3] = True
+        #Čtyřicettři
+        doors_dictionary[43][1] = True
+    if 43 in rooms:
+        #Dvacetčtyři
+        doors_dictionary[24][2] = True
+        #Čtyřicetdva
+        doors_dictionary[42][3] = True
+        #Čtyřicetdevět
+        doors_dictionary[49][0] = True
+    if 44 in rooms:
+        #Čtyřicetpět
+        doors_dictionary[45][2] = True
+        #Dvacetčtyři
+        doors_dictionary[24][3] = True
+        #Čtyřicetdevět
+        doors_dictionary[49][0] = True
+    if 45 in rooms:
+        #Dvacetdevět
+        doors_dictionary[29][2] = True
+        #Devatenáct
+        doors_dictionary[19][3] = True
+        #Čtyřicetčtyři
+        doors_dictionary[44][0] = True
+    if 46 in rooms:
+        #Třicetdva
+        doors_dictionary[32][3] = True
+        #Třicetjedna
+        doors_dictionary[31][0] = True
+    if 47 in rooms:
+        #Třicetpět
+        doors_dictionary[35][1] = True
+        #Třicetšest
+        doors_dictionary[36][0] = True
+    if 48 in rooms:
+        #Třicetdevět
+        doors_dictionary[39][2] = True
+        #Čtyřicet
+        doors_dictionary[40][1] = True
+    if 49 in rooms:
+        #Čtyřicetčtyři
+        doors_dictionary[44][2] = True
+        #Čtyřicettři
+        doors_dictionary[43][3] = True
+    return doors_dictionary
 
 
 def pohyby_mapy():
