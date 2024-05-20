@@ -12,6 +12,7 @@ cerna = (0, 0, 0)
 projectile_size = 10
 projectile_speed = 10
 projectile_speed_diagonal = 4
+
 # Shooting cooldown
 cooldown = 0
 cooldown_time = 10
@@ -71,13 +72,22 @@ zkouzka_image = pygame.image.load("nakres_dveri.png") #<---- Zkušební obrázek
 
 zkouzka_image = pygame.transform.scale(zkouzka_image,(image_width,image_height))
 room_image = pygame.transform.scale(room_image,(image_width,image_height))
+image_filter = pygame.transform.scale(room_image,(image_width,image_height))
+room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
 
-image_filter = room_image
-image_filter.set_alpha(128) #průhledné 0 - 255 neprůhledné
+
 image_filter_position = [775, 100] #<---- Pozice filtru
 # Rooms list
 rooms = [1]
 rooms = rooms_fixed(3) #<---- Číslo = level
+current_room = [1]
+
+
+doors_dictionary = {0: [False, False, False, False]} #Posloupnost dveří: UP, RIGHT, BOTTOM, LEFT
+for i in range(1, 50):
+    doors_dictionary[i] = [False, False, False, False]
+
+print(doors_dictionary)
 print(rooms)
 
 
@@ -97,6 +107,199 @@ dvere_up = False #<--- Změní se, pokud hráč projde dveřmi (kvůli if statme
 dvere_down = False 
 dvere_left = False
 dvere_right = False
+
+#Funkce která určí zda budou dveře v dané roomce funkční
+def rooms_dictionary_funciton():
+    if 1 in rooms:
+        #Čtyři
+        doors_dictionary[4][2] = True
+        #Pět
+        doors_dictionary[5][3] = True
+        #Dva
+        doors_dictionary[2][0] = True
+        #Tři
+        doors_dictionary[3][1] = True
+    if 2 in rooms:
+        #Jedna
+        doors_dictionary[1][2] = True
+        #Šest
+        doors_dictionary[6][3] = True
+        #Jedenáct
+        doors_dictionary[11][0] = True
+        #Sedm
+        doors_dictionary[7][1] = True
+    if 3 in rooms:
+        #Osm
+        doors_dictionary[8][2] = True
+        #Jedna
+        doors_dictionary[1][3] = True
+        #Sedm
+        doors_dictionary[7][0] = True
+        #Dvanáct
+        doors_dictionary[12][1] = True
+    if 4 in rooms:
+        #Třináct
+        doors_dictionary[13][2] = True
+        #Devět
+        doors_dictionary[9][3] = True
+        #Jedna
+        doors_dictionary[1][0] = True
+        #Osm
+        doors_dictionary[8][1] = True
+    if 5 in rooms:
+        #Devět
+        doors_dictionary[9][2] = True
+        #Deset
+        doors_dictionary[10][3] = True
+        #Šest
+        doors_dictionary[6][0] = True
+        #Jedna
+        doors_dictionary[1][1] = True
+    if 6 in rooms:
+        #Pět
+        doors_dictionary[5][2] = True
+        #Šestnáct
+        doors_dictionary[16][3] = True
+        #Sedmnáct
+        doors_dictionary[17][0] = True
+        #Dva
+        doors_dictionary[2][1] = True
+    if 7 in rooms:
+        #Tři
+        doors_dictionary[3][2] = True
+        #Dva
+        doors_dictionary[2][3] = True
+        #Osmnáct
+        doors_dictionary[18][1] = True
+        #Devatenáct
+        doors_dictionary[19][0] = True
+    if 8 in rooms:
+        #Dvacetjedna
+        doors_dictionary[21][2] = True
+        #Čtyři
+        doors_dictionary[4][3] = True
+        #Tři
+        doors_dictionary[3][0] = True
+        #Dvacet
+        doors_dictionary[20][1] = True
+    if 9 in rooms:
+        #Čtrnáct
+        doors_dictionary[14][2] = True
+        #Patnáct
+        doors_dictionary[15][3] = True
+        #Pět
+        doors_dictionary[5][0] = True
+        #Čtyři
+        doors_dictionary[4][1] = True
+    if 10 in rooms:
+        #Patnáct
+        doors_dictionary[15][2] = True
+        #Dvacetsedm
+        doors_dictionary[27][3] = True
+        #Šestnáct
+        doors_dictionary[16][0] = True
+        #Pět
+        doors_dictionary[5][1] = True
+    if 11 in rooms:
+        #Dva
+        doors_dictionary[2][2] = True
+        #Sedmnáct
+        doors_dictionary[17][3] = True
+        #Dvacetosm
+        doors_dictionary[28][0] = True
+        #Osmnáct
+        doors_dictionary[18][1] = True
+    if 12 in rooms:
+        #Dvacet
+        doors_dictionary[20][2] = True
+        #Tři
+        doors_dictionary[3][3] = True
+        #Devatenáct
+        doors_dictionary[19][0] = True
+        #Dvacetdevět
+        doors_dictionary[29][1] = True
+    if 13 in rooms:
+        #Dvacetšest
+        doors_dictionary[26][2] = True
+        #Čtrnáct
+        doors_dictionary[14][3] = True
+        #Čtyři
+        doors_dictionary[4][0] = True
+        #Dvacetjedna
+        doors_dictionary[21][1] = True
+    if 14 in rooms:
+        #Třicetčtyři
+        doors_dictionary[34][2] = True
+        #Dvacetdva
+        doors_dictionary[22][3] = True
+        #Devět
+        doors_dictionary[9][0] = True
+        #Třináct
+        doors_dictionary[13][1] = True
+    if 15 in rooms:
+        #Dvacetdva
+        doors_dictionary[22][2] = True
+        #Třicetsedm
+        doors_dictionary[37][3] = True
+        #Deset
+        doors_dictionary[10][0] = True
+        #Devět
+        doors_dictionary[9][1] = True
+    if 16 in rooms:
+        #Deset
+        doors_dictionary[10][2] = True
+        #Třicetosm
+        doors_dictionary[38][3] = True
+        #Dvacettři
+        doors_dictionary[23][0] = True
+        #Šest
+        doors_dictionary[6][1] = True
+    if 17 in rooms:
+        #Šest
+        doors_dictionary[6][2] = True
+        #Dvacettři
+        doors_dictionary[23][3] = True
+        #Čtyřicetjedna
+        doors_dictionary[41][0] = True
+        #Jedenáct
+        doors_dictionary[11][1] = True
+    if 18 in rooms:
+        #Sedm
+        doors_dictionary[7][2] = True
+        #Jedenáct
+        doors_dictionary[11][3] = True
+        #Čtyřicetdva
+        doors_dictionary[42][0] = True
+        #Dvacetčtyři
+        doors_dictionary[24][1] = True
+    if 19 in rooms:
+        #Dvanáct
+        doors_dictionary[12][2] = True
+        #Sedm
+        doors_dictionary[7][3] = True
+        #Dvacetčtyři
+        doors_dictionary[24][0] = True
+        #Čtyřicetpět
+        doors_dictionary[45][1] = True
+    if 20 in rooms:
+        #Dvacetpět
+        doors_dictionary[25][2] = True
+        #Osm
+        doors_dictionary[8][3] = True
+        #Dvanáct
+        doors_dictionary[12][0] = True
+        #Třicet
+        doors_dictionary[30][1] = True
+    if 21 in rooms:
+        #Třicettři
+        doors_dictionary[33][2] = True
+        #Třináct
+        
+
+
+
+
+
 
 def pohyby_mapy():
     # Room numbers
@@ -402,7 +605,9 @@ ctyratasesta_statement = False
 ctyratasedma_statement = False
 ctyrataosma_statement = False
 ctyratadevata_statement = False
+
 prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+
 
 if 2 in rooms:
     druha_statement = True 
@@ -500,7 +705,6 @@ if 48 in rooms:
     ctyrataosma_statement = True
 if 49 in rooms:
     ctyratadevata_statement = True
-
 
 pohyby_mapy()
 """
@@ -783,6 +987,18 @@ while True:
         for proj_x, proj_y in player_projectiles_right_up:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
 
+
+
+    # DOČASNĚ ZAKOMENTOVÁNO
+    """
+    # Ensure the character stays within the window boundaries
+    rect_x = max(45, min(rect_x, WIDTH - 100))
+    rect_y = max(45, min(rect_y, HEIGHT - 100))
+    """
+
+    # Draw the character and hearts on the window
+    isaac = window.blit(postava, (rect_x, rect_y))
+    
     """
     Start -------------- minimap_file.py
     """
@@ -1036,37 +1252,28 @@ while True:
     """
     End -------------- minimap_file.py
     """
-
-
-
-    # DOČASNĚ ZAKOMENTOVÁNO
-    """
-    # Ensure the character stays within the window boundaries
-    rect_x = max(45, min(rect_x, WIDTH - 100))
-    rect_y = max(45, min(rect_y, HEIGHT - 100))
-    """
-
-    # Draw the character and hearts on the window
-    isaac = window.blit(postava, (rect_x, rect_y))
-
     """
     Start -------------- plane.py
     """
     if isaac.colliderect(pygame.Rect(40, 250, 1, 100)):
         rect_x += 855
         move_side_counter += dvere_left_value
+        prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
         dvere_left = True
     elif isaac.colliderect(pygame.Rect(960,250, 1, 100)):
         rect_x -= 855
         move_side_counter += dvere_right_value
+        prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
         dvere_right = True
     elif isaac.colliderect(pygame.Rect(450,40, 100, 1)):
         rect_y += 460
         move_up_counter += dvere_up_value
+        prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
         dvere_up = True
     elif isaac.colliderect(pygame.Rect(450,560, 100, 1)):
         rect_y -= 460
         move_up_counter += dvere_down_value
+        prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
         dvere_down = True
 
 
