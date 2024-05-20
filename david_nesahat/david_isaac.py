@@ -37,14 +37,16 @@ player_projectiles_right_up = []
 projectiles = []
 
 # Create the game window + Load images
-window = pygame.display.set_mode((1366, 755))
+window = pygame.display.set_mode((1000, 600))
 pygame.display.set_caption("ˇIsaacˇ")
 pozadi = pygame.image.load("pozadi.png")
+pozadi = pygame.transform.scale(pozadi, (1000, 600))
+
 window.blit(pozadi, (0, 0))
 
 # Set initial position and dimensions for the character
 rect_x, rect_y = 70, 500
-WIDTH, HEIGHT = 1366, 755
+WIDTH, HEIGHT = 1000, 600
 
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
@@ -72,7 +74,7 @@ room_image = pygame.transform.scale(room_image,(image_width,image_height))
 
 image_filter = room_image
 image_filter.set_alpha(128) #průhledné 0 - 255 neprůhledné
-image_filter_position = [500,500]
+image_filter_position = [775, 100] #<---- Pozice filtru
 # Rooms list
 rooms = [1]
 rooms = rooms_fixed(3) #<---- Číslo = level
@@ -99,8 +101,8 @@ dvere_right = False
 def pohyby_mapy():
     # Room numbers
     #První
-    prvni = [500 , 500] #POKUD CHCEŠ ZMĚNIT UMÍSTĚNÍ MAPY, ZMĚŇ UMÍSTĚNÍ PRVNÍ ROOMKY   
-                #Pokračuje na konci funkce
+    prvni = [775 , 100] #POKUD CHCEŠ ZMĚNIT UMÍSTĚNÍ MAPY, ZMĚŇ UMÍSTĚNÍ PRVNÍ ROOMKY   
+                #---Pokračuje na konci funkce---
 
     #Druhá
     druha = [0,0]
@@ -581,9 +583,11 @@ while True:
     if cooldown == 0:
         shoots = False
 
+
+    # DOČASNĚ ZAKOMENTOVÁNO
     """
     Start -------------- minimap_file.py
-    """
+    
     # Jestliže jsou aktivovány dveře
     if dvere_up:
         move_up_counter += dvere_up_value
@@ -597,7 +601,7 @@ while True:
     elif dvere_right:
         move_side_counter += dvere_right_value
         dvere_right = False
-    """
+    
     End -------------- minimap_file.py
     """
     keys = pygame.key.get_pressed()
@@ -1033,12 +1037,45 @@ while True:
     End -------------- minimap_file.py
     """
 
+
+
+    # DOČASNĚ ZAKOMENTOVÁNO
+    """
     # Ensure the character stays within the window boundaries
     rect_x = max(45, min(rect_x, WIDTH - 100))
     rect_y = max(45, min(rect_y, HEIGHT - 100))
+    """
 
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
+
+    """
+    Start -------------- plane.py
+    """
+    if isaac.colliderect(pygame.Rect(40, 250, 1, 100)):
+        rect_x += 855
+        move_side_counter += dvere_left_value
+        dvere_left = True
+    elif isaac.colliderect(pygame.Rect(960,250, 1, 100)):
+        rect_x -= 855
+        move_side_counter += dvere_right_value
+        dvere_right = True
+    elif isaac.colliderect(pygame.Rect(450,40, 100, 1)):
+        rect_y += 460
+        move_up_counter += dvere_up_value
+        dvere_up = True
+    elif isaac.colliderect(pygame.Rect(450,560, 100, 1)):
+        rect_y -= 460
+        move_up_counter += dvere_down_value
+        dvere_down = True
+
+
+
+
+
+    """
+    End -------------- plane.py
+    """
     # Draw the player health bar
     window.blit(heart_full, (25, 25))
     window.blit(heart_full, (95, 25))
