@@ -1,3 +1,12 @@
+"""
+v tomto souboru na nás útočí moucha, která nám ubírá životy (zatim ne)§
+moucha se pohybuje na základě toho, kde se nachází hráč <-- AI generated
+pokud hráč narazí do mouchy, ztratí polovinu srdíčka <-- AI generated
+je fakt pekna btw
+"""
+
+
+
 import pygame, sys
 pygame.init()
 
@@ -34,7 +43,11 @@ importovani_slzy = pygame.image.load("tear.png")
 heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
 moucha = pygame.image.load("enemies/moucha.png")
-    
+
+frst_srd = 1
+scnd_srd = 1
+thrd_srd = 1
+aktualni_srdicko = frst_srd 
 pygame.display.update()
 
 # Game loop
@@ -63,12 +76,19 @@ while True:
     rect_y = max(40, min(rect_y, HEIGHT - 96))
 
     # Draw the player health bar
-    prvni_srdicko = window.blit(heart_full, (25, 25))
-    frst_srd = 1
-    druhe_srdicko = window.blit(heart_full, (95, 25))
-    scnd_srd = 1
-    trati_srdicko = window.blit(heart_half, (165, 25))
-    thrd_srd = 1
+    if frst_srd == 1:
+        window.blit(heart_full, (25, 25))
+    elif frst_srd == 0.5:
+        window.blit(heart_half, (25, 25))
+    if scnd_srd == 1:
+        window.blit(heart_full, (95, 25))
+    elif scnd_srd == 0.5: 
+        window.blit(heart_half, (95, 25))
+    if thrd_srd == 1:
+        window.blit(heart_full, (165, 25))
+    elif thrd_srd == 0.5:
+        window.blit(heart_half, (165, 25))
+
 
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
@@ -100,7 +120,9 @@ while True:
         moucha_y += 1               
     if rect_y < moucha_y:       
         moucha_y -= 1
-    window.blit(moucha, (moucha_x, moucha_y))
+    angry_moucha = window.blit(moucha, (moucha_x, moucha_y))
+    if isaac.colliderect(angry_moucha):
+        aktualni_srdicko -= 0.5
 
     # Update the display and control the frame rate
     pygame.display.update()
