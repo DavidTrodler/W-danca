@@ -48,8 +48,9 @@ window.blit(pozadi, (0, 0))
 # Set initial position and dimensions for the character
 rect_x, rect_y = 70, 500
 WIDTH, HEIGHT = 1000, 600
-WORLD_WIDTH, WORLD_HEIGHT = 7000, 3500
+WORLD_WIDTH, WORLD_HEIGHT = 7000, 4200
 velikost_mistnosti = WIDTH, HEIGHT
+pozice_prvni_roomky = 3000, 1800
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
 
@@ -73,7 +74,7 @@ room_image = pygame.image.load("pozadi.png")
 room_image = pygame.transform.scale(room_image,(image_width, image_height))
 image_filter = pygame.transform.scale(room_image,(image_width, image_height))
 room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((2000, 1500))
 world = pygame.Surface((WORLD_WIDTH, WORLD_HEIGHT))
 
 image_filter_position = [775, 100] #<---- Pozice filtru
@@ -915,6 +916,7 @@ def pozice_roomek():
         current = 1
     elif isaac.colliderect(pygame.Rect(0,HEIGHT, WIDTH, (HEIGHT*2))):
         current = 2
+    
     print(current)
     return current
 
@@ -1164,7 +1166,7 @@ while True:
 
 
     # Vykreslení pozadí
-    window.blit(pozadi, (0,0))
+    window.blit(pozadi, (0, 0))
     window.blit(image_filter, (image_filter_position))
     
     # Draw player projectiles on the window
@@ -1238,13 +1240,11 @@ while True:
         for img_x, img_y in [prvni]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0: #<----- pouze, aby se nezobrazovaly mimo obrazovku
                 window.blit(room_image, (prvni))
-        window.blit(pozadi, (WIDTH, HEIGHT))
     #Druhá
     if druha_statement:
         for img_x, img_y in [druha]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
                 window.blit(room_image, ((druha)))
-        window.blit(pozadi, (WIDTH, (HEIGHT*2)))
     #Třetí
     if treti_statement:
         for img_x, img_y in [treti]:
@@ -1289,7 +1289,7 @@ while True:
     if jedenacta_statement:
         for img_x, img_y in [jedenacta]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
-                window.blit(room_image, (jedenacta))
+                window.blit(room_image, (jedenacta))  
     #Dvanáctá
     if dvanacta_statement:
         for img_x, img_y in [dvanacta]:
@@ -1300,6 +1300,7 @@ while True:
         for img_x, img_y in [trinacta]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
                 window.blit(room_image, (trinacta))
+
     #Čtrnáctá
     if ctrnacta_statement:
         for img_x, img_y in [ctrnacta]:
@@ -1365,6 +1366,7 @@ while True:
         for img_x, img_y in [dvacatasesta]:
             if img_x < WIDTH and img_x > 0 and img_y < HEIGHT and img_y > 0:
                 window.blit(room_image, (dvacatasesta))
+
     #Dvacátá sedmá
     if dvacatasedma_statement:
         for img_x, img_y in [dvacatasedma]:
