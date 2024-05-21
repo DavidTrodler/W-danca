@@ -44,10 +44,8 @@ heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
 moucha = pygame.image.load("enemies/moucha.png")
 
-frst_srd = 1
-scnd_srd = 1
-thrd_srd = 1
-aktualni_srdicko = frst_srd 
+frst_srd = 3
+
 pygame.display.update()
 
 # Game loop
@@ -76,18 +74,27 @@ while True:
     rect_y = max(40, min(rect_y, HEIGHT - 96))
 
     # Draw the player health bar
-    if frst_srd == 1:
+    if frst_srd == 3:
+        window.blit(heart_full, (25, 25))
+        window.blit(heart_full, (95, 25))
+        window.blit(heart_full, (165, 25))
+    elif frst_srd == 2.5:
+        window.blit(heart_full, (25, 25))
+        window.blit(heart_full, (95, 25))
+        window.blit(heart_half, (165, 25))
+    elif frst_srd == 2:
+        window.blit(heart_full, (25, 25))
+        window.blit(heart_full, (95, 25))
+    elif frst_srd == 1.5:
+        window.blit(heart_full, (25, 25))
+        window.blit(heart_half, (95, 25))
+    elif frst_srd == 1:
         window.blit(heart_full, (25, 25))
     elif frst_srd == 0.5:
         window.blit(heart_half, (25, 25))
-    if scnd_srd == 1:
-        window.blit(heart_full, (95, 25))
-    elif scnd_srd == 0.5: 
-        window.blit(heart_half, (95, 25))
-    if thrd_srd == 1:
-        window.blit(heart_full, (165, 25))
-    elif thrd_srd == 0.5:
-        window.blit(heart_half, (165, 25))
+    elif frst_srd == 0:
+        print("Game over, bracho")
+        sys.exit()
 
 
     # Draw the character and hearts on the window
@@ -122,7 +129,7 @@ while True:
         moucha_y -= 1
     angry_moucha = window.blit(moucha, (moucha_x, moucha_y))
     if isaac.colliderect(angry_moucha):
-        aktualni_srdicko -= 0.5
+        frst_srd -= 0.5
 
     # Update the display and control the frame rate
     pygame.display.update()
