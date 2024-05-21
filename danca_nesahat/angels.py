@@ -1,3 +1,9 @@
+"""
+extrem, ja nevim proste ma neco delat "pew pew", ale je tam moc pngcek.
+asi zbytecna vec, nase postava se neotaci narozdil od teto
+je to asi potreti co jsem nasla tu stranku https://www.techwithtim.net/tutorials/game-development-with-python/pygame-tutorial/projectiles
+nekdo by na ne mel poslat mail, ze to je zbytecne <-- AI generated
+"""
 import pygame
 pygame.init()
 

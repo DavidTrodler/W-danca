@@ -14,13 +14,15 @@ pozadi = pygame.image.load("nakres_dveri.png")
 window.blit(pozadi, (0, 0))
 aktualni_room = 1
 
-""" ENEMIES """
-
-
-
 # Set initial position and dimensions for the character
 rect_x, rect_y = 70, 500
 WIDTH, HEIGHT = 1000, 600
+
+
+
+""" ENEMIES """
+#moucha bracho
+moucha_x, moucha_y = 500, 300
 
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
@@ -84,10 +86,21 @@ while True:
         rect_y -= 460
         print("jizni")
 
+
+
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
-    window.blit(moucha, (500, 300))
 
+
+    if rect_x > moucha_x:
+        moucha_x += 1
+    if rect_x < moucha_x:
+        moucha_x -= 1
+    if rect_y > moucha_y:    
+        moucha_y += 1               
+    if rect_y < moucha_y:       
+        moucha_y -= 1
+    window.blit(moucha, (moucha_x, moucha_y))
 
     # Update the display and control the frame rate
     pygame.display.update()
