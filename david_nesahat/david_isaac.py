@@ -40,7 +40,7 @@ projectiles = []
 # Create the game window + Load images
 window = pygame.display.set_mode((50, 600))
 pygame.display.set_caption("ˇIsaacˇ")
-pozadi = pygame.image.load("nakres_dveri.png")
+pozadi = pygame.image.load("david_nesahat/nakres_dveri.png")
 pozadi = pygame.transform.scale(pozadi, (1000, 600))
 
 window.blit(pozadi, (0, 0))
