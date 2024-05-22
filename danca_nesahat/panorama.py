@@ -58,7 +58,7 @@ WIDTH, HEIGHT = 1000, 600
 
 """ ENEMIES """
 #moucha bracho
-moucha_x, moucha_y = 500, 300
+moucha_x, moucha_y = [500, 300]
 hp_mouchy = 20
 
 # Create a clock object to control the frame rate
