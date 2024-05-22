@@ -414,11 +414,9 @@ while True:
 
     if hp_mouchy > 0:
         angry_moucha = window.blit(moucha, (moucha_x, moucha_y))
-    elif hp_mouchy == 0:
-        angry_moucha = window.blit(moucha, (9000, 9000))
-
-    if isaac.colliderect(angry_moucha):
-        frst_srd -= 0.5
+        if isaac.colliderect(angry_moucha):
+            frst_srd -= 0.5
+    
 
     # Update the display and control the frame rate
     pygame.display.flip()

@@ -9,14 +9,14 @@ cerna = (0, 0, 0)
 
 
 # Create the game window + Load images
-window = pygame.display.set_mode((1000, 600))
+WIDTH, HEIGHT = 1000, 600
+window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("ˇIsaacˇ")
 pozadi = pygame.image.load("nakres_dveri.png")
 window.blit(pozadi, (0, 0))
 
-# Set initial position and dimensions for the character
+# Set initial position for the character
 rect_x, rect_y = 70, 500
-WIDTH, HEIGHT = 1366, 755
 
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
