@@ -1,5 +1,6 @@
 import pygame, sys
 pygame.init()
+from jedna_moucha import osm_much
 
 # Define color constants
 telova = (255, 186, 141)
@@ -7,6 +8,16 @@ hneda = (85, 33, 0)
 modra_mouchy =(165, 199, 206)
 cerna = (0, 0, 0)
 
+""" LIST S TYPY ROOMEK, ZATIM NEPOUZIVANE """
+list_typu = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+""" ENEMIES """
+#moucha bracho
+moucha_x, moucha_y = 500, 300
+hp_mouchy = 20
+srd = 3
+moucha = pygame.image.load("def/moucha.png")
+musi_pozice = []
 
 # Create the game window + Load images
 WIDTH, HEIGHT = 1000, 600
@@ -22,19 +33,7 @@ rect_x, rect_y = 70, 500
 clock = pygame.time.Clock()
 
 # Load the character and tear image
-velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
-importovani_slzy = pygame.image.load("tear.png")
-slza = pygame.transform.scale(importovani_slzy, (25, 25))
-heart_full = pygame.image.load("srdicka/full_heart.png")
-heart_half = pygame.image.load("srdicka/half_a_heart.png")
-
-#Functions for enemies.py
-def level():
-    pass
-
-def player_position():
-    pass
 
 # Game loop
 while True:
@@ -55,13 +54,8 @@ while True:
     if keys[pygame.K_s]:
         rect_y += 5
 
-
     # Vykreslení pozadí
     window.blit(pozadi, (0, 0))
-
-    
-
-
 
     # Ensure the character stays within the window boundaries
     rect_x = max(40, min(rect_x, WIDTH - 101))
@@ -70,8 +64,11 @@ while True:
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
 
-    
-
+    musi_pozice = osm_much(rect_x, moucha_x, rect_y, moucha_y)
+    if hp_mouchy > 0:
+        angry_moucha = window.blit(moucha, (musi_pozice[0], musi_pozice[1]))
+        if isaac.colliderect(angry_moucha):
+            srd -= 0.5
 
     # Update the display and control the frame rate
     pygame.display.update()

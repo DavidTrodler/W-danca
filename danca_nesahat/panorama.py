@@ -49,15 +49,12 @@ window = pygame.display.set_mode((1000, 600))
 pygame.display.set_caption("ˇIsaacˇ")
 pozadi = pygame.image.load("nakres_dveri.png")
 window.blit(pozadi, (0, 0))
-aktualni_room = 1
-importovani_slzy   = pygame.image.load("tear.png")
+importovani_slzy = pygame.image.load("tear.png")
 slza = pygame.transform.scale(importovani_slzy, (25, 25))
 
 # Set initial position and dimensions for the character
 rect_x, rect_y = 70, 500
 WIDTH, HEIGHT = 1000, 600
-
-
 
 """ ENEMIES """
 #moucha bracho
