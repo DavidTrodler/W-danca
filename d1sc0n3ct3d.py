@@ -1044,7 +1044,6 @@ while True:
     window.blit(heart_full, (95, 25))
     window.blit(heart_half, (165, 25))
     
-    isaac = window.blit(postava, (rect_x, rect_y))
 
     if isaac.colliderect(pygame.Rect(100, 250, 1, 100)):
         rect_x += 1100
