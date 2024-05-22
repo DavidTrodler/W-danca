@@ -64,11 +64,16 @@ while True:
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
 
+
     musi_pozice = osm_much(rect_x, moucha_x, rect_y, moucha_y)
+    moucha_x = musi_pozice[0]
+    moucha_y = musi_pozice[1]
     if hp_mouchy > 0:
-        angry_moucha = window.blit(moucha, (musi_pozice[0], musi_pozice[1]))
+        angry_moucha = window.blit(moucha, (moucha_x, moucha_y))
         if isaac.colliderect(angry_moucha):
             srd -= 0.5
+    musi_pozice = []
+
 
     # Update the display and control the frame rate
     pygame.display.update()
