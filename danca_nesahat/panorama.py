@@ -58,7 +58,7 @@ WIDTH, HEIGHT = 1000, 600
 
 """ ENEMIES """
 #moucha bracho
-moucha_x, moucha_y = 500, 300
+moucha_x, moucha_y = [500, 300]
 hp_mouchy = 20
 
 # Create a clock object to control the frame rate
@@ -395,10 +395,6 @@ while True:
     elif isaac.colliderect(pygame.Rect(450,560, 100, 1)):
         rect_y -= 460
         print("jizni")
-
-
-
-
 
     if rect_x > moucha_x:
         moucha_x += 0.5
