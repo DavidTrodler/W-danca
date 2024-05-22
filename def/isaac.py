@@ -1,6 +1,6 @@
 import pygame, sys
 pygame.init()
-from jedna_moucha import osm_much
+from jedna_moucha import muska
 
 # Define color constants
 telova = (255, 186, 141)
@@ -11,13 +11,14 @@ cerna = (0, 0, 0)
 """ LIST S TYPY ROOMEK, ZATIM NEPOUZIVANE """
 list_typu = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
-""" ENEMIES """
+"""* ENEMIES *"""
 #moucha bracho
 moucha_x, moucha_y = 500, 300
 hp_mouchy = 20
 srd = 3
 moucha = pygame.image.load("def/moucha.png")
 musi_pozice = []
+"""* ENEMIES *"""
 
 # Create the game window + Load images
 WIDTH, HEIGHT = 1000, 600
@@ -64,11 +65,21 @@ while True:
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
 
-    musi_pozice = osm_much(rect_x, moucha_x, rect_y, moucha_y)
+    """* ENEMIES - random moucha *"""
+    musi_pozice = muska(rect_x, moucha_x, rect_y, moucha_y)
+    moucha_x = musi_pozice[0]
+    moucha_y = musi_pozice[1]
     if hp_mouchy > 0:
-        angry_moucha = window.blit(moucha, (musi_pozice[0], musi_pozice[1]))
+        angry_moucha = window.blit(moucha, (moucha_x, moucha_y))
         if isaac.colliderect(angry_moucha):
             srd -= 0.5
+    musi_pozice = []
+    """* ENEMIES - random moucha + 2. roomka *"""
+    druha_roomka(rect_x, rect_y, hp_mouchy, srd, window, isaac)
+    """* ENEMIES - 2. roomka*"""
+
+
+
 
     # Update the display and control the frame rate
     pygame.display.update()
