@@ -396,10 +396,6 @@ while True:
         rect_y -= 460
         print("jizni")
 
-
-
-
-
     if rect_x > moucha_x:
         moucha_x += 0.5
     if rect_x < moucha_x:
