@@ -64,7 +64,7 @@ hp_mouchy = 20
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
 
-# Load the character and tear image
+# Load images
 velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 importovani_slzy = pygame.image.load("tear.png")
