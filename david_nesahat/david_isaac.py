@@ -56,8 +56,8 @@ clock = pygame.time.Clock()
 
 # Load the character and tear image
 velikost_postavy = 57
-postava = pygame.image.load("pixelovy_isaac_vetsi.png")
-importovani_slzy = pygame.image.load("tear.png")
+postava = pygame.image.load("david_nesahat/pixelovy_isaac_vetsi.png")
+importovani_slzy = pygame.image.load("david_nesahat/tear.png")
 slza = pygame.transform.scale(importovani_slzy, (25, 25))
 heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
@@ -69,13 +69,12 @@ Start -------------- minimap_file.py
 image_width = 60 #x  #<---- Šířka obrázku, dá se volně měnit
 image_height = 30 #y
 pygame.display.set_caption("ˇIsaacˇ")
-room_image = pygame.image.load("pozadi.png")
+room_image = pygame.image.load("david_nesahat/pozadi.png")
 
 room_image = pygame.transform.scale(room_image,(image_width, image_height))
 image_filter = pygame.transform.scale(room_image,(image_width, image_height))
 room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
-screen = pygame.display.set_mode((2000, 1500))
-world = pygame.Surface((WORLD_WIDTH, WORLD_HEIGHT))
+
 
 image_filter_position = [775, 100] #<---- Pozice filtru
 # Rooms list
