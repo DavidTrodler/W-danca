@@ -75,7 +75,7 @@ while True:
             srd -= 0.5
     musi_pozice = []
     """* ENEMIES - random moucha + 2. roomka *"""
-    druha_roomka(rect_x, rect_y, hp_mouchy, srd, window, isaac)
+    #druha_roomka(rect_x, rect_y, hp_mouchy, srd, window, isaac)
     """* ENEMIES - 2. roomka*"""
 
 
