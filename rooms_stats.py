@@ -405,7 +405,7 @@ def rooms_dictionary_funciton(rooms):
 
 
 #Mění současnou roomku (current_room), podle toho, do jakých dveří hráč vstoupil
-def current_room(doors, current_room):
+def current_room_function(doors, current_room):
     if current_room == 1:
         if doors == "UP":
             return 4

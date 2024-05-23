@@ -2,8 +2,9 @@ import pygame, sys
 pygame.init()
 #Importing functions
 from map import pohyby_mapy
-from rooms_stats import set_statements, rooms_dictionary_funciton, current_room
+from rooms_stats import set_statements, rooms_dictionary_funciton, current_room_function
 from rooms_vyber import rooms_fixed
+from bullet_movement import bullet_movement
 # map.py
 #----------------------------------------------------------------------
 
@@ -28,6 +29,8 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pozadi = pygame.image.load("nakres_dveri.png")
 window.blit(pozadi, (0, 0))
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
+importovani_slzy = pygame.image.load("david_nesahat/tear.png")
+slza = pygame.transform.scale(importovani_slzy, (25, 25))
 room_image = pygame.image.load("david_nesahat/pozadi.png")
 room_image = pygame.transform.scale(room_image,(image_width, image_height))
 image_filter = pygame.transform.scale(room_image,(image_width, image_height))
@@ -100,6 +103,7 @@ rooms = rooms_fixed(level)
 
 #Vyvolání funkcí
 doors_dictionary = rooms_dictionary_funciton(rooms)
+print(doors_dictionary)
 prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)
 
 # Game loop
@@ -181,6 +185,24 @@ while True:
                 player_projectiles_right_up.append((rect_x + 52, rect_y + velikost_postavy // 2))
                 cooldown = cooldown_time
                 break
+    # Bullet positions update
+        #UP
+    new_player_projectiles_UP = []
+    new_player_projectiles_UP_LEFT = []
+    new_player_projectiles_UP_RIGHT = []
+    #DOWN
+    new_player_projectiles_DOWN = []
+    new_player_projectiles_DOWN_LEFT = []
+    new_player_projectiles_DOWN_RIGHT = []
+    #LEFT
+    new_player_projectiles_LEFT = []
+    new_player_projectiles_LEFT_DOWN = []
+    new_player_projectiles_LEFT_UP = []
+    #RIGHT
+    new_player_projectiles_RIGHT = []
+    new_player_projectiles_RIGHT_DOWN = []
+    new_player_projectiles_RIGHT_UP = []
+    player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up = bullet_movement(projectile_speed, projectile_speed_diagonal, WIDTH, HEIGHT, player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, new_player_projectiles_UP, new_player_projectiles_UP_LEFT, new_player_projectiles_UP_RIGHT, new_player_projectiles_DOWN, new_player_projectiles_DOWN_LEFT, new_player_projectiles_DOWN_RIGHT, new_player_projectiles_LEFT, new_player_projectiles_LEFT_DOWN, new_player_projectiles_LEFT_UP, new_player_projectiles_RIGHT, new_player_projectiles_RIGHT_DOWN, new_player_projectiles_RIGHT_UP)
     # Move the character based on the pressed keys
     if keys[pygame.K_a]:
         rect_x -= 5
@@ -191,35 +213,100 @@ while True:
     if keys[pygame.K_s]:
         rect_y += 5
 
-    #Vykreslení postavy + pozadí
+    #Vykreslení pozadí
     window.blit(pozadi, (0, 0))
-    window.blit(image_filter, (image_filter_position))
-    isaac = window.blit(postava, (rect_x, rect_y))
 
+    #Vykrelsení projektilů
+    #UP
+    if len(player_projectiles_up) > 0:
+        for proj_x, proj_y in player_projectiles_up:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #UP_LEFT
+    if len(player_projectiles_up_left) > 0:
+        for proj_x, proj_y in player_projectiles_up_left:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #UP_RIGHT
+    if len(player_projectiles_up_right) > 0:
+        for proj_x, proj_y in player_projectiles_up_right:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #DOWN
+    if len(player_projectiles_down) > 0:
+        for proj_x, proj_y in player_projectiles_down:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #DOWN_LEFT
+    if len(player_projectiles_down_left) > 0:
+        for proj_x, proj_y in player_projectiles_down_left:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #DOWN_RIGHT
+    if len(player_projectiles_down_right) > 0:
+        for proj_x, proj_y in player_projectiles_down_right:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #LEFT
+    if len(player_projectiles_left) > 0:
+        for proj_x, proj_y in player_projectiles_left:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #LEFT_DOWN
+    if len(player_projectiles_left_down) > 0:
+        for proj_x, proj_y in player_projectiles_left_down:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #LEFT_UP
+    if len(player_projectiles_left_up) > 0:
+        for proj_x, proj_y in player_projectiles_left_up:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #RIGHT
+    if len(player_projectiles_right) > 0:
+        for proj_x, proj_y in player_projectiles_right:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #RIGHT_DOWN
+    if len(player_projectiles_right_down) > 0:
+        for proj_x, proj_y in player_projectiles_right_down:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+    #RIGHT_UP
+    if len(player_projectiles_right_up) > 0:
+        for proj_x, proj_y in player_projectiles_right_up:
+            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
+
+    
+    
+    #Vykreslení postavy + filtru
+    isaac = window.blit(postava, (rect_x, rect_y))
+    window.blit(image_filter, (image_filter_position))
+    #UP
     if doors_dictionary[current_room][0]:
         if isaac.colliderect(pygame.Rect(450,40, 100, 1)):
+            doors = "UP"
             rect_y -= 80
             move_up_counter += dvere_up_value
-            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             dvere_up = True
+            current_room = current_room_function(doors, current_room)
+    #RIGHT
     if doors_dictionary[current_room][1]:
         if isaac.colliderect(pygame.Rect(960,250, 1, 100)):
+            doors = "RIGHT"
             rect_x += 80
             move_side_counter += dvere_right_value
-            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             dvere_right = True
+            current_room = current_room_function(doors, current_room)
+    #DOWN
     if doors_dictionary[current_room][2]:
         if isaac.colliderect(pygame.Rect(450,560, 100, 1)):
+            doors = "DOWN"
             rect_y += 80
             move_up_counter += dvere_down_value
-            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             dvere_down = True
+            current_room = current_room_function(doors, current_room)
+    #LEFT
     if doors_dictionary[current_room][3]:
         if isaac.colliderect(pygame.Rect(40, 250, 1, 100)):
+            doors = "LEFT"
             rect_x -= 80
             move_side_counter += dvere_left_value
-            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
+            prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             dvere_left = True
+            current_room = current_room_function(doors, current_room)
 
     # Update the display and control the frame rate
     pygame.display.flip()
