@@ -1,6 +1,7 @@
-from main import WIDTH, HEIGHT
+
 import pygame
 import random
+"""
 def room_types(x):
     prekazky = {}
     basic = pygame.image.load("nakres_dvery.png")
@@ -43,4 +44,13 @@ def room_types(x):
                 prekazky.append(prekazky_1[i])
 
     return theme, prekazky  
+"""
+def room_types():
+    prekazky = {}
+    basic = pygame.image.load("nakres_dveri.png")
+    advanted = pygame.image.load("pozadi.png")
+    themes = [basic, advanted]
+    room_image = random.choice(themes)
+    
 
+    return room_image

@@ -5,6 +5,7 @@ from map import pohyby_mapy
 from rooms_stats import set_statements, rooms_dictionary_funciton, current_room_function
 from rooms_vyber import rooms_fixed
 from bullet_movement import bullet_movement
+from rooms_types import room_types
 import rooms_types
 import time
 # map.py
@@ -24,16 +25,21 @@ image_height = 30 #y
 
 #----------------------------------------------------------------------
 
-# Create the game window + Load images
+# Create the game window
 WIDTH, HEIGHT = 1000, 600
-
 window = pygame.display.set_mode((WIDTH, HEIGHT))
+
+# Loading background images
 pozadi = pygame.image.load("nakres_dveri.png")
-window.blit(pozadi, (0, 0))
+room_image = pygame.image.load("david_nesahat/pozadi.png")
+pozaadi = room_types()
+#----------------------------------------------------------------------
+doors_image = pygame.image.load("doors.png")
+doors_image = pygame.transform.scale(doors_image, (100, 60))
+pozaadi = pygame.transform.scale(pozaadi,(WIDTH, HEIGHT))
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 importovani_slzy = pygame.image.load("david_nesahat/tear.png")
 slza = pygame.transform.scale(importovani_slzy, (25, 25))
-room_image = pygame.image.load("david_nesahat/pozadi.png")
 room_image = pygame.transform.scale(room_image,(image_width, image_height))
 image_filter = pygame.transform.scale(room_image,(image_width, image_height))
 room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
@@ -217,7 +223,7 @@ while True:
         rect_y += 5
 
     #Vykreslení pozadí
-    window.blit(pozadi, (0, 0))
+    window.blit(pozaadi, (0, 0))
 
 
     #Vykrelsení projektilů
@@ -282,9 +288,11 @@ while True:
                 window.blit(room_image, (img_x, img_y))
 
         window.blit(image_filter, (image_filter_position))
+
     #UP
     if doors_dictionary[current_room][0]:
-        if isaac.colliderect(pygame.Rect(450,40, 100, 1)):
+        window.blit(doors_image, (450, -10))
+        if isaac.colliderect(pygame.Rect(450,40, 100, 1)) and door_cooldown == 0:
             doors = "UP"
             door_cooldown = door_cooldown_time
             rect_y += 460
@@ -295,8 +303,10 @@ while True:
             
             time.sleep(0.1)
     #RIGHT
-    if doors_dictionary[current_room][1] and door_cooldown == 0:
-        if isaac.colliderect(pygame.Rect(960,250, 1, 100)):
+    if doors_dictionary[current_room][1]:
+        rotated_doors_image_right = pygame.transform.rotate(doors_image, -90)
+        window.blit(rotated_doors_image_right, (960, 250))
+        if isaac.colliderect(pygame.Rect(960,250, 1, 100)) and door_cooldown == 0:
             doors = "RIGHT"
             door_cooldown = door_cooldown_time
             rect_x -= 855
@@ -306,8 +316,10 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             time.sleep(0.1)   
     #DOWN
-    if doors_dictionary[current_room][2] and door_cooldown == 0:
-        if isaac.colliderect(pygame.Rect(450,560, 100, 1)):
+    if doors_dictionary[current_room][2]:
+        rotated_doors_image_right = pygame.transform.rotate(doors_image, 180)
+        window.blit(rotated_doors_image_right, (450, 550))
+        if isaac.colliderect(pygame.Rect(450,560, 100, 1)) and door_cooldown == 0:
             doors = "DOWN"
             door_cooldown = door_cooldown_time
             rect_y -= 460
@@ -317,8 +329,10 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             time.sleep(0.1)
     #LEFT
-    if doors_dictionary[current_room][3] and door_cooldown == 0:
-        if isaac.colliderect(pygame.Rect(40, 250, 1, 100)):
+    if doors_dictionary[current_room][3]:
+        rotated_doors_image_left = pygame.transform.rotate(doors_image, 90)
+        window.blit(rotated_doors_image_left, (-20, 250))
+        if isaac.colliderect(pygame.Rect(40, 250, 1, 100)) and door_cooldown == 0:
             doors = "LEFT"
             door_cooldown = door_cooldown_time
             rect_x += 855
