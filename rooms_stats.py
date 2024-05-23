@@ -75,9 +75,9 @@ def rooms_dictionary_funciton(rooms):
         #Dva
         doors_dictionary[2][3] = True
         #Osmnáct
-        doors_dictionary[18][1] = True
+        doors_dictionary[18][0] = True
         #Devatenáct
-        doors_dictionary[19][0] = True
+        doors_dictionary[19][1] = True
     if 8 in rooms:
         #Dvacetjedna
         doors_dictionary[21][2] = True
