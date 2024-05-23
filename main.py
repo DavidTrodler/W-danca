@@ -5,7 +5,6 @@ from map import pohyby_mapy
 from rooms_stats import set_statements, rooms_dictionary_funciton, current_room
 from rooms_vyber import rooms_fixed
 # map.py
-prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy()
 #----------------------------------------------------------------------
 
 
@@ -101,6 +100,7 @@ rooms = rooms_fixed(level)
 
 #Vyvolání funkcí
 doors_dictionary = rooms_dictionary_funciton(rooms)
+prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)
 
 # Game loop
 while True:
@@ -191,6 +191,8 @@ while True:
     if keys[pygame.K_s]:
         rect_y += 5
 
+    #Vykreslení postavy
+    isaac = window.blit(postava, (rect_x, rect_y))
 
     if doors_dictionary[current_room][0]:
         if isaac.colliderect(pygame.Rect(450,40, 100, 1)):
