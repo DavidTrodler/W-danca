@@ -191,7 +191,9 @@ while True:
     if keys[pygame.K_s]:
         rect_y += 5
 
-    #Vykreslení postavy
+    #Vykreslení postavy + pozadí
+    window.blit(pozadi, (0, 0))
+    window.blit(image_filter, (image_filter_position))
     isaac = window.blit(postava, (rect_x, rect_y))
 
     if doors_dictionary[current_room][0]:
@@ -220,5 +222,6 @@ while True:
             dvere_left = True
 
     # Update the display and control the frame rate
+    pygame.display.flip()
     pygame.display.update()
     clock.tick(30)
