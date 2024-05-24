@@ -4,6 +4,13 @@ import random
 
 def room_typeees(x): #NEOPRAVOVAT NAZEV JINAK SE TO POJEBE, dik :D
     prekazky = {}
+    prekazky_1 = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
+    prekazky_2 = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
+    prekazky_3 = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
+    prekazky_4 = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
+    prekazky_5 = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
+    prekazky_6 = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
+    prekazky_7 = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
     basic = pygame.image.load("nakres_dvery.png")
     themes = [basic]
     theme = random.choice(themes)

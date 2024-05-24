@@ -46,7 +46,7 @@ room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
 pygame.display.set_caption("ˇIsaacˇ")
 #----------------------------------------------------------------------
 #Level
-level = 1
+level = 30
 
 # Player variables
 rect_x, rect_y = 70, 500
@@ -114,6 +114,14 @@ doors_dictionary = rooms_dictionary_funciton(rooms)
 print(doors_dictionary)
 mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)
 print(mapa)
+
+
+#POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
+# Vytvoření seznamu pro ukládání pozic kliknutí
+click_positions = []
+
+
+
 
 # Game loop
 while True:
@@ -195,6 +203,14 @@ while True:
                 player_projectiles_right_up.append((rect_x + 52, rect_y + velikost_postavy // 2))
                 cooldown = cooldown_time
                 break
+        
+        
+        #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            # Získání pozice kurzoru myši při kliknutí
+            mouse_pos = pygame.mouse.get_pos()
+            print(mouse_pos)  # Vypíše pozici kurzoru myši při kliknutí
+            click_positions.append(pygame.mouse.get_pos())
     # Bullet positions update
         #UP
     new_player_projectiles_UP = []
@@ -225,6 +241,25 @@ while True:
 
     #Vykreslení pozadí
     window.blit(pozaadi, (0, 0))
+
+
+
+
+
+
+    #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
+    # Získání pozice kurzoru myši
+    mouse_pos = pygame.mouse.get_pos()
+    # Vykreslení čtverce na pozici myši
+    pygame.draw.rect(window, (255, 0, 0), (mouse_pos[0], mouse_pos[1], 50, 50))
+    
+    for pos in click_positions:
+        pygame.draw.rect(window, (255, 0, 0), (pos[0], pos[1], 50, 50))
+
+
+
+
+
 
 
     #Vykrelsení projektilů
