@@ -4,11 +4,11 @@ level = 1
 print(random.randint(1, 10))
 
 def items():
-    items_crap = {}
-    items_common = {'sword': [-2, +3, 0, 0, 0, 1, 0], 'shield': [-1, 0, 0, 3, 0, 0, 0], 'potion': [1, 1, 1, 0, 0, 0, 0], 'hearth': [0, 0, 1, 0, 0, 0, 0]} #Name: speed, damage, health, total health, projectile speed, reload time, lives
-    items_epic = {} #Name: speed, damage, health, total health, projectile speed, reload time, lives
-    items_legendary = {} #Name: speed, damage, health, total health, projectile speed, reload time, lives
-    items_mythical = {} #Name: speed, damage, health, total health, projectile speed, reload time, lives
+    items_crap = {"teddy": [0, -1, 0, 0, 0, -1, 0, 0], "mine": [0, 0, -1, 0, 0, 0, 0, 0], "expired_milk":[0, 0, 0, -1, 0, 0, 0, 0], "physics_book":[-1, -1, 0, 0, -1, 0, 0, 1]}
+    items_common = {'hearth': [0, 0, 1, 0, 0, 0, 0, 0], "salt": [0, 2, 0, 0, 0, -1, 0, 0], "water": [0, 0, 0, 0, 0, 1, 0, 0], "granade": [0, 0, 0, 0, 0, 0, 0, 1]} #Name: speed, damage, health, total health, projectile speed, reload time, lives, granades --- 8
+    items_epic = {'sword': [-2, +3, 0, 0, 0, 1, 0, 0], 'shield': [-1, 0, 0, 3, 0, 0, 0, 0],'potion': [1, 1, 1, 0, 0, 0, 0, 0], "lotion": [2, 0, 0, 0, 0, 0, 0, 0]} #Name: speed, damage, health, total health, projectile speed, reload time, lives, granades
+    items_legendary = {"pepper": [0, 1, 0, 0, 0, 3, 0, 0], "lemon":[1, 1, -0,5, 1, 0, 1, 0, 0], "school_report":[0, 0, 0, 0, 0, 4, 0, 0], "Conjunctivitis": [0, 0, 0, 0, 0, 3, 0, 0]} #Name: speed, damage, health, total health, projectile speed, reload time, lives, granades
+    items_mythical = {"melon": [1, 0, 0, 0, 0, 5, 0, 0], "tuberculosis": [0, 5, 0, 0, -1, 1, 0, 0], "elvis_presley_jacket_with_magical_pills": [1, 2, 0, 100, 0, 1, 1, 0]} #Name: speed, damage, health, total health, projectile speed, reload time, lives, granades
     return items_crap, items_common, items_epic, items_legendary, items_mythical
 
 
