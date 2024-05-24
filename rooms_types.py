@@ -1,8 +1,8 @@
 
 import pygame
 import random
-"""
-def room_types(x):
+
+def room_typeees(x): #NEOPRAVOVAT NAZEV JINAK SE TO POJEBE, dik :D
     prekazky = {}
     basic = pygame.image.load("nakres_dvery.png")
     themes = [basic]
@@ -44,7 +44,7 @@ def room_types(x):
                 prekazky.append(prekazky_1[i])
 
     return theme, prekazky  
-"""
+
 def room_types():
     prekazky = {}
     basic = pygame.image.load("nakres_dveri.png")
