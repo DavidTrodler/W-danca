@@ -114,6 +114,7 @@ doors_dictionary = rooms_dictionary_funciton(rooms)
 print(doors_dictionary)
 mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)
 print(mapa)
+
 # Game loop
 while True:
     # cooldown
@@ -125,7 +126,7 @@ while True:
     if door_cooldown > 0:
         door_cooldown -= 1
     keys = pygame.key.get_pressed()
-
+    # Shooting
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -280,7 +281,7 @@ while True:
     
     #Vykreslení postavy + filtru
     isaac = window.blit(postava, (rect_x, rect_y))
-
+    #Vykreslení minimapy
     for ii in rooms:
         for i in range(0, len(mapa[ii-1]), 2):
             img_x, img_y = mapa[ii-1][i], mapa[ii-1][i+1]
@@ -289,6 +290,7 @@ while True:
 
         window.blit(image_filter, (image_filter_position))
 
+    #Doors
     #UP
     if doors_dictionary[current_room][0]:
         window.blit(doors_image, (450, -10))
