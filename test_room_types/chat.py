@@ -31,6 +31,7 @@ while True:
         basic = pygame.image.load("nakres_dveri.png")
         themes = [basic]
         theme = random.choice(themes)
+        
         if random.random() < 1:
             for i in prekazky_1:
                 prekazky.append(prekazky_1[i])
