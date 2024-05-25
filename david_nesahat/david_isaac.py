@@ -38,7 +38,7 @@ player_projectiles_right_up = []
 projectiles = []
 
 # Create the game window + Load images
-window = pygame.display.set_mode((50, 600))
+window = pygame.display.set_mode((1000, 600))
 pygame.display.set_caption("ˇIsaacˇ")
 pozadi = pygame.image.load("david_nesahat/nakres_dveri.png")
 pozadi = pygame.transform.scale(pozadi, (1000, 600))
@@ -500,6 +500,9 @@ def rooms_dictionary_funciton():
 print(rooms_dictionary_funciton())
 
 
+
+
+
 def pohyby_mapy():
     # Room numbers
     #První
@@ -910,14 +913,6 @@ pohyby_mapy()
 End -------------- minimap_file.py
 """
 
-def pozice_roomek():
-    if isaac.colliderect(pygame.Rect(0,0, WIDTH, HEIGHT)):
-        current = 1
-    elif isaac.colliderect(pygame.Rect(0,HEIGHT, WIDTH, (HEIGHT*2))):
-        current = 2
-    
-    print(current)
-    return current
 
 
 
@@ -927,16 +922,9 @@ def pozice_roomek():
 
 
 
-
-
-
-
-
-
-
-
-
-
+klouzani_cooldown = 0
+klouzani_x = 0
+klouzani_y = 0
 
 # Game loop
 while True:
@@ -1044,12 +1032,50 @@ while True:
     # Move the character based on the pressed keys
     if keys[pygame.K_a]:
         rect_x -= 5
+
+        if klouzani_x > -3:
+            klouzani_x -= 0.01
+
+
+
+    else:
+        if klouzani_x < 0:
+            klouzani_x += 0.1 
+
     if keys[pygame.K_d]:
         rect_x += 5
+
+        if klouzani_x > -3:
+            klouzani_x += 0.05
+            print(klouzani_x)
+
+
+    else:
+        if klouzani_x > 0:
+            klouzani_x -= 0.1 
     if keys[pygame.K_w]:
         rect_y -= 5
+
+        if klouzani_y > 3:
+            klouzani_y -= 0.05
+
+
+    else:
+        if klouzani_y < 0:
+            klouzani_y += 0.1
+    
     if keys[pygame.K_s]:
         rect_y += 5
+
+        if klouzani_y < 3:
+            klouzani_y += 0.05
+
+
+    else:
+        if klouzani_y > 0:
+            klouzani_y -= 0.1 
+    rect_y += klouzani_y
+    rect_x += klouzani_x
 
     # Update the position of player projectiles
     #UP
@@ -1229,7 +1255,6 @@ while True:
 
     # Draw the character and hearts on the window
     isaac = window.blit(postava, (rect_x, rect_y))
-    current_room = pozice_roomek()
     """
     Start -------------- minimap_file.py
     """
