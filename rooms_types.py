@@ -121,19 +121,20 @@ def room_typeees(): #NEOPRAVOVAT NAZEV JINAK SE TO POJEBE, dik :D
 
 rooms = {0:[],1:[],2:[],3:[]}
 
-for i in range(len(rooms)):
-    result = room_typeees()
-    if len(result) == 2:
-        theme, prekazky = result
+def room_types(rooms):
+    for i in range(len(rooms)):
+        result = room_typeees()
+        if len(result) == 2:
+            theme, prekazky = result
+            rooms[i] = [theme, prekazky]
+        else:
+            rooms[i] = result
         rooms[i] = [theme, prekazky]
-    else:
-        rooms[i] = result
-    rooms[i] = [theme, prekazky]
 
-    
-print(rooms)
+    return rooms
+    print(rooms)
 
-def room_types():
+def room_typesss():
     prekazky = {}
     basic = pygame.image.load("nakres_dveri.png")
     advanted = pygame.image.load("pozadi.png")
