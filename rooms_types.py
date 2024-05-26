@@ -11,9 +11,13 @@ def room_typeees(): #NEOPRAVOVAT NAZEV JINAK SE TO POJEBE, dik :D
     prekazky_6 = {0: [40, 170, 50, 50], 1: [90, 170, 50, 50], 2: [40, 382, 50, 50], 3: [90, 382, 50, 50], 4: [374, 40, 50, 50], 5: [374, 90, 50, 50], 6: [374, 511, 50, 50], 7: [374, 461, 50, 50], 8: [860, 170, 50, 50], 9: [910, 170, 50, 50], 10: [860, 382, 50, 50], 11: [910, 382, 50, 50], 12: [579, 40, 50, 50], 13: [579, 90, 50, 50], 14: [579, 511, 50, 50], 15: [579, 461, 50, 50], 16: [475, 275, 50, 50], 17: [525, 275, 50, 50], 18: [475, 225, 50, 50], 19: [425, 275, 50, 50], 20: [475, 325, 50, 50]}
     prekazky_7 = {0: [40, 40, 50, 50], 1: [90, 40, 50, 50], 2: [910, 511, 50, 50], 3: [910, 461, 50, 50], 4: [860, 511, 50, 50], 5: [40, 511, 50, 50], 6: [40,461,50,50], 7: [90, 511, 50, 50], 8: [910, 40, 50, 50], 9: [910, 90, 50, 50], 10: [860, 40, 50, 50], 11: [40, 90, 50, 50]}
     prekazky_8 = {0: [730, 155, 50, 50], 1: [680, 205, 50, 50], 2: [780, 205, 50, 50], 3: [730, 255, 50, 50], 4: [250, 300, 50, 50], 5: [200, 350, 50, 50], 6: [250, 400, 50, 50], 7: [300, 350, 50, 50]}
-    basic = "basic"
-    themes = [basic]
-    theme = random.choice(themes)
+    WIDTH, HEIGHT = 1000, 600
+    basic = pygame.image.load("nakres_dveri.png")
+    advanted = pygame.image.load("pozadi.png")
+    basic = pygame.transform.scale(basic,(WIDTH, HEIGHT))
+    advanted = pygame.transform.scale(advanted,(WIDTH, HEIGHT))
+    images = [basic, advanted]
+    theme = random.choice(images)
 
     random_int = random.randint(1, 8)
 
@@ -121,21 +125,25 @@ def room_typeees(): #NEOPRAVOVAT NAZEV JINAK SE TO POJEBE, dik :D
 
 rooms = {0:[],1:[],2:[],3:[]}
 
-def room_types(rooms):
-    for i in range(len(rooms)):
+def room_typesss(x):
+    
+
+
+    slovnik = {}
+    for i in range(len(x)):
+        slovnik[x[i]] = x[i]
+
+    for key in x:
         result = room_typeees()
-        if len(result) == 2:
-            theme, prekazky = result
-            rooms[i] = [theme, prekazky]
-        else:
-            rooms[i] = result
-        rooms[i] = [theme, prekazky]
+        theme, prekazky = result
+        slovnik[key] = {"theme": theme, "prekazky": prekazky}
 
-    return rooms
-    print(rooms)
+    return slovnik
 
-def room_typesss():
-    prekazky = {}
+
+
+
+def room_types():
     basic = pygame.image.load("nakres_dveri.png")
     advanted = pygame.image.load("pozadi.png")
     themes = [basic, advanted]

@@ -46,7 +46,7 @@ room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
 pygame.display.set_caption("ˇIsaacˇ")
 #----------------------------------------------------------------------
 #Level
-level = 30
+level = 20
 
 # Player variables
 rect_x, rect_y = 70, 500
@@ -247,7 +247,7 @@ while True:
         rect_y += 5
 
     #Vykreslení pozadí
-    window.blit(pozaadi, (0, 0))
+    window.blit(rooms_dict[current_room]["theme"], (0, 0)) #ANOOO FUNGUJE TOO DOPICII
 
 
 
