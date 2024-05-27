@@ -8,7 +8,7 @@ from bullet_movement import bullet_movement
 from rooms_types import room_types, room_typesss, room_typeees
 import rooms_types
 import time
-from vsechny_cislicka import telova_barva, hneda_barva, modra_mouchy_barva, cerna_barva, sirka_obrazku, vyska_obrazku, width_mapy, height_mapy, level, rect_x, rect_y, velikost_postavy, projectile_size, projectile_speed, projectile_speed_diagonal, cooldown, cooldown_time, move_up_counter, move_side_counter, current_room, dvere_up_value, dvere_down_value, dvere_left_value, dvere_right_value, dvere_up, dvere_down, dvere_left, dvere_right, player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, rooms, rooms_dict, move_up, move_side, image_filter_position
+from vsechny_cislicka import telova_barva, hneda_barva, modra_mouchy_barva, cerna_barva, sirka_obrazku, vyska_obrazku, width_mapy, height_mapy, level, rect_x, rect_y, velikost_postavy, projectile_size, projectile_speed, projectile_speed_diagonal, cooldown, cooldown_time, move_up_counter, move_side_counter, current_room, dvere_up_value, dvere_down_value, dvere_left_value, dvere_right_value, dvere_up, dvere_down, dvere_left, dvere_right, player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, rooms, rooms_dict, move_up, move_side, image_filter_position, projectiles, door_cooldown, door_cooldown_time
 # map.py
 #----------------------------------------------------------------------
 
@@ -88,34 +88,34 @@ player_projectiles_up_left = player_projectiles_up_left()
 player_projectiles_up_right = player_projectiles_up_right()
 #DOWN
 player_projectiles_down = player_projectiles_down()
-player_projectiles_down_left = []
-player_projectiles_down_right = []
+player_projectiles_down_left = player_projectiles_down_left()
+player_projectiles_down_right = player_projectiles_down_right()
 #LEFT
-player_projectiles_left = []
-player_projectiles_left_down = []
-player_projectiles_left_up = []
+player_projectiles_left = player_projectiles_left()
+player_projectiles_left_down = player_projectiles_left_down()
+player_projectiles_left_up = player_projectiles_left_up()
 #RIGHT
-player_projectiles_right = []
-player_projectiles_right_down = []
-player_projectiles_right_up = []
+player_projectiles_right = player_projectiles_right()
+player_projectiles_right_down = player_projectiles_right_down()
+player_projectiles_right_up = player_projectiles_right_up()
 #ALL
-projectiles = []
+projectiles = projectiles()
 #Map
-move_up = [0, 30] # y + 30
-move_side = [60, 0] # x + 60
-image_filter_position = [775, 100] #<---- Pozice filtru
+move_up = move_up() # y + 30
+move_side = move_side() # x + 60
+image_filter_position = image_filter_position() #<---- Pozice filtru
 # Rooms list
-rooms = [1]
+rooms = rooms()
 rooms = rooms_fixed(level)
 
-rooms_dict = {}
+rooms_dict = rooms_dict()
 rooms_dict = room_typesss(rooms)
 
 print(rooms_dict)
 
 
-door_cooldown = 0
-door_cooldown_time = 20
+door_cooldown = door_cooldown()
+door_cooldown_time = door_cooldown_time()
 
 #Vyvolání funkcí
 doors_dictionary = rooms_dictionary_funciton(rooms)

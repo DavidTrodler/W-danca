@@ -163,3 +163,10 @@ def rooms():
 def rooms_dict():
     rooms_dict = {}
     return rooms_dict
+
+def door_cooldown():
+    door_cooldown = 0
+    return door_cooldown
+def door_cooldown_time():
+    door_cooldown_time = 20
+    return door_cooldown_time
