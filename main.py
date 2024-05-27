@@ -8,7 +8,7 @@ from bullet_movement import bullet_movement
 from rooms_types import room_types, room_typesss, room_typeees
 import rooms_types
 import time
-from vsechny_cislicka import telova_barva, hneda_barva, modra_mouchy_barva, cerna_barva, sirka_obrazku, vyska_obrazku, width_mapy, height_mapy, level, rect_x, rect_y, velikost_postavy, projectile_size, projectile_speed, projectile_speed_diagonal, cooldown, cooldown_time, move_up_counter, move_side_counter, current_room, dvere_up_value, dvere_down_value, dvere_left_value, dvere_right_value, dvere_up, dvere_down, dvere_left, dvere_right, player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, rooms, rooms_dict, move_up, move_side, image_filter_position, rooms_dictionary_funciton
+from vsechny_cislicka import telova_barva, hneda_barva, modra_mouchy_barva, cerna_barva, sirka_obrazku, vyska_obrazku, width_mapy, height_mapy, level, rect_x, rect_y, velikost_postavy, projectile_size, projectile_speed, projectile_speed_diagonal, cooldown, cooldown_time, move_up_counter, move_side_counter, current_room, dvere_up_value, dvere_down_value, dvere_left_value, dvere_right_value, dvere_up, dvere_down, dvere_left, dvere_right, player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, rooms, rooms_dict, move_up, move_side, image_filter_position
 # map.py
 #----------------------------------------------------------------------
 
@@ -72,7 +72,7 @@ current_room = current_room()
 #Dveře, ukazuje, kam se mají osy posunout
 dvere_up_value = dvere_up_value()
 dvere_down_value = dvere_down_value()
-dvere_left_value = dvere_up_value()
+dvere_left_value = dvere_left_value()
 dvere_right_value = dvere_right_value()
 dvere_up = dvere_up() #<--- Změní se, pokud hráč projde dveřmi (kvůli if statment ve while loop)
 dvere_down = dvere_down()
