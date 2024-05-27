@@ -104,6 +104,18 @@ def room_typeees(): #NEOPRAVOVAT NAZEV JINAK SE TO POJEBE, dik :D
                         prekazky.extend(integers)  # Add integers to prekazky
                     else:
                         prekazky.append(item)  # If item is not a string, add it directly to prekazky
+
+    elif random_int == 8:
+        keys = list(prekazky_8.keys()) 
+        for i in range(len(keys)):
+            if random.randint(1,5) == 1:
+                key = keys[i]
+                for item in prekazky_8[key]:
+                    if isinstance(item, str):  # Check if item is a string
+                        integers = list(map(int, item.split(', ')))  # Split string into integers
+                        prekazky.extend(integers)  # Add integers to prekazky
+                    else:
+                        prekazky.append(item)  # If item is not a string, add it directly to prekazky
     else:
         return theme
 
@@ -139,9 +151,3 @@ def room_types():
     
 
     return room_image
-
-
-
-"""
-SLOZKA - test_room_types, SOUBOR - nevim.py
-"""
