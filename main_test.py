@@ -111,12 +111,6 @@ rooms_dict = room_typesss(rooms)
 
 print(rooms_dict)
 
-current_prekazky = rooms_dict[current_room]["prekazky"]
-print("PREKAZKY", current_prekazky)
-
-for i in range(0, len(current_prekazky), 2):
-    x, y = current_prekazky[i], current_prekazky[i+1]
-    print(x, y)
 
 door_cooldown = 0
 door_cooldown_time = 20
