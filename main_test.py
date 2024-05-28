@@ -114,9 +114,7 @@ print(rooms_dict)
 current_prekazky = rooms_dict[current_room]["prekazky"]
 print("PREKAZKY", current_prekazky)
 
-for i in range(0, len(current_prekazky), 2):
-    x, y = current_prekazky[i], current_prekazky[i+1]
-    print(x, y)
+
 
 door_cooldown = 0
 door_cooldown_time = 20
@@ -133,6 +131,20 @@ print(mapa)
 click_positions = []
 """
 
+
+
+#NO ENTRY AREA
+no_entry_area_x = []
+no_entry_area_y = []
+
+def new_room_shit():
+    no_entry_area_x = []
+    no_entry_area_y = []
+    for i in range(0, len(current_prekazky), 2):
+        x, y = current_prekazky[i], current_prekazky[i+1]
+        no_entry_area_x.append(x)
+        no_entry_area_y.append(y)
+    return no_entry_area_x, no_entry_area_y
 
 
 # Game loop
@@ -216,6 +228,22 @@ while True:
                 cooldown = cooldown_time
                 break
         
+
+    # Move the character based on thed pressed keys
+
+    if rect_x not in no_entry_area_x and rect_y not in no_entry_area_y:    
+        if keys[pygame.K_a]:
+            rect_x -= 5
+    if rect_x not in no_entry_area_x and rect_y not in no_entry_area_y:
+        if keys[pygame.K_d]:
+            rect_x += 5
+    if rect_y not in no_entry_area_y and rect_x not in no_entry_area_x:
+        if keys[pygame.K_w]:
+            rect_y -= 5
+    if rect_y not isaac.colliderect(i, for i in no_emtry_area_y):
+        if keys[pygame.K_s]:
+            rect_y += 5
+
     """
         #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -242,15 +270,7 @@ while True:
     new_player_projectiles_RIGHT_DOWN = []
     new_player_projectiles_RIGHT_UP = []
     player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up = bullet_movement(projectile_speed, projectile_speed_diagonal, WIDTH, HEIGHT, player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, new_player_projectiles_UP, new_player_projectiles_UP_LEFT, new_player_projectiles_UP_RIGHT, new_player_projectiles_DOWN, new_player_projectiles_DOWN_LEFT, new_player_projectiles_DOWN_RIGHT, new_player_projectiles_LEFT, new_player_projectiles_LEFT_DOWN, new_player_projectiles_LEFT_UP, new_player_projectiles_RIGHT, new_player_projectiles_RIGHT_DOWN, new_player_projectiles_RIGHT_UP)
-    # Move the character based on the pressed keys
-    if keys[pygame.K_a]:
-        rect_x -= 5
-    if keys[pygame.K_d]:
-        rect_x += 5
-    if keys[pygame.K_w]:
-        rect_y -= 5
-    if keys[pygame.K_s]:
-        rect_y += 5
+
 
     #Vykreslení pozadí
     window.blit(rooms_dict[current_room]["theme"], (0, 0)) #ANOOO FUNGUJE TOO DOPICII
@@ -329,6 +349,7 @@ while True:
     
     #Vykreslení postavy + filtru
     isaac = window.blit(postava, (rect_x, rect_y))
+
     #Vykreslení minimapy
     for ii in rooms:
         for i in range(0, len(mapa[ii-1]), 2):
@@ -350,7 +371,8 @@ while True:
             dvere_up = True
             current_room = current_room_function(doors, current_room)
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
-            
+            current_prekazky = rooms_dict[current_room]["prekazky"]
+            no_entry_area_x, no_entry_area_y = new_room_shit()
             time.sleep(0.1)
     #RIGHT
     if doors_dictionary[current_room][1]:
@@ -364,6 +386,8 @@ while True:
             dvere_right = True
             current_room = current_room_function(doors, current_room)
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
+            current_prekazky = rooms_dict[current_room]["prekazky"]
+            no_entry_area_x, no_entry_area_y = new_room_shit()
             time.sleep(0.1)   
     #DOWN
     if doors_dictionary[current_room][2]:
@@ -377,6 +401,8 @@ while True:
             dvere_down = True
             current_room = current_room_function(doors, current_room)
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
+            current_prekazky = rooms_dict[current_room]["prekazky"]
+            no_entry_area_x, no_entry_area_y = new_room_shit()
             time.sleep(0.1)
     #LEFT
     if doors_dictionary[current_room][3]:
@@ -390,7 +416,13 @@ while True:
             dvere_left = True
             current_room = current_room_function(doors, current_room)
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
+            current_prekazky = rooms_dict[current_room]["prekazky"]
+            no_entry_area_x, no_entry_area_y = new_room_shit()
             time.sleep(0.1)
+
+    for i in range(0, len(current_prekazky), 2):
+        x, y = current_prekazky[i], current_prekazky[i+1]
+        pygame.draw.rect(window, (255, 0, 0), (x, y, 50, 50))
 
     rect_x = max(40, min(rect_x, WIDTH - 101))
     rect_y = max(40, min(rect_y, HEIGHT - 96))
