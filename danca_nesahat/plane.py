@@ -24,7 +24,7 @@ clock = pygame.time.Clock()
 # Load the character and tear image
 velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
-importovani_slzy = pygame.image.load("tear.png")
+importovani_slzy = pygame.image.load("enemies_cervenej_borec/tear.png")
 heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
 

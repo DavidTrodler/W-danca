@@ -8,25 +8,27 @@ from bullet_movement import bullet_movement
 from rooms_types import room_types, room_typesss, room_typeees
 import rooms_types
 import time
+from vsechny_cislicka import telova_barva, hneda_barva, modra_mouchy_barva, cerna_barva, sirka_obrazku, vyska_obrazku, width_mapy, height_mapy, level, rect_x, rect_y, velikost_postavy, projectile_size, projectile_speed, projectile_speed_diagonal, cooldown, cooldown_time, move_up_counter, move_side_counter, current_room, dvere_up_value, dvere_down_value, dvere_left_value, dvere_right_value, dvere_up, dvere_down, dvere_left, dvere_right, player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, rooms, rooms_dict, move_up, move_side, image_filter_position, projectiles, door_cooldown, door_cooldown_time
 # map.py
 #----------------------------------------------------------------------
+
 
 
 clock = pygame.time.Clock()
 
 # Define color constants
-telova = (255, 186, 141)
-hneda = (85, 33, 0)
-modra_mouchy =(165, 199, 206)
-cerna = (0, 0, 0)
-image_width = 60 #x  #<---- Šířka obrázku, dá se volně měnit
-image_height = 30 #y
+telova = telova_barva()
+hneda = hneda_barva()
+modra_mouchy = modra_mouchy_barva()
+cerna = cerna_barva()
+image_width = sirka_obrazku() #x  #<---- Šířka obrázku, dá se volně měnit
+image_height = vyska_obrazku() #y
 
 
 #----------------------------------------------------------------------
 
 # Create the game window
-WIDTH, HEIGHT = 1000, 600
+WIDTH, HEIGHT = width_mapy(), height_mapy()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # Loading background images
@@ -46,74 +48,74 @@ room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
 pygame.display.set_caption("ˇIsaacˇ")
 #----------------------------------------------------------------------
 #Level
-level = 30
+level = level()
 
 # Player variables
-rect_x, rect_y = 70, 500
-velikost_postavy = 57
-projectile_size = 10
-projectile_speed = 10
-projectile_speed_diagonal = 4
+rect_x, rect_y = rect_x(), rect_y()
+velikost_postavy = velikost_postavy()
+projectile_size = projectile_size()
+projectile_speed = projectile_speed()
+projectile_speed_diagonal = projectile_speed_diagonal()
 
 # Room variables
 velikost_mistnosti = WIDTH, HEIGHT
 
 # Shooting cooldown
-cooldown = 0
-cooldown_time = 10
+cooldown = cooldown()
+cooldown_time = cooldown_time()
 
 
 #Map
-move_up_counter = 0 #<---- O kolik roomek se posunul hráč nahoru nebo dolů
-move_side_counter = 0
-current_room = 1
+move_up_counter = move_up_counter() #<---- O kolik roomek se posunul hráč nahoru nebo dolů
+move_side_counter = move_side_counter()
+current_room = current_room()
 #Dveře, ukazuje, kam se mají osy posunout
-dvere_up_value = 1
-dvere_down_value = -1
-dvere_left_value = 1
-dvere_right_value = -1
-dvere_up = False #<--- Změní se, pokud hráč projde dveřmi (kvůli if statment ve while loop)
-dvere_down = False 
-dvere_left = False
-dvere_right = False
+dvere_up_value = dvere_up_value()
+dvere_down_value = dvere_down_value()
+dvere_left_value = dvere_left_value()
+dvere_right_value = dvere_right_value()
+dvere_up = dvere_up() #<--- Změní se, pokud hráč projde dveřmi (kvůli if statment ve while loop)
+dvere_down = dvere_down()
+dvere_left = dvere_left()
+dvere_right = dvere_right()
 
 #----------------------------------------------------------------------
 
 # Lists
 #UP
-player_projectiles_up = []
-player_projectiles_up_left = []
-player_projectiles_up_right = []
+player_projectiles_up = player_projectiles_up()
+player_projectiles_up_left = player_projectiles_up_left()
+player_projectiles_up_right = player_projectiles_up_right()
 #DOWN
-player_projectiles_down = []
-player_projectiles_down_left = []
-player_projectiles_down_right = []
+player_projectiles_down = player_projectiles_down()
+player_projectiles_down_left = player_projectiles_down_left()
+player_projectiles_down_right = player_projectiles_down_right()
 #LEFT
-player_projectiles_left = []
-player_projectiles_left_down = []
-player_projectiles_left_up = []
+player_projectiles_left = player_projectiles_left()
+player_projectiles_left_down = player_projectiles_left_down()
+player_projectiles_left_up = player_projectiles_left_up()
 #RIGHT
-player_projectiles_right = []
-player_projectiles_right_down = []
-player_projectiles_right_up = []
+player_projectiles_right = player_projectiles_right()
+player_projectiles_right_down = player_projectiles_right_down()
+player_projectiles_right_up = player_projectiles_right_up()
 #ALL
-projectiles = []
+projectiles = projectiles()
 #Map
-move_up = [0, 30] # y + 30
-move_side = [60, 0] # x + 60
-image_filter_position = [775, 100] #<---- Pozice filtru
+move_up = move_up() # y + 30
+move_side = move_side() # x + 60
+image_filter_position = image_filter_position() #<---- Pozice filtru
 # Rooms list
-rooms = [1]
+rooms = rooms()
 rooms = rooms_fixed(level)
 
-rooms_dict = {}
+rooms_dict = rooms_dict()
 rooms_dict = room_typesss(rooms)
 
 print(rooms_dict)
 
 
-door_cooldown = 0
-door_cooldown_time = 20
+door_cooldown = door_cooldown()
+door_cooldown_time = door_cooldown_time()
 
 #Vyvolání funkcí
 doors_dictionary = rooms_dictionary_funciton(rooms)

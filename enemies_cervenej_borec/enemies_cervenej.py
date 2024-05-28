@@ -1,12 +1,3 @@
-"""
-v tomto souboru na nás útočí moucha, která nám ubírá životy (zatim ne)§
-moucha se pohybuje na základě toho, kde se nachází hráč <-- AI generated
-pokud hráč narazí do mouchy, ztratí polovinu srdíčka <-- AI generated
-je fakt pekna btw
-"""
-
-
-
 import pygame, sys
 pygame.init()
 
@@ -60,6 +51,16 @@ WIDTH, HEIGHT = 1000, 600
 #moucha bracho
 moucha_x, moucha_y = [500, 300]
 hp_mouchy = 20
+#enemy projectiles
+cervenej_projectiles_up_x = moucha_x
+cervenej_projectiles_down_x = moucha_x
+cervenej_projectiles_left_x = moucha_x
+cervenej_projectiles_right_x = moucha_x
+
+cervenej_projectiles_up_y = moucha_y
+cervenej_projectiles_down_y = moucha_y
+cervenej_projectiles_left_y = moucha_y
+cervenej_projectiles_right_y = moucha_y
 
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
@@ -69,7 +70,8 @@ velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
-moucha = pygame.image.load("enemies/moucha.png")
+moucha = pygame.image.load("enemies/cervenej_borec.png")
+
 
 frst_srd = 3
 
@@ -278,7 +280,7 @@ while True:
     # Vykreslení pozadí
     window.blit(pozadi, (0, 0))
 
-# Draw player projectiles on the window
+    # Draw player projectiles on the window
     #UP
     if len(player_projectiles_up) > 0:
         for proj_x, proj_y in player_projectiles_up:
@@ -395,6 +397,7 @@ while True:
         rect_y -= 460
         print("jizni")
 
+    """moucha"""
     if rect_x > moucha_x:
         moucha_x += 0.5
     if rect_x < moucha_x:
@@ -408,7 +411,44 @@ while True:
         angry_moucha = window.blit(moucha, (moucha_x, moucha_y))
         if isaac.colliderect(angry_moucha):
             frst_srd -= 0.5
+
+    up_cervenej = window.blit(slza, (cervenej_projectiles_up_x, cervenej_projectiles_up_y))
+    cervenej_projectiles_up_y -= 5
+    if up_cervenej.colliderect(isaac):
+        frst_srd -= 0.5
+
+    down_cervenej = window.blit(slza, (cervenej_projectiles_down_x, cervenej_projectiles_down_y))
+    cervenej_projectiles_down_y += 5
+    if down_cervenej.colliderect(isaac):
+        frst_srd -= 0.5
+
+    left_cervenej = window.blit(slza, (cervenej_projectiles_left_x, cervenej_projectiles_left_y))
+    cervenej_projectiles_left_x -= 5
+    if left_cervenej.colliderect(isaac):
+        frst_srd -= 0.5
+
+    right_cervenej = window.blit(slza, (cervenej_projectiles_right_x, cervenej_projectiles_right_y))
+    cervenej_projectiles_right_x += 5
+    if right_cervenej.colliderect(isaac):
+        frst_srd -= 0.5
+
+    hranice_horni = pygame.Rect(40, 40, 960, 1)
+    hranice_spodni = pygame.Rect(40, 560, 960, 1)
+    hranice_leva = pygame.Rect(40, 40, 1, 560)
+    hranice_prava = pygame.Rect(960, 40, 1, 560)
+
+
+    if up_cervenej.colliderect(hranice_horni) or down_cervenej.colliderect(hranice_spodni) or left_cervenej.colliderect(hranice_leva) or right_cervenej.colliderect(hranice_prava) or up_cervenej.colliderect(isaac) or down_cervenej.colliderect(isaac) or left_cervenej.colliderect(isaac) or right_cervenej.colliderect(isaac):
+        cervenej_projectiles_up_y = moucha_y
+        cervenej_projectiles_up_x = moucha_x
+        cervenej_projectiles_down_y = moucha_y
+        cervenej_projectiles_down_x = moucha_x
+        cervenej_projectiles_left_x = moucha_x
+        cervenej_projectiles_left_y = moucha_y
+        cervenej_projectiles_right_x = moucha_x
+        cervenej_projectiles_right_y = moucha_y
     
+
 
     # Update the display and control the frame rate
     pygame.display.flip()
