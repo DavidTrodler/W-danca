@@ -1,4 +1,5 @@
 import pygame, sys
+from clotty import clotty_moves, clotty_cooldown
 pygame.init()
 
 # Define color constants
@@ -62,6 +63,8 @@ cervenej_projectiles_down_y = moucha_y
 cervenej_projectiles_left_y = moucha_y
 cervenej_projectiles_right_y = moucha_y
 
+cas = 120
+
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
 
@@ -72,7 +75,6 @@ heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
 moucha = pygame.image.load("enemies/clotty.png")
 moucha = pygame.transform.scale(moucha, (80, 80))
-
 
 frst_srd = 3
 
@@ -399,14 +401,7 @@ while True:
         print("jizni")
 
     """moucha"""
-    if rect_x > moucha_x:
-        moucha_x += 0.5
-    if rect_x < moucha_x:
-        moucha_x -= 0.5
-    if rect_y > moucha_y:    
-        moucha_y += 0.5
-    if rect_y < moucha_y:       
-        moucha_y -= 0.5
+    moucha_x, moucha_y = clotty_moves(rect_x, rect_y, moucha_x, moucha_y)
 
     if hp_mouchy > 0:
         angry_moucha = window.blit(moucha, (moucha_x, moucha_y))
@@ -433,23 +428,9 @@ while True:
     if right_cervenej.colliderect(isaac):
         frst_srd -= 0.5
 
-    hranice_horni = pygame.Rect(40, 40, 960, 1)
-    hranice_spodni = pygame.Rect(40, 560, 960, 1)
-    hranice_leva = pygame.Rect(40, 40, 1, 560)
-    hranice_prava = pygame.Rect(960, 40, 1, 560)
+    cas -= 1
 
-
-    if up_cervenej.colliderect(hranice_horni) or down_cervenej.colliderect(hranice_spodni) or left_cervenej.colliderect(hranice_leva) or right_cervenej.colliderect(hranice_prava) or up_cervenej.colliderect(isaac) or down_cervenej.colliderect(isaac) or left_cervenej.colliderect(isaac) or right_cervenej.colliderect(isaac):
-        cervenej_projectiles_up_y = moucha_y
-        cervenej_projectiles_up_x = moucha_x
-        cervenej_projectiles_down_y = moucha_y
-        cervenej_projectiles_down_x = moucha_x
-        cervenej_projectiles_left_x = moucha_x
-        cervenej_projectiles_left_y = moucha_y
-        cervenej_projectiles_right_x = moucha_x
-        cervenej_projectiles_right_y = moucha_y
-    
-
+    cas, cervenej_projectiles_up_y, cervenej_projectiles_up_x, cervenej_projectiles_down_y, cervenej_projectiles_down_x, cervenej_projectiles_left_x, cervenej_projectiles_left_y, cervenej_projectiles_right_x, cervenej_projectiles_right_y = clotty_cooldown(cas, moucha_x, moucha_y, cervenej_projectiles_up_y, cervenej_projectiles_up_x, cervenej_projectiles_down_y, cervenej_projectiles_down_x, cervenej_projectiles_left_x, cervenej_projectiles_left_y, cervenej_projectiles_right_x, cervenej_projectiles_right_y)
 
     # Update the display and control the frame rate
     pygame.display.flip()
