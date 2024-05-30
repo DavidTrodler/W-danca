@@ -52,8 +52,8 @@ level = 20
 rect_x, rect_y = 70, 500
 velikost_postavy = 57
 projectile_size = 10
-projectile_speed = 10
-projectile_speed_diagonal = 4
+projectile_speed = 2
+projectile_speed_diagonal = 0.5
 
 # Room variables
 velikost_mistnosti = WIDTH, HEIGHT
