@@ -183,67 +183,89 @@ while True:
 
             #DOWN
             elif event.key == pygame.K_DOWN and not keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
-                player_projectiles_down.append((rect_x + velikost_postavy // 2, rect_y + 46))
+                player_projectiles_down.append((rect_x + velikost_postavy // 2, rect_y + velikost_postavy))
                 cooldown = cooldown_time  
                 break
             #DOWN_LEFT
             elif event.key == pygame.K_DOWN and keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
-                player_projectiles_down_left.append((rect_x + velikost_postavy // 2, rect_y + 46))
+                player_projectiles_down_left.append((rect_x + velikost_postavy // 2, rect_y + velikost_postavy))
                 cooldown = cooldown_time
                 break
             #DOWN_RIGHT
             elif event.key == pygame.K_DOWN and keys[pygame.K_d] and not keys[pygame.K_a] and shoots == False:
-                player_projectiles_down_right.append((rect_x + velikost_postavy // 2, rect_y + 46))
+                player_projectiles_down_right.append((rect_x + velikost_postavy // 2, rect_y + velikost_postavy))
                 cooldown = cooldown_time
                 break
 
             #LEFT
             elif event.key == pygame.K_LEFT and not keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
-                player_projectiles_left.append((rect_x - 2, rect_y + velikost_postavy // 2))
+                player_projectiles_left.append((rect_x, rect_y + velikost_postavy // 2))
                 cooldown = cooldown_time
                 break
             #LEFT_DOWN
             elif event.key == pygame.K_LEFT and keys[pygame.K_s] and not keys[pygame.K_w] and shoots == False:
-                player_projectiles_left_down.append((rect_x - 2, rect_y + velikost_postavy // 2))
+                player_projectiles_left_down.append((rect_x, rect_y + velikost_postavy // 2))
                 cooldown = cooldown_time
                 break
             #LEFT_UP
             elif event.key == pygame.K_LEFT and keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
-                player_projectiles_left_up.append((rect_x - 2, rect_y + velikost_postavy // 2))
+                player_projectiles_left_up.append((rect_x, rect_y + velikost_postavy // 2))
                 cooldown = cooldown_time
                 break
             #RIGHT
             elif event.key == pygame.K_RIGHT and not keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
-                player_projectiles_right.append((rect_x + 52, rect_y + velikost_postavy // 2))
+                player_projectiles_right.append((rect_x + velikost_postavy, rect_y + velikost_postavy // 2))
                 cooldown = cooldown_time
                 break
             #RIGHT_DOWN
             elif event.key == pygame.K_RIGHT and keys[pygame.K_s] and not keys[pygame.K_w] and shoots == False:
-                player_projectiles_right_down.append((rect_x + 52, rect_y + velikost_postavy // 2))
+                player_projectiles_right_down.append((rect_x + velikost_postavy, rect_y + velikost_postavy // 2))
                 cooldown = cooldown_time
                 break
             #RIGHT_UP
             elif event.key == pygame.K_RIGHT and keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
-                player_projectiles_right_up.append((rect_x + 52, rect_y + velikost_postavy // 2))
+                player_projectiles_right_up.append((rect_x + velikost_postavy, rect_y + velikost_postavy // 2))
                 cooldown = cooldown_time
                 break
         
 
     # Move the character based on thed pressed keys
+    w_statement = True
+    d_statement = True
+    s_statement = True
+    a_statement = True
+    d_statement = True
+    isaac_rect = pygame.Rect(rect_x, rect_y, velikost_postavy, velikost_postavy)
+    isaac_polygon_left = pygame.Poly
+    for x, y in zip(no_entry_area_x, no_entry_area_y):
+        zone_1 = pygame.draw.polygon(window, modra_mouchy, [(x, y - 25), (x + 50, y - 25), (x + 50, y), (x, y)])
+        zone_2 = pygame.draw.polygon(window, modra_mouchy, [(x + 25, y), (x + 50, y), (x + 50, y + 50), (x + 25, y + 50)])
+        zone_3 = pygame.draw.polygon(window, modra_mouchy, [(x, y + 25), (x + 50, y + 25), (x + 50, y + 50), (x, y + 50)])
+        zone_4 = pygame.draw.polygon(window, modra_mouchy, [(x - 25, y), (x, y), (x, y + 50), (x - 25, y + 50)])
 
-    if rect_x not in no_entry_area_x and rect_y not in no_entry_area_y:    
-        if keys[pygame.K_a]:
-            rect_x -= 5
-    if rect_x not in no_entry_area_x and rect_y not in no_entry_area_y:
-        if keys[pygame.K_d]:
-            rect_x += 5
-    if rect_y not in no_entry_area_y and rect_x not in no_entry_area_x:
-        if keys[pygame.K_w]:
-            rect_y -= 5
-    if rect_y not isaac.colliderect(i, for i in no_emtry_area_y):
-        if keys[pygame.K_s]:
-            rect_y += 5
+        
+        if isaac_rect.colliderect(zone_1):
+            s_statement = False
+        if isaac_rect.colliderect(zone_2):
+            a_statement = False
+        if isaac_rect.colliderect(zone_3):
+            w_statement = False
+        if isaac_rect.colliderect(zone_4):
+            d_statement = False
 
+
+
+    if keys[pygame.K_d] and d_statement:
+        rect_x += 5
+
+    if keys[pygame.K_w] and w_statement:
+        rect_y -= 5
+
+    if keys[pygame.K_s] and s_statement:
+        rect_y += 5
+
+    if keys[pygame.K_a] and a_statement:
+        rect_x -= 5
     """
         #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
         elif event.type == pygame.MOUSEBUTTONDOWN:
