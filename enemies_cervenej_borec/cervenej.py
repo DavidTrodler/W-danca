@@ -62,6 +62,8 @@ cervenej_projectiles_down_y = moucha_y
 cervenej_projectiles_left_y = moucha_y
 cervenej_projectiles_right_y = moucha_y
 
+cas = 120
+
 # Create a clock object to control the frame rate
 clock = pygame.time.Clock()
 
@@ -432,13 +434,10 @@ while True:
     if right_cervenej.colliderect(isaac):
         frst_srd -= 0.5
 
-    hranice_horni = pygame.Rect(40, 40, 960, 1)
-    hranice_spodni = pygame.Rect(40, 560, 960, 1)
-    hranice_leva = pygame.Rect(40, 40, 1, 560)
-    hranice_prava = pygame.Rect(960, 40, 1, 560)
+    cas -= 1
 
 
-    if up_cervenej.colliderect(hranice_horni) or down_cervenej.colliderect(hranice_spodni) or left_cervenej.colliderect(hranice_leva) or right_cervenej.colliderect(hranice_prava) or up_cervenej.colliderect(isaac) or down_cervenej.colliderect(isaac) or left_cervenej.colliderect(isaac) or right_cervenej.colliderect(isaac):
+    if cas == 0:
         cervenej_projectiles_up_y = moucha_y
         cervenej_projectiles_up_x = moucha_x
         cervenej_projectiles_down_y = moucha_y
@@ -447,6 +446,7 @@ while True:
         cervenej_projectiles_left_y = moucha_y
         cervenej_projectiles_right_x = moucha_x
         cervenej_projectiles_right_y = moucha_y
+        cas = 120
     
 
 
