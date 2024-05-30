@@ -147,6 +147,8 @@ def new_room_shit():
     return no_entry_area_x, no_entry_area_y
 
 
+current_room = current_room_function("LEFT", current_room)
+current_room = current_room_function("RIGHT", current_room)
 # Game loop
 while True:
     # cooldown
