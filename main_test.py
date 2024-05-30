@@ -236,36 +236,32 @@ while True:
     a_statement = True
     d_statement = True
     isaac_rect = pygame.Rect(rect_x, rect_y, velikost_postavy, velikost_postavy)
-    isaac_polygon_left = pygame.Poly
     for x, y in zip(no_entry_area_x, no_entry_area_y):
-        zone_1 = pygame.draw.polygon(window, modra_mouchy, [(x, y - 25), (x + 50, y - 25), (x + 50, y), (x, y)])
-        zone_2 = pygame.draw.polygon(window, modra_mouchy, [(x + 25, y), (x + 50, y), (x + 50, y + 50), (x + 25, y + 50)])
-        zone_3 = pygame.draw.polygon(window, modra_mouchy, [(x, y + 25), (x + 50, y + 25), (x + 50, y + 50), (x, y + 50)])
-        zone_4 = pygame.draw.polygon(window, modra_mouchy, [(x - 25, y), (x, y), (x, y + 50), (x - 25, y + 50)])
-
+        zone_1 = pygame.Rect(x+1, y, 48, 25)
+        zone_2 = pygame.Rect(x+25, y+1, 25, 48)
+        zone_3 = pygame.Rect(x+1, y+25, 48, 25)
+        zone_4 = pygame.Rect(x, y+1, 25, 48)
         
         if isaac_rect.colliderect(zone_1):
             s_statement = False
-        if isaac_rect.colliderect(zone_2):
+        elif isaac_rect.colliderect(zone_2):
             a_statement = False
-        if isaac_rect.colliderect(zone_3):
+        elif isaac_rect.colliderect(zone_3):
             w_statement = False
-        if isaac_rect.colliderect(zone_4):
+        elif isaac_rect.colliderect(zone_4):
             d_statement = False
 
-
-
     if keys[pygame.K_d] and d_statement:
-        rect_x += 5
+        rect_x += 1
 
     if keys[pygame.K_w] and w_statement:
-        rect_y -= 5
+        rect_y -= 1
 
     if keys[pygame.K_s] and s_statement:
-        rect_y += 5
+        rect_y += 1
 
     if keys[pygame.K_a] and a_statement:
-        rect_x -= 5
+        rect_x -= 1
     """
         #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -451,4 +447,4 @@ while True:
     # Update the display and control the frame rate
     pygame.display.flip()
     pygame.display.update()
-    clock.tick(30)
+    clock.tick(150)
