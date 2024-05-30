@@ -146,6 +146,22 @@ def new_room_shit():
         no_entry_area_y.append(y)
     return no_entry_area_x, no_entry_area_y
 
+def projectile_cleaning():
+    player_projectiles_up = []
+    player_projectiles_up_left = []
+    player_projectiles_up_right = []
+    player_projectiles_down = []
+    player_projectiles_down_left = []
+    player_projectiles_down_right = []
+    player_projectiles_left = []
+    player_projectiles_left_down = []
+    player_projectiles_left_up = []
+    player_projectiles_right = []
+    player_projectiles_right_down = []
+    player_projectiles_right_up = []
+    projectiles = []
+    
+    return player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles
 
 no_entry_area_x, no_entry_area_y = new_room_shit()
 # Game loop
@@ -392,12 +408,13 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             current_prekazky = rooms_dict[current_room]["prekazky"]
             no_entry_area_x, no_entry_area_y = new_room_shit()
+            player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles = projectile_cleaning()
             time.sleep(0.1)
     #RIGHT
     if doors_dictionary[current_room][1]:
         rotated_doors_image_right = pygame.transform.rotate(doors_image, -90)
         window.blit(rotated_doors_image_right, (960, 250))
-        if isaac.colliderect(pygame.Rect(960,250, 1, 100)) and door_cooldown == 0:
+        if isaac.colliderect(pygame.Rect(950,250, 1, 100)) and door_cooldown == 0:
             doors = "RIGHT"
             door_cooldown = door_cooldown_time
             rect_x -= 855
@@ -407,6 +424,7 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             current_prekazky = rooms_dict[current_room]["prekazky"]
             no_entry_area_x, no_entry_area_y = new_room_shit()
+            player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles = projectile_cleaning()
             time.sleep(0.1)   
     #DOWN
     if doors_dictionary[current_room][2]:
@@ -422,6 +440,7 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             current_prekazky = rooms_dict[current_room]["prekazky"]
             no_entry_area_x, no_entry_area_y = new_room_shit()
+            player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles = projectile_cleaning()
             time.sleep(0.1)
     #LEFT
     if doors_dictionary[current_room][3]:
@@ -437,6 +456,7 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             current_prekazky = rooms_dict[current_room]["prekazky"]
             no_entry_area_x, no_entry_area_y = new_room_shit()
+            player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles = projectile_cleaning()
             time.sleep(0.1)
 
     for i in range(0, len(current_prekazky), 2):
