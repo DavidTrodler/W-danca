@@ -70,7 +70,8 @@ velikost_postavy = 57
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 heart_full = pygame.image.load("srdicka/full_heart.png")
 heart_half = pygame.image.load("srdicka/half_a_heart.png")
-moucha = pygame.image.load("enemies/cervenej_borec.png")
+moucha = pygame.image.load("enemies/clotty.png")
+moucha = pygame.transform.scale(moucha, (80, 80))
 
 
 frst_srd = 3
