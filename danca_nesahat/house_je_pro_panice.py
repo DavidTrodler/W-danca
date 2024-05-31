@@ -16,13 +16,11 @@ def FollowMe(pops, fpos):
     new_follower_vector = pygame.math.Vector2(*fpos)
 
     distance = follower_vector.distance_to(target_vector)
-    if distance > minimum_distance:
-        direction_vector    = (target_vector - follower_vector) / distance
-        min_step            = max(0, distance - maximum_distance)
-        max_step            = distance - minimum_distance
-        #step_distance       = min(max_step, max(min_step, VELOCITY))
-        step_distance       = min_step + (max_step - min_step) * LERP_FACTOR
-        new_follower_vector = follower_vector + direction_vector * step_distance
+    direction_vector    = (target_vector - follower_vector) / distance
+    min_step            = max(0, distance - maximum_distance)
+    max_step            = distance
+    step_distance       = min_step + (max_step - min_step) * LERP_FACTOR
+    new_follower_vector = follower_vector + direction_vector * step_distance
 
     return (new_follower_vector.x, new_follower_vector.y) 
 

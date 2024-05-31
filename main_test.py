@@ -60,7 +60,7 @@ velikost_mistnosti = WIDTH, HEIGHT
 
 # Shooting cooldown
 cooldown = 0
-cooldown_time = 10
+cooldown_time = 20
 
 
 #Map
@@ -82,20 +82,16 @@ dvere_right = False
 # Lists
 #UP
 player_projectiles_up = []
-player_projectiles_up_left = []
-player_projectiles_up_right = []
+
 #DOWN
 player_projectiles_down = []
-player_projectiles_down_left = []
-player_projectiles_down_right = []
+
 #LEFT
 player_projectiles_left = []
-player_projectiles_left_down = []
-player_projectiles_left_up = []
+
 #RIGHT
 player_projectiles_right = []
-player_projectiles_right_down = []
-player_projectiles_right_up = []
+
 #ALL
 projectiles = []
 #Map
@@ -148,20 +144,37 @@ def new_room_shit():
 
 def projectile_cleaning():
     player_projectiles_up = []
-    player_projectiles_up_left = []
-    player_projectiles_up_right = []
     player_projectiles_down = []
-    player_projectiles_down_left = []
-    player_projectiles_down_right = []
     player_projectiles_left = []
-    player_projectiles_left_down = []
-    player_projectiles_left_up = []
     player_projectiles_right = []
-    player_projectiles_right_down = []
-    player_projectiles_right_up = []
     projectiles = []
     
-    return player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles
+    return player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles
+
+#HOUSE OD DANCI
+VELOCITY         = 5
+LERP_FACTOR      = 0.05
+minimum_distance = 25
+maximum_distance = 100
+
+
+#TO DO --- OBRÁTIT ČERVENOU SRAČKU
+def FollowMe(pops, fpos):
+    target_vector       = pygame.math.Vector2(*pops)
+    follower_vector     = pygame.math.Vector2(*fpos)
+    new_follower_vector = pygame.math.Vector2(*fpos)
+
+    distance = follower_vector.distance_to(target_vector)
+    direction_vector    = (target_vector - follower_vector) / distance
+    min_step            = max(0, distance - maximum_distance)
+    max_step            = distance
+    step_distance       = min_step + (max_step - min_step) * LERP_FACTOR
+    new_follower_vector = follower_vector + direction_vector * step_distance
+
+    return (new_follower_vector.x, new_follower_vector.y) 
+
+follower = (100, 100)
+
 
 no_entry_area_x, no_entry_area_y = new_room_shit()
 # Game loop
@@ -176,6 +189,15 @@ while True:
         door_cooldown -= 1
     keys = pygame.key.get_pressed()
     # Shooting
+    #HOUSE OD DANCI
+    player   = (rect_x + 28.5), (rect_y + 28.5)
+    follower = FollowMe(player, follower)
+    f_x,f_y = follower
+    p_x,p_y = player
+    f_x = f_x - p_x
+    f_y = f_y - p_y
+    f_x = -(f_x/20)
+    f_y = -(f_y/20)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -183,65 +205,24 @@ while True:
         #Shooting
         elif event.type == pygame.KEYDOWN:
             #UP
-            if event.key == pygame.K_UP and not keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
-                player_projectiles_up.append((rect_x + velikost_postavy // 2, rect_y))
+            if event.key == pygame.K_UP and shoots == False:
+                player_projectiles_up.append((rect_x + velikost_postavy // 2, rect_y, f_x, f_y))
                 cooldown = cooldown_time
                 break
-            #UP_LEFT
-            elif event.key == pygame.K_UP and keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
-                player_projectiles_up_left.append((rect_x + velikost_postavy // 2, rect_y))
-                cooldown = cooldown_time
-                break
-            #UP_RIGHT
-            elif event.key == pygame.K_UP and keys[pygame.K_d] and not keys[pygame.K_a] and shoots == False:
-                player_projectiles_up_right.append((rect_x + velikost_postavy // 2, rect_y))
-                cooldown = cooldown_time
-                break
-
             #DOWN
-            elif event.key == pygame.K_DOWN and not keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
-                player_projectiles_down.append((rect_x + velikost_postavy // 2, rect_y + velikost_postavy))
+            elif event.key == pygame.K_DOWN and shoots == False:
+                player_projectiles_down.append((rect_x + velikost_postavy // 2, rect_y + velikost_postavy, f_x, f_y))
                 cooldown = cooldown_time  
-                break
-            #DOWN_LEFT
-            elif event.key == pygame.K_DOWN and keys[pygame.K_a] and not keys[pygame.K_d] and shoots == False:
-                player_projectiles_down_left.append((rect_x + velikost_postavy // 2, rect_y + velikost_postavy))
-                cooldown = cooldown_time
-                break
-            #DOWN_RIGHT
-            elif event.key == pygame.K_DOWN and keys[pygame.K_d] and not keys[pygame.K_a] and shoots == False:
-                player_projectiles_down_right.append((rect_x + velikost_postavy // 2, rect_y + velikost_postavy))
-                cooldown = cooldown_time
                 break
 
             #LEFT
-            elif event.key == pygame.K_LEFT and not keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
-                player_projectiles_left.append((rect_x, rect_y + velikost_postavy // 2))
-                cooldown = cooldown_time
-                break
-            #LEFT_DOWN
-            elif event.key == pygame.K_LEFT and keys[pygame.K_s] and not keys[pygame.K_w] and shoots == False:
-                player_projectiles_left_down.append((rect_x, rect_y + velikost_postavy // 2))
-                cooldown = cooldown_time
-                break
-            #LEFT_UP
-            elif event.key == pygame.K_LEFT and keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
-                player_projectiles_left_up.append((rect_x, rect_y + velikost_postavy // 2))
+            elif event.key == pygame.K_LEFT and shoots == False:
+                player_projectiles_left.append((rect_x, rect_y + velikost_postavy // 2, f_x, f_y))
                 cooldown = cooldown_time
                 break
             #RIGHT
-            elif event.key == pygame.K_RIGHT and not keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
-                player_projectiles_right.append((rect_x + velikost_postavy, rect_y + velikost_postavy // 2))
-                cooldown = cooldown_time
-                break
-            #RIGHT_DOWN
-            elif event.key == pygame.K_RIGHT and keys[pygame.K_s] and not keys[pygame.K_w] and shoots == False:
-                player_projectiles_right_down.append((rect_x + velikost_postavy, rect_y + velikost_postavy // 2))
-                cooldown = cooldown_time
-                break
-            #RIGHT_UP
-            elif event.key == pygame.K_RIGHT and keys[pygame.K_w] and not keys[pygame.K_s] and shoots == False:
-                player_projectiles_right_up.append((rect_x + velikost_postavy, rect_y + velikost_postavy // 2))
+            elif event.key == pygame.K_RIGHT and shoots == False:
+                player_projectiles_right.append((rect_x + velikost_postavy, rect_y + velikost_postavy // 2, f_x, f_y))
                 cooldown = cooldown_time
                 break
         
@@ -290,21 +271,18 @@ while True:
     # Bullet positions update
         #UP
     new_player_projectiles_UP = []
-    new_player_projectiles_UP_LEFT = []
-    new_player_projectiles_UP_RIGHT = []
+
     #DOWN
     new_player_projectiles_DOWN = []
-    new_player_projectiles_DOWN_LEFT = []
-    new_player_projectiles_DOWN_RIGHT = []
+
     #LEFT
     new_player_projectiles_LEFT = []
-    new_player_projectiles_LEFT_DOWN = []
-    new_player_projectiles_LEFT_UP = []
+
     #RIGHT
     new_player_projectiles_RIGHT = []
-    new_player_projectiles_RIGHT_DOWN = []
-    new_player_projectiles_RIGHT_UP = []
-    player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up = bullet_movement(projectile_speed, projectile_speed_diagonal, WIDTH, HEIGHT, player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, new_player_projectiles_UP, new_player_projectiles_UP_LEFT, new_player_projectiles_UP_RIGHT, new_player_projectiles_DOWN, new_player_projectiles_DOWN_LEFT, new_player_projectiles_DOWN_RIGHT, new_player_projectiles_LEFT, new_player_projectiles_LEFT_DOWN, new_player_projectiles_LEFT_UP, new_player_projectiles_RIGHT, new_player_projectiles_RIGHT_DOWN, new_player_projectiles_RIGHT_UP)
+
+    print("UP", player_projectiles_up)
+    player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right = bullet_movement(projectile_speed, WIDTH, HEIGHT, player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, new_player_projectiles_UP, new_player_projectiles_DOWN, new_player_projectiles_LEFT, new_player_projectiles_RIGHT)
 
 
     #Vykreslení pozadí
@@ -333,58 +311,19 @@ while True:
     #Vykrelsení projektilů
     #UP
     if len(player_projectiles_up) > 0:
-        for i in range(len(player_projectiles_up)):
-            proj_x, proj_y = player_projectiles_up[i]
-            rect = pygame.Rect(proj_x, proj_y, projectile_size, projectile_size)
-            for x, y in zip(no_entry_area_x, no_entry_area_y):
-                if rect.colliderect(pygame.Rect(x, y, 50, 50)):
-                    player_projectiles_up.pop(i)
-                    break
-                else:
-                    window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-    #UP_LEFT
-    if len(player_projectiles_up_left) > 0:
-        for proj_x, proj_y in player_projectiles_up_left:
-            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-    #UP_RIGHT
-    if len(player_projectiles_up_right) > 0:
-        for proj_x, proj_y in player_projectiles_up_right:
-            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-    #DOWN
-    if len(player_projectiles_down) > 0:
-        for proj_x, proj_y in player_projectiles_down:
-            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-    #DOWN_LEFT
-    if len(player_projectiles_down_left) > 0:
-        for proj_x, proj_y in player_projectiles_down_left:
-            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-    #DOWN_RIGHT
-    if len(player_projectiles_down_right) > 0:
-        for proj_x, proj_y in player_projectiles_down_right:
+        for proj_x, proj_y, x, y in player_projectiles_up:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
     #LEFT
     if len(player_projectiles_left) > 0:
-        for proj_x, proj_y in player_projectiles_left:
+        for proj_x, proj_y, x, y in player_projectiles_left:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-    #LEFT_DOWN
-    if len(player_projectiles_left_down) > 0:
-        for proj_x, proj_y in player_projectiles_left_down:
-            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-    #LEFT_UP
-    if len(player_projectiles_left_up) > 0:
-        for proj_x, proj_y in player_projectiles_left_up:
+    #DOWN
+    if len(player_projectiles_down) > 0:
+        for proj_x, proj_y, x, y in player_projectiles_down:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
     #RIGHT
     if len(player_projectiles_right) > 0:
-        for proj_x, proj_y in player_projectiles_right:
-            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-    #RIGHT_DOWN
-    if len(player_projectiles_right_down) > 0:
-        for proj_x, proj_y in player_projectiles_right_down:
-            window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-    #RIGHT_UP
-    if len(player_projectiles_right_up) > 0:
-        for proj_x, proj_y in player_projectiles_right_up:
+        for proj_x, proj_y, x, y in player_projectiles_right:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
 
     
@@ -415,7 +354,7 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             current_prekazky = rooms_dict[current_room]["prekazky"]
             no_entry_area_x, no_entry_area_y = new_room_shit()
-            player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles = projectile_cleaning()
+            player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)
     #RIGHT
     if doors_dictionary[current_room][1]:
@@ -431,7 +370,7 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             current_prekazky = rooms_dict[current_room]["prekazky"]
             no_entry_area_x, no_entry_area_y = new_room_shit()
-            player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles = projectile_cleaning()
+            player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)   
     #DOWN
     if doors_dictionary[current_room][2]:
@@ -447,7 +386,7 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             current_prekazky = rooms_dict[current_room]["prekazky"]
             no_entry_area_x, no_entry_area_y = new_room_shit()
-            player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles = projectile_cleaning()
+            player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)
     #LEFT
     if doors_dictionary[current_room][3]:
@@ -463,7 +402,7 @@ while True:
             mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)            
             current_prekazky = rooms_dict[current_room]["prekazky"]
             no_entry_area_x, no_entry_area_y = new_room_shit()
-            player_projectiles_up, player_projectiles_up_left, player_projectiles_up_right, player_projectiles_down, player_projectiles_down_left, player_projectiles_down_right, player_projectiles_left, player_projectiles_left_down, player_projectiles_left_up, player_projectiles_right, player_projectiles_right_down, player_projectiles_right_up, projectiles = projectile_cleaning()
+            player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)
 
     for i in range(0, len(current_prekazky), 2):
@@ -472,6 +411,15 @@ while True:
 
     rect_x = max(40, min(rect_x, WIDTH - 101))
     rect_y = max(40, min(rect_y, HEIGHT - 96))
+
+    #HOUSE OD DANCI
+    pygame.draw.circle(window, (0, 0, 255), player, 10)
+    pygame.draw.circle(window, (255, 0, 0), (round(follower[0]), round(follower[1])), 10)
+
+
+
+
+
     # Update the display and control the frame rate
     pygame.display.flip()
     pygame.display.update()
