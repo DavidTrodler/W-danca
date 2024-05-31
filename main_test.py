@@ -55,6 +55,8 @@ projectile_size = 10
 projectile_speed = 2
 projectile_speed_diagonal = 0.5
 bullet_range = 100 #Čas, po který bude existovat
+player_speed = 2
+
 # Room variables
 velikost_mistnosti = WIDTH, HEIGHT
 
@@ -233,12 +235,13 @@ while True:
     s_statement = True
     a_statement = True
     d_statement = True
-    isaac_rect = pygame.Rect(rect_x, rect_y, velikost_postavy, velikost_postavy)
+    
     for x, y in zip(no_entry_area_x, no_entry_area_y):
-        zone_1 = pygame.Rect(x+1, y, 48, 25)
-        zone_2 = pygame.Rect(x+25, y+1, 25, 48)
-        zone_3 = pygame.Rect(x+1, y+25, 48, 25)
-        zone_4 = pygame.Rect(x, y+1, 25, 48)
+        isaac_rect = pygame.Rect(rect_x, rect_y, velikost_postavy, velikost_postavy)
+        zone_1 = pygame.Rect(x+2, y, 46, 25)
+        zone_2 = pygame.Rect(x+25, y+2, 25, 46)
+        zone_3 = pygame.Rect(x+2, y+25, 46, 25)
+        zone_4 = pygame.Rect(x, y+2, 25, 46)
         
         if isaac_rect.colliderect(zone_1):
             s_statement = False
@@ -250,16 +253,16 @@ while True:
             d_statement = False
 
     if keys[pygame.K_d] and d_statement:
-        rect_x += 1
+        rect_x += player_speed
 
     if keys[pygame.K_w] and w_statement:
-        rect_y -= 1
+        rect_y -= player_speed
 
     if keys[pygame.K_s] and s_statement:
-        rect_y += 1
+        rect_y += player_speed
 
     if keys[pygame.K_a] and a_statement:
-        rect_x -= 1
+        rect_x -= player_speed
     """
         #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -415,10 +418,7 @@ while True:
     #HOUSE OD DANCI
     pygame.draw.circle(window, (0, 0, 255), player, 10)
     pygame.draw.circle(window, (255, 0, 0), (round(follower[0]), round(follower[1])), 10)
-
-
-
-
+    pygame.draw.rect(window, (255, 0, 0), (rect_x, rect_y, velikost_postavy, velikost_postavy))
 
     # Update the display and control the frame rate
     pygame.display.flip()
