@@ -1,5 +1,4 @@
 import pygame, sys
-from clotty import clotty_moves, clotty_cooldown
 pygame.init()
 
 # Define color constants
@@ -401,7 +400,14 @@ while True:
         print("jizni")
 
     """moucha"""
-    moucha_x, moucha_y = clotty_moves(rect_x, rect_y, moucha_x, moucha_y)
+    if rect_x > moucha_x:
+        moucha_x += 0.5
+    if rect_x < moucha_x:
+        moucha_x -= 0.5
+    if rect_y > moucha_y:    
+        moucha_y += 0.5
+    if rect_y < moucha_y:       
+        moucha_y -= 0.5
 
     if hp_mouchy > 0:
         angry_moucha = window.blit(moucha, (moucha_x, moucha_y))
@@ -430,7 +436,19 @@ while True:
 
     cas -= 1
 
-    cas, cervenej_projectiles_up_y, cervenej_projectiles_up_x, cervenej_projectiles_down_y, cervenej_projectiles_down_x, cervenej_projectiles_left_x, cervenej_projectiles_left_y, cervenej_projectiles_right_x, cervenej_projectiles_right_y = clotty_cooldown(cas, moucha_x, moucha_y, cervenej_projectiles_up_y, cervenej_projectiles_up_x, cervenej_projectiles_down_y, cervenej_projectiles_down_x, cervenej_projectiles_left_x, cervenej_projectiles_left_y, cervenej_projectiles_right_x, cervenej_projectiles_right_y)
+
+    if cas == 0:
+        cervenej_projectiles_up_y = moucha_y
+        cervenej_projectiles_up_x = moucha_x
+        cervenej_projectiles_down_y = moucha_y
+        cervenej_projectiles_down_x = moucha_x
+        cervenej_projectiles_left_x = moucha_x
+        cervenej_projectiles_left_y = moucha_y
+        cervenej_projectiles_right_x = moucha_x
+        cervenej_projectiles_right_y = moucha_y
+        cas = 120
+    
+
 
     # Update the display and control the frame rate
     pygame.display.flip()
