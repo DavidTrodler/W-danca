@@ -3,7 +3,7 @@ def bullet_movement(projectile_speed, WIDTH, HEIGHT, player_projectiles_up, play
     #UP
     if len(player_projectiles_up) > 0:
         for proj_x, proj_y, x, y in player_projectiles_up:
-            proj_y -= projectile_speed + y
+            proj_y -= projectile_speed - y
             proj_x += x
             if proj_y > 0:
                 new_player_projectiles_UP.append((proj_x, proj_y, x, y))
@@ -21,7 +21,7 @@ def bullet_movement(projectile_speed, WIDTH, HEIGHT, player_projectiles_up, play
     #LEFT
     if len(player_projectiles_left) > 0:
         for proj_x, proj_y, x, y in player_projectiles_left:
-            proj_x -= projectile_speed + x
+            proj_x -= projectile_speed - x
             proj_y += y
             if proj_x > 0:
                 new_player_projectiles_LEFT.append((proj_x, proj_y, x, y))
