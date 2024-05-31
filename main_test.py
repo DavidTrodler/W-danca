@@ -54,7 +54,7 @@ velikost_postavy = 57
 projectile_size = 10
 projectile_speed = 2
 projectile_speed_diagonal = 0.5
-
+bullet_range = 100 #Čas, po který bude existovat
 # Room variables
 velikost_mistnosti = WIDTH, HEIGHT
 
@@ -206,23 +206,23 @@ while True:
         elif event.type == pygame.KEYDOWN:
             #UP
             if event.key == pygame.K_UP and shoots == False:
-                player_projectiles_up.append((rect_x + velikost_postavy // 2, rect_y, f_x, f_y))
+                player_projectiles_up.append((rect_x + velikost_postavy // 2, rect_y, f_x, f_y, bullet_range))
                 cooldown = cooldown_time
                 break
             #DOWN
             elif event.key == pygame.K_DOWN and shoots == False:
-                player_projectiles_down.append((rect_x + velikost_postavy // 2, rect_y + velikost_postavy, f_x, f_y))
+                player_projectiles_down.append((rect_x + velikost_postavy // 2, rect_y + velikost_postavy, f_x, f_y, bullet_range))
                 cooldown = cooldown_time  
                 break
 
             #LEFT
             elif event.key == pygame.K_LEFT and shoots == False:
-                player_projectiles_left.append((rect_x, rect_y + velikost_postavy // 2, f_x, f_y))
+                player_projectiles_left.append((rect_x, rect_y + velikost_postavy // 2, f_x, f_y, bullet_range))
                 cooldown = cooldown_time
                 break
             #RIGHT
             elif event.key == pygame.K_RIGHT and shoots == False:
-                player_projectiles_right.append((rect_x + velikost_postavy, rect_y + velikost_postavy // 2, f_x, f_y))
+                player_projectiles_right.append((rect_x + velikost_postavy, rect_y + velikost_postavy // 2, f_x, f_y, bullet_range))
                 cooldown = cooldown_time
                 break
         
@@ -311,19 +311,19 @@ while True:
     #Vykrelsení projektilů
     #UP
     if len(player_projectiles_up) > 0:
-        for proj_x, proj_y, x, y in player_projectiles_up:
+        for proj_x, proj_y, x, y, t in player_projectiles_up:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
     #LEFT
     if len(player_projectiles_left) > 0:
-        for proj_x, proj_y, x, y in player_projectiles_left:
+        for proj_x, proj_y, x, y, t in player_projectiles_left:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
     #DOWN
     if len(player_projectiles_down) > 0:
-        for proj_x, proj_y, x, y in player_projectiles_down:
+        for proj_x, proj_y, x, y, t in player_projectiles_down:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
     #RIGHT
     if len(player_projectiles_right) > 0:
-        for proj_x, proj_y, x, y in player_projectiles_right:
+        for proj_x, proj_y, x, y, t in player_projectiles_right:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
 
     
