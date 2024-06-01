@@ -177,7 +177,7 @@ def FollowMe(pops, fpos):
 
 follower = (100, 100)
 
-
+player_dot = (rect_x + 28.5), (rect_y + 28.5)
 no_entry_area_x, no_entry_area_y = new_room_shit()
 # Game loop
 while True:
@@ -230,6 +230,9 @@ while True:
         
 
     # Move the character based on thed pressed keys
+
+
+
     w_statement = True
     d_statement = True
     s_statement = True
@@ -253,16 +256,27 @@ while True:
             d_statement = False
 
     if keys[pygame.K_d] and d_statement:
-        rect_x += player_speed
+        player_dot_x, player_dot_y = player_dot
+        player_dot_x += player_speed
+        player_dot = player_dot_x, player_dot_y
 
     if keys[pygame.K_w] and w_statement:
-        rect_y -= player_speed
+        player_dot_x, player_dot_y = player_dot
+        player_dot_y -= player_speed
+        player_dot = player_dot_x, player_dot_y
 
     if keys[pygame.K_s] and s_statement:
-        rect_y += player_speed
+        player_dot_x, player_dot_y = player_dot
+        player_dot_y += player_speed
+        player_dot = player_dot_x, player_dot_y
 
     if keys[pygame.K_a] and a_statement:
-        rect_x -= player_speed
+        player_dot_x, player_dot_y = player_dot
+        player_dot_x -= player_speed
+        player_dot = player_dot_x, player_dot_y
+
+
+    rect_x, rect_y = FollowMe(player_dot, (rect_x, rect_y))
     """
         #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
         elif event.type == pygame.MOUSEBUTTONDOWN:
