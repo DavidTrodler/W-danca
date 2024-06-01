@@ -46,7 +46,7 @@ room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
 pygame.display.set_caption("ˇIsaacˇ")
 #----------------------------------------------------------------------
 #Level
-level = 20
+level = 1
 
 # Player variables
 rect_x, rect_y = 70, 500

@@ -178,6 +178,10 @@ def FollowMe(pops, fpos):
 follower = (100, 100)
 
 player_dot = (rect_x + 28.5), (rect_y + 28.5)
+bariera = pygame.Rect(0, 0, WIDTH, 40)
+
+
+    
 no_entry_area_x, no_entry_area_y = new_room_shit()
 # Game loop
 while True:
@@ -240,43 +244,50 @@ while True:
     d_statement = True
     
     for x, y in zip(no_entry_area_x, no_entry_area_y):
+        player_dot_rect = pygame.Rect(player_dot[0], player_dot[1], 10, 10)
         isaac_rect = pygame.Rect(rect_x, rect_y, velikost_postavy, velikost_postavy)
         zone_1 = pygame.Rect(x+2, y, 46, 25)
         zone_2 = pygame.Rect(x+25, y+2, 25, 46)
         zone_3 = pygame.Rect(x+2, y+25, 46, 25)
         zone_4 = pygame.Rect(x, y+2, 25, 46)
         
-        if isaac_rect.colliderect(zone_1):
+        if player_dot_rect.colliderect(zone_1) or isaac_rect.colliderect(zone_1):
             s_statement = False
-        elif isaac_rect.colliderect(zone_2):
+        elif player_dot_rect.colliderect(zone_2) or isaac_rect.colliderect(zone_2):
             a_statement = False
-        elif isaac_rect.colliderect(zone_3):
+        elif player_dot_rect.colliderect(zone_3) or isaac_rect.colliderect(zone_3):
             w_statement = False
-        elif isaac_rect.colliderect(zone_4):
+        elif player_dot_rect.colliderect(zone_4) or isaac_rect.colliderect(zone_4):
             d_statement = False
 
     if keys[pygame.K_d] and d_statement:
         player_dot_x, player_dot_y = player_dot
         player_dot_x += player_speed
+        player_dot_x = max(40, min(player_dot_x, WIDTH - 101))
         player_dot = player_dot_x, player_dot_y
 
     if keys[pygame.K_w] and w_statement:
         player_dot_x, player_dot_y = player_dot
         player_dot_y -= player_speed
+        player_dot_y = max(40, min(player_dot_y, HEIGHT - 96))
         player_dot = player_dot_x, player_dot_y
 
     if keys[pygame.K_s] and s_statement:
         player_dot_x, player_dot_y = player_dot
         player_dot_y += player_speed
+        player_dot_y = max(40, min(player_dot_y, HEIGHT - 96))
         player_dot = player_dot_x, player_dot_y
 
     if keys[pygame.K_a] and a_statement:
         player_dot_x, player_dot_y = player_dot
         player_dot_x -= player_speed
+        player_dot_x = max(40, min(player_dot_x, WIDTH - 101))
         player_dot = player_dot_x, player_dot_y
 
-
+    
     rect_x, rect_y = FollowMe(player_dot, (rect_x, rect_y))
+    rect_x = max(40, min(rect_x, WIDTH - 101))
+    rect_y = max(40, min(rect_y, HEIGHT - 96))
     """
         #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -426,12 +437,11 @@ while True:
         x, y = current_prekazky[i], current_prekazky[i+1]
         pygame.draw.rect(window, (255, 0, 0), (x, y, 50, 50))
 
-    rect_x = max(40, min(rect_x, WIDTH - 101))
-    rect_y = max(40, min(rect_y, HEIGHT - 96))
 
     #HOUSE OD DANCI
     pygame.draw.circle(window, (0, 0, 255), player, 10)
     pygame.draw.circle(window, (255, 0, 0), (round(follower[0]), round(follower[1])), 10)
+    pygame.draw.circle(window,(0, 255, 0), (player_dot), 10)
 
 
     # Update the display and control the frame rate
