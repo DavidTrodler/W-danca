@@ -5,6 +5,7 @@ import random
 
 
 def enemies_spot(): #NEOPRAVOVAT NAZEV JINAK SE TO POJEBE, dik :D
+    prekazky_ = []
     prekazky = []
     prekazky_1 = {0: [80, 100, 850, 425, 90, 100, 80, 120, 830, 425, 850, 405], 1: [250, 300, 200, 350, 250, 400, 300, 350]}
     prekazky_2 = {0: [40, 200, 90, 200, 140, 200, 190, 200, 240, 200, 910, 200, 860, 200, 810, 200, 760, 200, 710, 200, 40, 350, 90, 350, 140, 350, 190, 350, 240, 350, 910, 350, 860, 350, 810, 350, 760, 350, 710, 350], 1: [400, 40, 400, 90, 400, 140, 550, 510, 550, 460, 550, 410, 400, 510, 400, 460, 400, 410, 550, 40, 550, 90, 550, 140]}
@@ -20,42 +21,44 @@ def enemies_spot(): #NEOPRAVOVAT NAZEV JINAK SE TO POJEBE, dik :D
         for i in prekazky_1.keys():
             a_n = random.randint(0, 1)
             if a_n == 1:
-                prekazky.append(prekazky_1[i])
+                prekazky_.append(prekazky_1[i])
+            
+        for i in prekazky:
+            for j in i:
+                prekazky_.append(j)
     elif vyber_prekazky == 2:
         for i in prekazky_2.keys():
             a_n = random.randint(0, 1)
             if a_n == 1:
-                prekazky.append(prekazky_2[i])
+                prekazky_.append(prekazky_2[i])
     elif vyber_prekazky == 3:
         for i in prekazky_3.keys():
             a_n = random.randint(0, 1)
             if a_n == 1:
-                prekazky.append(prekazky_3[i])
+                prekazky_.append(prekazky_3[i])
     elif vyber_prekazky == 4:
         for i in prekazky_4.keys():
             a_n = random.randint(0, 1)
             if a_n == 1:
-                prekazky.append(prekazky_4[i])
+                prekazky_.append(prekazky_4[i])
     elif vyber_prekazky == 5:
         for i in prekazky_5.keys():
             a_n = random.randint(0, 1)
             if a_n == 1:
-                prekazky.append(prekazky_5[i])
+                prekazky_.append(prekazky_5[i])
     elif vyber_prekazky == 6:
         for i in prekazky_6.keys():
             a_n = random.randint(0, 1)
             if a_n == 1:
-                prekazky.append(prekazky_6[i])
+                prekazky_.append(prekazky_6[i])
     elif vyber_prekazky == 7:
         for i in prekazky_7.keys():
             a_n = random.randint(0, 1)
             if a_n == 1:
-                prekazky.append(prekazky_7[i])
+                prekazky_.append(prekazky_7[i])
     elif vyber_prekazky == 8:
         for i in prekazky_8.keys():
             a_n = random.randint(0, 1)
             if a_n == 1:
-                prekazky.append(prekazky_8[i])
+                prekazky_.append(prekazky_8[i])
     return prekazky
-
-print(room_typeees())

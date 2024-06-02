@@ -451,13 +451,18 @@ while True:
     
 
     ene_cisl = 0
-    for i in enemies_spot():
+    ene_list = enemies_spot()
+    for i in ene_list:
         ene_cisl += 1
         if ene_cisl // 2 == 0:
-            pygame.draw.rect(50, 50, i-1, i)
+            pygame.draw.rect(window, telova, (i[j-1], i[j], 50, 50))
     
 
     # Update the display and control the frame rate
     pygame.display.flip()
     pygame.display.update()
     clock.tick(30)
+
+
+
+    #§
