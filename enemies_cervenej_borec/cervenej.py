@@ -1,5 +1,6 @@
 import pygame, sys
 pygame.init()
+from enemies_spoting import enemies_spot
 
 # Define color constants
 telova = (255, 186, 141)
@@ -449,6 +450,12 @@ while True:
         cas = 120
     
 
+    ene_cisl = 0
+    for i in enemies_spot():
+        ene_cisl += 1
+        if ene_cisl // 2 == 0:
+            pygame.draw.rect(50, 50, i-1, i)
+    
 
     # Update the display and control the frame rate
     pygame.display.flip()
