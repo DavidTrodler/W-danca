@@ -385,7 +385,7 @@ while True:
             player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)
     #RIGHT
-    elif doors_dictionary[current_room][1]:
+    if doors_dictionary[current_room][1]:
         rotated_doors_image_right = pygame.transform.rotate(doors_image, -90)
         window.blit(rotated_doors_image_right, (960, 250))
         if isaac.colliderect(pygame.Rect(950,250, 1, 100)) and door_cooldown == 0:
@@ -403,7 +403,7 @@ while True:
             player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)   
     #DOWN
-    elif doors_dictionary[current_room][2]:
+    if doors_dictionary[current_room][2]:
         rotated_doors_image_right = pygame.transform.rotate(doors_image, 180)
         window.blit(rotated_doors_image_right, (450, 550))
         if isaac.colliderect(pygame.Rect(450,550, 100, 1)) and door_cooldown == 0:
@@ -421,7 +421,7 @@ while True:
             player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)
     #LEFT
-    elif doors_dictionary[current_room][3]:
+    if doors_dictionary[current_room][3]:
         rotated_doors_image_left = pygame.transform.rotate(doors_image, 90)
         window.blit(rotated_doors_image_left, (-20, 250))
         if isaac.colliderect(pygame.Rect(40, 250, 1, 100)) and door_cooldown == 0:
