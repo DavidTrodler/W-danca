@@ -307,8 +307,7 @@ while True:
     #RIGHT
     new_player_projectiles_RIGHT = []
 
-
-    player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right = bullet_movement(projectile_speed, WIDTH, HEIGHT, player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, new_player_projectiles_UP, new_player_projectiles_DOWN, new_player_projectiles_LEFT, new_player_projectiles_RIGHT, no_entry_area_x, no_entry_area_y, projectile_size)
+    
 
 
     #Vykreslení pozadí
@@ -335,6 +334,8 @@ while True:
 
 
     #Vykrelsení projektilů
+    if len(player_projectiles_up) > 0 or len(player_projectiles_down) > 0 or len(player_projectiles_left) > 0 or len(player_projectiles_right) > 0: 
+        player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right = bullet_movement(projectile_speed, WIDTH, HEIGHT, player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, new_player_projectiles_UP, new_player_projectiles_DOWN, new_player_projectiles_LEFT, new_player_projectiles_RIGHT, no_entry_area_x, no_entry_area_y, projectile_size)
     #UP
     if len(player_projectiles_up) > 0:
         for proj_x, proj_y, x, y, t in player_projectiles_up:
