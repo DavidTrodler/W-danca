@@ -46,7 +46,7 @@ room_image.set_alpha(128) #průhledné 0 - 255 neprůhledné
 pygame.display.set_caption("ˇIsaacˇ")
 #----------------------------------------------------------------------
 #Level
-level = 20
+level = 1
 
 # Player variables
 rect_x, rect_y = 70, 500
@@ -107,10 +107,10 @@ rooms = rooms_fixed(level)
 rooms_dict = {}
 rooms_dict = room_typesss(rooms)
 
-print(rooms_dict)
+
 
 current_prekazky = rooms_dict[current_room]["prekazky"]
-print("PREKAZKY", current_prekazky)
+
 
 
 
@@ -119,9 +119,9 @@ door_cooldown_time = 20
 
 #Vyvolání funkcí
 doors_dictionary = rooms_dictionary_funciton(rooms)
-print(doors_dictionary)
+
 mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)
-print(mapa)
+
 
 """
 #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
@@ -165,7 +165,6 @@ def FollowMe(pops, fpos):
     target_vector       = pygame.math.Vector2(*pops)
     target_vector[0] = target_vector[0] - 28.49999
     target_vector[1] = target_vector[1] - 28.49999
-    print("TARGET VECTOR", target_vector)
     follower_vector     = pygame.math.Vector2(*fpos)
     new_follower_vector = pygame.math.Vector2(*fpos)
 
@@ -180,7 +179,7 @@ def FollowMe(pops, fpos):
 
 follower = (100, 100)
 
-player_dot = (rect_x + 28.5), (rect_y + 28.5)
+player_dot = ((rect_x + 28.5), (rect_y + 28.5))
 
 
 
@@ -249,51 +248,42 @@ while True:
     a_statement = True
     d_statement = True
     
+    if len(no_entry_area_x) > 0 or len(no_entry_area_y) > 0:
+        for x, y in zip(no_entry_area_x, no_entry_area_y):
+            isaac_rect = pygame.Rect(rect_x, rect_y, velikost_postavy, velikost_postavy)
+            player_dot_rect = pygame.Rect(player_dot[0] - 28.5, player_dot[1] - 28.5, velikost_postavy, velikost_postavy)
 
-    for x, y in zip(no_entry_area_x, no_entry_area_y):
-        isaac_rect = pygame.Rect(rect_x, rect_y, velikost_postavy, velikost_postavy)
-        player_dot_rect = pygame.Rect(player_dot[0] - 28.5, player_dot[1] - 28.5, velikost_postavy, velikost_postavy)
-
-        zone_1 = pygame.Rect(x+2, y, 46, 25)
-        zone_2 = pygame.Rect(x+25, y+2, 25, 46)
-        zone_3 = pygame.Rect(x+2, y+25, 46, 25)
-        zone_4 = pygame.Rect(x, y+2, 25, 46)
-        
-        if player_dot_rect.colliderect(zone_1):
-            s_statement = False
-        elif player_dot_rect.colliderect(zone_2):
-            a_statement = False
-        elif player_dot_rect.colliderect(zone_3):
-            w_statement = False
-        elif player_dot_rect.colliderect(zone_4):
-            d_statement = False
+            zone_1 = pygame.Rect(x+3, y, 44, 25)
+            zone_2 = pygame.Rect(x+25, y+3, 25, 44)
+            zone_3 = pygame.Rect(x+3, y+25, 44, 25)
+            zone_4 = pygame.Rect(x, y+3, 25, 44)
+            
+            if player_dot_rect.colliderect(zone_1):
+                s_statement = False
+            if player_dot_rect.colliderect(zone_2):
+                a_statement = False
+            if player_dot_rect.colliderect(zone_3):
+                w_statement = False
+            if player_dot_rect.colliderect(zone_4):
+                d_statement = False
 
     if keys[pygame.K_d] and d_statement:
-        player_dot_x, player_dot_y = player_dot
-        player_dot_x += player_speed
-        player_dot_x = max(68.5, min(player_dot_x, WIDTH - 101))
-        player_dot = player_dot_x, player_dot_y
+        player_dot = (player_dot[0] + player_speed, player_dot[1])
 
     if keys[pygame.K_w] and w_statement:
-        player_dot_x, player_dot_y = player_dot
-        player_dot_y -= player_speed
-        player_dot_y = max(68.5, min(player_dot_y, HEIGHT - 68.5))
-        player_dot = player_dot_x, player_dot_y
+        player_dot = (player_dot[0], player_dot[1] - player_speed)
 
     if keys[pygame.K_s] and s_statement:
-        player_dot_x, player_dot_y = player_dot
-        player_dot_y += player_speed
-        player_dot_y = max(68.5, min(player_dot_y, HEIGHT - 68.5))
-        player_dot = player_dot_x, player_dot_y
+        player_dot = (player_dot[0], player_dot[1] + player_speed)
 
     if keys[pygame.K_a] and a_statement:
-        player_dot_x, player_dot_y = player_dot
-        player_dot_x -= player_speed
-        player_dot_x = max(68.5, min(player_dot_x, WIDTH - 101))
-        player_dot = player_dot_x, player_dot_y
+        player_dot = (player_dot[0] - player_speed, player_dot[1])
 
-    
+
     rect_x, rect_y = FollowMe(player_dot, (rect_x, rect_y))
+    player_dot_x, player_dot_y = player_dot
+    player_dot = (max(68.5, min(player_dot_x, WIDTH - 68.5)), max(68.5, min(player_dot_y, HEIGHT - 68.5)))
+
     rect_x = max(40, min(rect_x, WIDTH - 101))
     rect_y = max(40, min(rect_y, HEIGHT - 96))
     """
@@ -317,7 +307,7 @@ while True:
     #RIGHT
     new_player_projectiles_RIGHT = []
 
-    print("UP", player_projectiles_up)
+
     player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right = bullet_movement(projectile_speed, WIDTH, HEIGHT, player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, new_player_projectiles_UP, new_player_projectiles_DOWN, new_player_projectiles_LEFT, new_player_projectiles_RIGHT, no_entry_area_x, no_entry_area_y, projectile_size)
 
 
@@ -383,8 +373,9 @@ while True:
         if isaac.colliderect(pygame.Rect(450,40, 100, 1)) and door_cooldown == 0:
             doors = "UP"
             door_cooldown = door_cooldown_time
-            rect_y += 460
-            player_dot = (player_dot[1] + 460, player_dot[0])
+            rect_y += 450
+            dot_x, dot_y = player_dot
+            player_dot = (dot_x, dot_y + 450)
             move_up_counter += dvere_up_value
             dvere_up = True
             current_room = current_room_function(doors, current_room)
@@ -394,14 +385,15 @@ while True:
             player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)
     #RIGHT
-    if doors_dictionary[current_room][1]:
+    elif doors_dictionary[current_room][1]:
         rotated_doors_image_right = pygame.transform.rotate(doors_image, -90)
         window.blit(rotated_doors_image_right, (960, 250))
         if isaac.colliderect(pygame.Rect(950,250, 1, 100)) and door_cooldown == 0:
             doors = "RIGHT"
             door_cooldown = door_cooldown_time
             rect_x -= 855
-            player_dot = (player_dot[0] - 855, player_dot[0])
+            dot_x, dot_y = player_dot
+            player_dot = (dot_x - 855, dot_y)
             move_side_counter += dvere_right_value
             dvere_right = True
             current_room = current_room_function(doors, current_room)
@@ -411,14 +403,15 @@ while True:
             player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)   
     #DOWN
-    if doors_dictionary[current_room][2]:
+    elif doors_dictionary[current_room][2]:
         rotated_doors_image_right = pygame.transform.rotate(doors_image, 180)
         window.blit(rotated_doors_image_right, (450, 550))
-        if isaac.colliderect(pygame.Rect(450,560, 100, 1)) and door_cooldown == 0:
+        if isaac.colliderect(pygame.Rect(450,550, 100, 1)) and door_cooldown == 0:
             doors = "DOWN"
             door_cooldown = door_cooldown_time
-            rect_y -= 460
-            player_dot = (player_dot[1] - 460, player_dot[1])
+            rect_y -= 450
+            dot_x, dot_y = player_dot
+            player_dot = (dot_x, dot_y - 450)
             move_up_counter += dvere_down_value
             dvere_down = True
             current_room = current_room_function(doors, current_room)
@@ -428,14 +421,15 @@ while True:
             player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)
     #LEFT
-    if doors_dictionary[current_room][3]:
+    elif doors_dictionary[current_room][3]:
         rotated_doors_image_left = pygame.transform.rotate(doors_image, 90)
         window.blit(rotated_doors_image_left, (-20, 250))
         if isaac.colliderect(pygame.Rect(40, 250, 1, 100)) and door_cooldown == 0:
             doors = "LEFT"
             door_cooldown = door_cooldown_time
             rect_x += 855
-            player_dot = (player_dot[0] + 855, player_dot[1])
+            dot_x, dot_y = player_dot
+            player_dot = (dot_x + 850, dot_y)
             move_side_counter += dvere_left_value
             dvere_left = True
             current_room = current_room_function(doors, current_room)
@@ -451,10 +445,11 @@ while True:
 
 
     #HOUSE OD DANCI
+    """
     pygame.draw.rect(window, (0,255,0), (player_dot[0] - 28.5, player_dot[1] - 28.5, velikost_postavy, velikost_postavy))
     pygame.draw.circle(window, (0, 0, 255), player, 10)
     pygame.draw.circle(window, (255, 0, 0), (round(follower[0]), round(follower[1])), 10)
-
+    """
 
 
     # Update the display and control the frame rate
