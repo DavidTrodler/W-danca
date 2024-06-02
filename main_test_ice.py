@@ -55,7 +55,7 @@ projectile_size = 10
 projectile_speed = 2
 projectile_speed_diagonal = 0.5
 bullet_range = 100 #Čas, po který bude existovat
-player_speed = 2
+player_speed = 2.5
 
 # Room variables
 velikost_mistnosti = WIDTH, HEIGHT
@@ -160,9 +160,12 @@ minimum_distance = 25
 maximum_distance = 100
 
 
-#TO DO --- OBRÁTIT ČERVENOU SRAČKU
+
 def FollowMe(pops, fpos):
     target_vector       = pygame.math.Vector2(*pops)
+    target_vector[0] = target_vector[0] - 28.49999
+    target_vector[1] = target_vector[1] - 28.49999
+    print("TARGET VECTOR", target_vector)
     follower_vector     = pygame.math.Vector2(*fpos)
     new_follower_vector = pygame.math.Vector2(*fpos)
 
@@ -178,7 +181,7 @@ def FollowMe(pops, fpos):
 follower = (100, 100)
 
 player_dot = (rect_x + 28.5), (rect_y + 28.5)
-bariera = pygame.Rect(0, 0, WIDTH, 40)
+
 
 
     
@@ -197,7 +200,10 @@ while True:
     # Shooting
     #HOUSE OD DANCI
     player   = (rect_x + 28.5), (rect_y + 28.5)
-    follower = FollowMe(player, follower)
+    player_x = player[0] + 28.5
+    player_y = player[1] + 28.5
+    player_xy = player_x, player_y
+    follower = FollowMe(player_xy, follower)
     f_x,f_y = follower
     p_x,p_y = player
     f_x = f_x - p_x
@@ -243,45 +249,47 @@ while True:
     a_statement = True
     d_statement = True
     
+
     for x, y in zip(no_entry_area_x, no_entry_area_y):
-        player_dot_rect = pygame.Rect(player_dot[0], player_dot[1], 10, 10)
         isaac_rect = pygame.Rect(rect_x, rect_y, velikost_postavy, velikost_postavy)
+        player_dot_rect = pygame.Rect(player_dot[0] - 28.5, player_dot[1] - 28.5, velikost_postavy, velikost_postavy)
+
         zone_1 = pygame.Rect(x+2, y, 46, 25)
         zone_2 = pygame.Rect(x+25, y+2, 25, 46)
         zone_3 = pygame.Rect(x+2, y+25, 46, 25)
         zone_4 = pygame.Rect(x, y+2, 25, 46)
         
-        if player_dot_rect.colliderect(zone_1) or isaac_rect.colliderect(zone_1):
+        if player_dot_rect.colliderect(zone_1):
             s_statement = False
-        elif player_dot_rect.colliderect(zone_2) or isaac_rect.colliderect(zone_2):
+        elif player_dot_rect.colliderect(zone_2):
             a_statement = False
-        elif player_dot_rect.colliderect(zone_3) or isaac_rect.colliderect(zone_3):
+        elif player_dot_rect.colliderect(zone_3):
             w_statement = False
-        elif player_dot_rect.colliderect(zone_4) or isaac_rect.colliderect(zone_4):
+        elif player_dot_rect.colliderect(zone_4):
             d_statement = False
 
     if keys[pygame.K_d] and d_statement:
         player_dot_x, player_dot_y = player_dot
         player_dot_x += player_speed
-        player_dot_x = max(40, min(player_dot_x, WIDTH - 101))
+        player_dot_x = max(68.5, min(player_dot_x, WIDTH - 101))
         player_dot = player_dot_x, player_dot_y
 
     if keys[pygame.K_w] and w_statement:
         player_dot_x, player_dot_y = player_dot
         player_dot_y -= player_speed
-        player_dot_y = max(40, min(player_dot_y, HEIGHT - 96))
+        player_dot_y = max(68.5, min(player_dot_y, HEIGHT - 68.5))
         player_dot = player_dot_x, player_dot_y
 
     if keys[pygame.K_s] and s_statement:
         player_dot_x, player_dot_y = player_dot
         player_dot_y += player_speed
-        player_dot_y = max(40, min(player_dot_y, HEIGHT - 96))
+        player_dot_y = max(68.5, min(player_dot_y, HEIGHT - 68.5))
         player_dot = player_dot_x, player_dot_y
 
     if keys[pygame.K_a] and a_statement:
         player_dot_x, player_dot_y = player_dot
         player_dot_x -= player_speed
-        player_dot_x = max(40, min(player_dot_x, WIDTH - 101))
+        player_dot_x = max(68.5, min(player_dot_x, WIDTH - 101))
         player_dot = player_dot_x, player_dot_y
 
     
@@ -376,6 +384,7 @@ while True:
             doors = "UP"
             door_cooldown = door_cooldown_time
             rect_y += 460
+            player_dot = (player_dot[1] + 460, player_dot[0])
             move_up_counter += dvere_up_value
             dvere_up = True
             current_room = current_room_function(doors, current_room)
@@ -392,6 +401,7 @@ while True:
             doors = "RIGHT"
             door_cooldown = door_cooldown_time
             rect_x -= 855
+            player_dot = (player_dot[0] - 855, player_dot[0])
             move_side_counter += dvere_right_value
             dvere_right = True
             current_room = current_room_function(doors, current_room)
@@ -408,6 +418,7 @@ while True:
             doors = "DOWN"
             door_cooldown = door_cooldown_time
             rect_y -= 460
+            player_dot = (player_dot[1] - 460, player_dot[1])
             move_up_counter += dvere_down_value
             dvere_down = True
             current_room = current_room_function(doors, current_room)
@@ -424,6 +435,7 @@ while True:
             doors = "LEFT"
             door_cooldown = door_cooldown_time
             rect_x += 855
+            player_dot = (player_dot[0] + 855, player_dot[1])
             move_side_counter += dvere_left_value
             dvere_left = True
             current_room = current_room_function(doors, current_room)
@@ -439,9 +451,10 @@ while True:
 
 
     #HOUSE OD DANCI
+    pygame.draw.rect(window, (0,255,0), (player_dot[0] - 28.5, player_dot[1] - 28.5, velikost_postavy, velikost_postavy))
     pygame.draw.circle(window, (0, 0, 255), player, 10)
     pygame.draw.circle(window, (255, 0, 0), (round(follower[0]), round(follower[1])), 10)
-    pygame.draw.circle(window,(0, 255, 0), (player_dot), 10)
+
 
 
     # Update the display and control the frame rate
