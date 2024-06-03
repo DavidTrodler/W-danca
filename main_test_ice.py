@@ -39,6 +39,16 @@ doors_image = pygame.transform.scale(doors_image, (100, 60))
 pozaadi = pygame.transform.scale(pozaadi,(WIDTH, HEIGHT))
 postava = pygame.image.load("pixelovy_isaac_vetsi.png")
 importovani_slzy = pygame.image.load("david_nesahat/tear.png")
+kameny_1 = pygame.image.load("kameny_1.png")
+kameny_1 = pygame.transform.scale(kameny_1, (50, 50))
+kameny_2 = pygame.image.load("kameny_2.png")
+kameny_2 = pygame.transform.scale(kameny_2, (50, 50))
+kameny_3 = pygame.image.load("kameny_3.png")
+kameny_3 = pygame.transform.scale(kameny_3, (50, 50))
+kameny_4 = pygame.image.load("kameny_4.png")
+kameny_4 = pygame.transform.scale(kameny_4, (50, 50))
+kameny_5 = pygame.image.load("kameny_5.png")
+kameny_5 = pygame.transform.scale(kameny_5, (50, 50))
 slza = pygame.transform.scale(importovani_slzy, (25, 25))
 room_image = pygame.transform.scale(room_image,(image_width, image_height))
 image_filter = pygame.transform.scale(room_image,(image_width, image_height))
@@ -138,7 +148,7 @@ no_entry_area_y = []
 def new_room_shit():
     no_entry_area_x = []
     no_entry_area_y = []
-    for i in range(0, len(current_prekazky), 2):
+    for i in range(0, len(current_prekazky), 3):
         x, y = current_prekazky[i], current_prekazky[i+1]
         no_entry_area_x.append(x)
         no_entry_area_y.append(y)
@@ -440,9 +450,10 @@ while True:
             player_projectiles_up, player_projectiles_down, player_projectiles_left, player_projectiles_right, projectiles = projectile_cleaning()
             time.sleep(0.1)
 
-    for i in range(0, len(current_prekazky), 2):
-        x, y = current_prekazky[i], current_prekazky[i+1]
-        pygame.draw.rect(window, (255, 0, 0), (x, y, 50, 50))
+    for i in range(0, len(current_prekazky), 3):
+        textury = ["0", kameny_1, kameny_2, kameny_3, kameny_4, kameny_5]
+        x, y, z = current_prekazky[i], current_prekazky[i+1], current_prekazky[i+2]
+        window.blit(textury[z], (x, y))
 
 
     #HOUSE OD DANCI

@@ -24,101 +24,82 @@ def room_typeees(): #NEOPRAVOVAT NAZEV JINAK SE TO POJEBE, dik :D
     if random_int == 1:
         keys = list(prekazky_1.keys()) 
         for i in range(len(keys)):
-            if random.randint(1,5) == 1:
+            if random.randint(1,3) == 1:
                 key = keys[i]
-                for item in prekazky_1[key]:
-                    if isinstance(item, str):  # Check if item is a string
-                        integers = list(map(int, item.split(', ')))  # Split string into integers
-                        prekazky.extend(integers)  # Add integers to prekazky
-                    else:
-                        prekazky.append(item)  # If item is not a string, add it directly to prekazky
-
+                for i in range(0, len(prekazky_1[key]), 2):  # Iterate over pairs
+                    pair = prekazky_1[key][i:i+2]  # Get the pair
+                    pair.append(random.randint(1, 5))  # Add a random number to the pair
+                    prekazky.extend(pair)  # Add the pair to prekazky
     elif random_int == 2:
         keys = list(prekazky_2.keys()) 
         for i in range(len(keys)):
-            if random.randint(1,5) == 1:
+            if random.randint(1,3) == 1:
                 key = keys[i]
-                for item in prekazky_2[key]:
-                    if isinstance(item, str):  # Check if item is a string
-                        integers = list(map(int, item.split(', ')))  # Split string into integers
-                        prekazky.extend(integers)  # Add integers to prekazky
-                    else:
-                        prekazky.append(item)  # If item is not a string, add it directly to prekazky
-
+                for i in range(0, len(prekazky_2[key]), 2):  # Iterate over pairs
+                    pair = prekazky_2[key][i:i+2]  # Get the pair
+                    pair.append(random.randint(1, 5))  # Add a random number to the pair
+                    prekazky.extend(pair)  # Add the pair to prekazky
     elif random_int == 3:
         keys = list(prekazky_3.keys()) 
         for i in range(len(keys)):
-            if random.randint(1,5) == 1:
+            if random.randint(1,3) == 1:
                 key = keys[i]
-                for item in prekazky_3[key]:
-                    if isinstance(item, str):  # Check if item is a string
-                        integers = list(map(int, item.split(', ')))  # Split string into integers
-                        prekazky.extend(integers)  # Add integers to prekazky
-                    else:
-                        prekazky.append(item)  # If item is not a string, add it directly to prekazky
-
+                for i in range(0, len(prekazky_3[key]), 2):  # Iterate over pairs
+                    pair = prekazky_3[key][i:i+2]  # Get the pair
+                    pair.append(random.randint(1, 5))  # Add a random number to the pair
+                    prekazky.extend(pair)  # Add the pair to prekazky
     elif random_int == 4:
         keys = list(prekazky_4.keys()) 
         for i in range(len(keys)):
-            if random.randint(1,5) == 1:
+            if random.randint(1,3) == 1:
                 key = keys[i]
-                for item in prekazky_4[key]:
-                    if isinstance(item, str):  # Check if item is a string
-                        integers = list(map(int, item.split(', ')))  # Split string into integers
-                        prekazky.extend(integers)  # Add integers to prekazky
-                    else:
-                        prekazky.append(item)  # If item is not a string, add it directly to prekazky
-
+                for i in range(0, len(prekazky_4[key]), 2):  # Iterate over pairs
+                    pair = prekazky_4[key][i:i+2]  # Get the pair
+                    pair.append(random.randint(1, 5))  # Add a random number to the pair
+                    prekazky.extend(pair)  # Add the pair to prekazky
     elif random_int == 5:
         keys = list(prekazky_5.keys()) 
         for i in range(len(keys)):
-            if random.randint(1,5) == 1:
+            if random.randint(1,3) == 1:
                 key = keys[i]
-                for item in prekazky_5[key]:
-                    if isinstance(item, str):  # Check if item is a string
-                        integers = list(map(int, item.split(', ')))  # Split string into integers
-                        prekazky.extend(integers)  # Add integers to prekazky
-                    else:
-                        prekazky.append(item)  # If item is not a string, add it directly to prekazky
-
+                for i in range(0, len(prekazky_5[key]), 2):  # Iterate over pairs
+                    pair = prekazky_5[key][i:i+2]  # Get the pair
+                    pair.append(random.randint(1, 5))  # Add a random number to the pair
+                    prekazky.extend(pair)  # Add the pair to prekazky
     elif random_int == 6:
         keys = list(prekazky_6.keys()) 
         for i in range(len(keys)):
-            if random.randint(1,5) == 1:
+            if random.randint(1,3) == 1:
                 key = keys[i]
-                for item in prekazky_6[key]:
-                    if isinstance(item, str):  # Check if item is a string
-                        integers = list(map(int, item.split(', ')))  # Split string into integers
-                        prekazky.extend(integers)  # Add integers to prekazky
-                    else:
-                        prekazky.append(item)  # If item is not a string, add it directly to prekazky
+                for i in range(0, len(prekazky_6[key]), 2):  # Iterate over pairs
+                    pair = prekazky_6[key][i:i+2]  # Get the pair
+                    pair.append(random.randint(1, 5))  # Add a random number to the pair
+                    prekazky.extend(pair)  # Add the pair to prekazky
 
     elif random_int == 7:
         keys = list(prekazky_7.keys()) 
         for i in range(len(keys)):
-            if random.randint(1,5) == 1:
+            if random.randint(1,3) == 1:
                 key = keys[i]
-                for item in prekazky_7[key]:
-                    if isinstance(item, str):  # Check if item is a string
-                        integers = list(map(int, item.split(', ')))  # Split string into integers
-                        prekazky.extend(integers)  # Add integers to prekazky
-                    else:
-                        prekazky.append(item)  # If item is not a string, add it directly to prekazky
+                for i in range(0, len(prekazky_7[key]), 2):  # Iterate over pairs
+                    pair = prekazky_7[key][i:i+2]  # Get the pair
+                    pair.append(random.randint(1, 5))  # Add a random number to the pair
+                    prekazky.extend(pair)  # Add the pair to prekazky
 
     elif random_int == 8:
         keys = list(prekazky_8.keys()) 
         for i in range(len(keys)):
-            if random.randint(1,5) == 1:
+            if random.randint(1,3) == 1:
                 key = keys[i]
-                for item in prekazky_8[key]:
-                    if isinstance(item, str):  # Check if item is a string
-                        integers = list(map(int, item.split(', ')))  # Split string into integers
-                        prekazky.extend(integers)  # Add integers to prekazky
-                    else:
-                        prekazky.append(item)  # If item is not a string, add it directly to prekazky
+                for i in range(0, len(prekazky_8[key]), 2):  # Iterate over pairs
+                    pair = prekazky_8[key][i:i+2]  # Get the pair
+                    pair.append(random.randint(1, 5))  # Add a random number to the pair
+                    prekazky.extend(pair)  # Add the pair to prekazky    
+    
     else:
         return theme
 
+    print(prekazky)
     return theme, prekazky  
 
 
@@ -151,3 +132,6 @@ def room_types():
     
 
     return room_image
+
+
+room_typeees()
