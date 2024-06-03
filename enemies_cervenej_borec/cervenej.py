@@ -63,6 +63,15 @@ cervenej_projectiles_down_y = moucha_y
 cervenej_projectiles_left_y = moucha_y
 cervenej_projectiles_right_y = moucha_y
 
+ene_list_ = []
+ene_cisl = 0
+ene_list = enemies_spot()
+for i in ene_list:
+    for j in i:
+        ene_list_.append(j)
+ene_ftk = pygame.image.load("enemies/clotty.png")
+ene_ftk = pygame.transform.scale(ene_ftk, (80, 80))
+
 cas = 120
 
 # Create a clock object to control the frame rate
@@ -449,14 +458,10 @@ while True:
         cervenej_projectiles_right_y = moucha_y
         cas = 120
     
-
-    ene_cisl = 0
-    ene_list = enemies_spot()
-    for i in ene_list:
+    for i in ene_list_:
         ene_cisl += 1
-        if ene_cisl // 2 == 0:
-            pygame.draw.rect(window, telova, (i[j-1], i[j], 50, 50))
-    
+        if ene_cisl % 2 == 0:
+            window.blit(ene_ftk, (i - 1, i))
 
     # Update the display and control the frame rate
     pygame.display.flip()
