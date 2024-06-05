@@ -461,7 +461,10 @@ while True:
     for i in ene_list_:
         ene_cisl += 1
         if ene_cisl % 2 == 0:
-            window.blit(ene_ftk, (i - 1, i))
+            pozice_x = i-1
+            pozice_y = i
+            borec = window.blit(ene_ftk, (pozice_x, pozice_y))
+
 
     # Update the display and control the frame rate
     pygame.display.flip()
