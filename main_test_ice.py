@@ -58,13 +58,19 @@ pygame.display.set_caption("ˇIsaacˇ")
 #Level
 level = 1
 
-# Player variables
 rect_x, rect_y = 70, 500
 velikost_postavy = 57
+player_speed = 2.5
+
+
+
+
+
+
 projectile_size = 10
 projectile_speed = 2
 projectile_speed_diagonal = 0.5
-bullet_range = 100 #Čas, po který bude existovat
+bullet_range = 100 
 player_speed = 2.5
 
 # Room variables
