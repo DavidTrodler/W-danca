@@ -80,7 +80,16 @@ cooldown_time = 20
 move_up_counter = 0 #<---- O kolik roomek se posunul hráč nahoru nebo dolů
 move_side_counter = 0
 current_room = 1
+
+
+
+
+
+
+
+
 #Dveře, ukazuje, kam se mají osy posunout
+level = 1
 dvere_up_value = 1
 dvere_down_value = -1
 dvere_left_value = 1
@@ -89,6 +98,24 @@ dvere_up = False #<--- Změní se, pokud hráč projde dveřmi (kvůli if statme
 dvere_down = False 
 dvere_left = False
 dvere_right = False
+rooms = [1]
+rooms = rooms_fixed(level)
+rooms_dict = {}
+rooms_dict = room_typesss(rooms)
+door_cooldown = 0
+door_cooldown_time = 20
+doors_dictionary = rooms_dictionary_funciton(rooms) 
+move_up = [0, 30] # y + 30
+move_side = [60, 0] # x + 60
+mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)
+
+
+
+
+
+
+
+
 
 #----------------------------------------------------------------------
 
@@ -111,36 +138,10 @@ projectiles = []
 move_up = [0, 30] # y + 30
 move_side = [60, 0] # x + 60
 image_filter_position = [775, 100] #<---- Pozice filtru
-# Rooms list
-rooms = [1]
-rooms = rooms_fixed(level)
-
-rooms_dict = {}
-rooms_dict = room_typesss(rooms)
 
 
 
 current_prekazky = rooms_dict[current_room]["prekazky"]
-
-
-
-
-door_cooldown = 0
-door_cooldown_time = 20
-
-#Vyvolání funkcí
-doors_dictionary = rooms_dictionary_funciton(rooms)
-
-mapa = [prvni, druha, treti, ctvrta, pata, sesta, sedma, osma, devata, desata, jedenacta, dvanacta, trinacta, ctrnacta, patnacta, sestnacta, sedmnacta, osmnacta, devatenacta, dvacata, dvacataprvni, dvacatadruha, dvacatatreti, dvacatactvrta, dvacatapata, dvacatasesta, dvacatasedma, dvacataosma, dvacatadevata, tricata, tricataprvni, tricatadruha, tricatatreti, tricatactvrta, tricatapata, tricatasesta, tricatasedma, tricataosma, tricatadevata, ctyracta, ctyractaprvni, ctyractadruha, ctyratatreti, ctyratactvrta, ctyratapata, ctyratasesta, ctyratasedma, ctyrataosma, ctyratadevata] = pohyby_mapy(image_width, image_height, move_side_counter, move_up_counter, move_side, move_up)
-
-
-"""
-#POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
-# Vytvoření seznamu pro ukládání pozic kliknutí
-click_positions = []
-"""
-
-
 
 #NO ENTRY AREA
 no_entry_area_x = []
@@ -297,14 +298,7 @@ while True:
 
     rect_x = max(40, min(rect_x, WIDTH - 101))
     rect_y = max(40, min(rect_y, HEIGHT - 96))
-    """
-        #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            # Získání pozice kurzoru myši při kliknutí
-            mouse_pos = pygame.mouse.get_pos()
-            print(mouse_pos)  # Vypíše pozici kurzoru myši při kliknutí
-            click_positions.append(pygame.mouse.get_pos())
-    """
+
     # Bullet positions update
         #UP
     new_player_projectiles_UP = []
@@ -318,30 +312,10 @@ while True:
     #RIGHT
     new_player_projectiles_RIGHT = []
 
-    
 
 
     #Vykreslení pozadí
     window.blit(rooms_dict[current_room]["theme"], (0, 0)) #ANOOO FUNGUJE TOO DOPICII
-
-
-
-
-
-    """
-    #POUZE DOČASNÉ, NÁSTROJ NA DĚLÁNÍ PŘEKÁŽEK
-    # Získání pozice kurzoru myši
-    mouse_pos = pygame.mouse.get_pos()
-    # Vykreslení čtverce na pozici myši
-    pygame.draw.rect(window, (255, 0, 0), (mouse_pos[0], mouse_pos[1], 50, 50))
-    
-    for pos in click_positions:
-        pygame.draw.rect(window, (255, 0, 0), (pos[0], pos[1], 50, 50))
-    """
-
-
-
-
 
 
     #Vykrelsení projektilů
@@ -363,7 +337,6 @@ while True:
     if len(player_projectiles_right) > 0:
         for proj_x, proj_y, x, y, t in player_projectiles_right:
             window.blit(slza, (proj_x, proj_y, projectile_size, projectile_size))
-
     
     
     #Vykreslení postavy + filtru
